@@ -1,0 +1,209 @@
+/* Responsive overrides - loaded after master.css */
+
+/* Viewport meta tag required in HTML:
+   <meta name="viewport" content="width=device-width, initial-scale=1"> */
+
+
+/* Make images scale */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+/* --- Tablet and below (under 1200px) --- */
+
+@media (max-width: 1200px) {
+
+    .centering_content {
+        width: 100%;
+        max-width: 1200px;
+        padding-left: 20px;
+        padding-right: 20px;
+        box-sizing: border-box;
+    }
+
+    hr {
+        width: 100%;
+        max-width: 1200px;
+    }
+
+    .fluid_homepage_header {
+        height: auto;
+        padding-bottom: 40px;
+    }
+
+    .carouselimage {
+        height: auto;
+    }
+
+}
+
+
+
+/* --- Tablet (under 768px) --- */
+
+@media (max-width: 768px) {
+
+    /* Nav: stack vertically */
+    .text-nav {
+        float: none;
+        display: block;
+        text-align: center;
+        top: 0;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    .text-nav li {
+        float: none;
+        display: inline-block;
+        padding: 5px 8px;
+        height: auto;
+    }
+
+    .myname {
+        display: block;
+        text-align: center;
+        padding: 5px 0;
+    }
+
+    #nav img {
+        display: block;
+        margin: 0 auto;
+    }
+
+    .fluid_container_fixed {
+        position: relative;
+    }
+
+
+    /* Quarter segments: 2-up */
+    .quarter_segments {
+        width: 50%;
+        box-sizing: border-box;
+    }
+
+
+    /* Floated images: stack below text */
+    .centering_content img[style*="float: right"],
+    .centering_content img[style*="float:right"] {
+        float: none !important;
+        display: block;
+        margin: 15px auto;
+    }
+
+
+    /* Hero text */
+    h1 {
+        font-size: 28px;
+        padding-top: 60px;
+    }
+
+    h2 {
+        font-size: 13px;
+    }
+
+    /* About section float */
+    .centering_content > span[style*="float:left"] {
+        float: none !important;
+        display: block;
+        width: 100%;
+    }
+
+    /* Third segments: 2-up */
+    .third_segments {
+        width: 50%;
+        box-sizing: border-box;
+    }
+
+    /* Placeholder block */
+    .placeholder-block {
+        width: 100%;
+        max-width: 270px;
+    }
+
+}
+
+
+
+/* --- Phone (under 480px) --- */
+
+@media (max-width: 480px) {
+
+    /* Nav links smaller */
+    .text-nav {
+        font-size: 10px;
+        letter-spacing: 0.5px;
+    }
+
+    .text-nav li {
+        padding: 4px 5px;
+    }
+
+    .myname {
+        font-size: 11px;
+    }
+
+
+    /* Quarter segments: full width stack */
+    .quarter_segments {
+        width: 100%;
+        padding: 20px;
+    }
+
+
+    /* Third segments: full width */
+    .third_segments {
+        width: 100%;
+        padding: 20px;
+    }
+
+
+    /* Hero */
+    h1 {
+        font-size: 22px;
+        padding-top: 40px;
+    }
+
+    h2 {
+        font-size: 11px;
+        padding-top: 10px;
+    }
+
+    h3 {
+        font-size: 20px;
+        padding-top: 30px;
+    }
+
+    h4 {
+        max-width: 100%;
+    }
+
+    .widertext {
+        max-width: 100%;
+    }
+
+
+    /* Skills bars */
+    .bar_style {
+        width: 100% !important;
+    }
+
+
+    /* Contact icons */
+    .contact_img {
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    /* Placeholder block */
+    .placeholder-block {
+        width: 100%;
+    }
+
+    .placeholder-block-wide {
+        height: 120px;
+    }
+
+}
