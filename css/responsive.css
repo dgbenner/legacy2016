@@ -11,6 +11,16 @@ img {
 }
 
 
+/* Hero background: anchor to right so the meaningful imagery
+   (Key West sign, Lincoln, woman) stays visible and the
+   decorative dots on the left crop off on smaller screens */
+.carouselimage {
+    background-size: cover;
+    background-position: right center;
+    background-repeat: no-repeat;
+}
+
+
 /* --- Tablet and below (under 1200px) --- */
 
 @media (max-width: 1200px) {
@@ -35,6 +45,16 @@ img {
 
     .carouselimage {
         height: auto;
+        min-height: 310px;
+    }
+
+    /* Un-float promo images at mid-sizes so they don't
+       overlap text (Fix The Debt, Dominion, etc.) */
+    .centering_content img[style*="float: right"],
+    .centering_content img[style*="float:right"] {
+        float: none !important;
+        display: block;
+        margin: 15px auto;
     }
 
 }
@@ -82,15 +102,6 @@ img {
     .quarter_segments {
         width: 50%;
         box-sizing: border-box;
-    }
-
-
-    /* Floated images: stack below text */
-    .centering_content img[style*="float: right"],
-    .centering_content img[style*="float:right"] {
-        float: none !important;
-        display: block;
-        margin: 15px auto;
     }
 
 
