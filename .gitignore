@@ -1,0 +1,17 @@
+# macOS
+.DS_Store
+
+# Production/design source files
+images/makers/
+*.psd
+*.fla
+*.swd
+
+# Drafts and prototypes
+drafts/
+
+# FTP config
+.ftpsync_settings
+
+# Local bootstrap dist (loaded via CDN)
+bootstrap-3.3.1-dist/

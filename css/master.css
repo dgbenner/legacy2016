@@ -1,0 +1,886 @@
+
+    html, body, div, span, applet, object, iframe,
+    h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+    a, abbr, acronym, address, big, cite, code,
+    del, dfn, em, img, ins, kbd, q, s, samp,
+    small, strike, strong, sub, sup, tt, var,
+    b, u, i, center,
+    dl, dt, dd, ol, ul, li,
+    fieldset, form, label, legend,
+    table, caption, tbody, tfoot, thead, tr, th, td,
+    article, aside, canvas, details, embed,
+    figure, figcaption, footer, header, hgroup,
+    menu, nav, output, ruby, section, summary,
+    time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    }
+
+    article, aside, details, figcaption, figure,
+    footer, header, hgroup, menu, nav, section {
+    display: block;
+    }
+    body {
+    line-height: 1;
+    }
+    ol, ul {
+    list-style: none;
+    }
+    blockquote, q {
+    quotes: none;
+    }
+    blockquote:before, blockquote:after,
+    q:before, q:after {
+    content: '';
+    content: none;
+    }
+    table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    }
+
+
+
+
+
+/* my clears */
+
+body {
+    padding: 0px;
+    margin: 0px;
+}
+
+
+a:active
+{
+outline: none;
+}
+
+a:focus
+{
+-moz-outline-style: none;
+}
+
+
+
+
+ul {
+    padding: 0px;
+    margin: 0px;
+}
+
+
+
+
+
+
+
+
+.clearfix {
+  clear:both;
+}
+
+
+/*  colors used
+
+color: #ADADAD;   strong grey
+color: #777777;  secondary grey
+
+
+*/
+
+
+
+/*  link colors */
+
+a:link    {color:#777777; background-color:transparent; text-decoration:none}
+a:visited {color:#777777; background-color:transparent; text-decoration:none}
+a:hover   {color:#999999; background-color:transparent; text-decoration:none}
+a:active  {color:#777777; background-color:transparent; text-decoration:none}
+    
+
+
+
+    
+    
+/*  fonts global styles     */
+ 
+
+h1, h3, h6, .h8  {
+ 
+  font-family: 'Raleway', sans-serif;
+    
+}
+
+
+
+h4 {
+ 
+  font-family: 'Open+Sans:400, 300', sans-serif;
+    
+}
+
+
+
+/*  fonts specific styles  
+h1 - home page carousel text
+h2 - home page carousel subtext
+h3 - section/client titles
+h4 - body copy global
+h5 - button text and styling
+h6 - about section categories
+h7 - contact section copy
+.h8 - UX subcategory headers
+.h9 - TDB but likely control or comments
+
+*/
+
+
+
+
+
+
+
+
+
+h1 { 
+	font-weight: 400;
+	font-size: 35px;
+	color: #ADADAD;
+    max-width: 600px;
+    padding-top: 100px;
+}
+
+
+h2 {  
+	font-weight: 100;
+	font-size: 14px;
+	color:#ADADAD;
+    max-width: 700px;
+    letter-spacing: 1px;
+    padding-top: 18px;
+}
+
+
+
+h3 { 
+	font-size: 25px;
+	color: #ADADAD;
+    max-width: 300px;
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+
+
+h4 { 
+	font-weight: 300;
+	font-size: 11.5px;
+	color: #ADADAD;
+    max-width: 300px;
+    line-height: 22px;
+    padding-bottom: 20px;
+  
+}
+
+
+
+.widertext {
+    max-width: 450px;
+}
+
+
+
+h5 { 
+	font-weight: 400;
+	font-size: 9px;
+	color: #555555;
+    background-color: #000000;
+    letter-spacing: 3.5px;
+    border: 1px solid #333333;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-right: 5px;
+    padding-left: 10px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    overflow: hidden;
+    display:inline-block;
+    -webkit-box-shadow: 0px 0px 14px 0px rgba(255, 255, 255, 0.15);
+    -moz-box-shadow:    0px 0px 14px 0px rgba(255, 255, 255, 0.15);
+    box-shadow:         0px 0px 14px 0px rgba(255, 255, 255, 0.15);
+    
+
+	
+/*Transition*/
+-webkit-transition: All 0.75s ease;
+-moz-transition: All 0.75s ease;
+-o-transition: All 0.75s ease;
+-ms-transition: All 0.75s ease;
+transition: All 0.75s ease;
+}
+
+
+
+h5:hover {
+  background-color: #222222;
+}
+
+
+
+h6 { 
+	font-weight: 100;
+	font-size: 15px;
+	color: #ADADAD;
+    padding-top: 20px;
+    padding-bottom: 34px;
+    letter-spacing: 1px;
+}
+
+
+
+h7 {   
+    color: #777777;
+	font-size: 11px;
+    padding-left: 5px;
+    padding-bottom: 5px;
+
+}
+
+
+
+.h8 { 
+	font-weight: 200;
+	font-size: 20px;
+	color: #ADADAD;
+    max-width: 300px;
+    letter-spacing: 1px;
+    padding-bottom: 10px;
+    padding-top: 40px;
+    display: block;
+
+    
+}
+
+
+
+
+
+
+
+/*  arrow style for all buttons  
+*/
+
+
+.arrow {
+    font-size: 9px;
+    margin-left: 4px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*  primary nav global hover styles  
+*/
+
+
+li{
+    float: left;
+    list-style: none;
+    padding-left: 15px;
+    height: 40px;
+    
+    
+
+}
+
+
+
+
+
+
+
+
+
+/*  primary nav active states FIND A BETTER WAY TO DO THIS
+*/
+
+
+
+
+.active_camp {
+        padding-bottom: 15px;
+        border-bottom: 4px solid #80c4af;
+
+}
+
+
+
+
+.active_web {
+        padding-bottom: 15px;
+        border-bottom: 4px solid #fcb572;
+
+}
+
+
+
+
+.active_ux, .active_copy {
+        padding-bottom: 15px;
+        border-bottom: 4px solid #e8d374;
+
+}
+
+
+
+
+.active_broad {
+        padding-bottom: 15px;
+        border-bottom: 4px solid #b2db84;
+
+}
+
+
+
+
+
+.active_resume {
+        padding-bottom: 15px;
+        border-bottom: 4px solid #e8d374;
+
+}
+
+
+
+
+
+
+
+
+
+
+/*  primary nav specific hover styles  
+*/
+
+
+.campaigns:hover {
+    padding-bottom: 15px;
+    border-bottom: 4px solid #80c4af;
+    
+-webkit-transition: All 0.2s ease;
+-moz-transition: All 0.2s ease;
+-o-transition: All 0.2s ease;
+-ms-transition: All 0.2s ease;
+transition: All 0.2s ease;
+}
+
+
+
+.web:hover {
+    
+    padding-bottom: 15px;
+    border-bottom: 4px solid #fcb572;
+    
+-webkit-transition: All 0.2s ease;
+-moz-transition: All 0.2s ease;
+-o-transition: All 0.2s ease;
+-ms-transition: All 0.2s ease;
+transition: All 0.2s ease;
+
+}
+
+
+.copy:hover {
+
+        padding-bottom: 15px;
+        border-bottom: 4px solid #e8d374;
+
+-webkit-transition: All 0.2s ease;
+-moz-transition: All 0.2s ease;
+-o-transition: All 0.2s ease;
+-ms-transition: All 0.2s ease;
+transition: All 0.2s ease;
+}
+
+
+.broadcast:hover {
+    
+    padding-bottom: 15px;
+    border-bottom: 4px solid #b2db84;
+    
+    
+-webkit-transition: All 0.2s ease;
+-moz-transition: All 0.2s ease;
+-o-transition: All 0.2s ease;
+-ms-transition: All 0.2s ease;
+transition: All 0.2s ease;
+}
+
+
+.resume:hover {
+    
+    padding-bottom: 15px;
+    border-bottom: 4px solid #8ee5ba;
+    
+
+    
+-webkit-transition: All 0.2s ease;
+-moz-transition: All 0.2s ease;
+-o-transition: All 0.2s ease;
+-ms-transition: All 0.2s ease;
+transition: All 0.2s ease;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*  primary image hover and box shadow styles  
+*/
+
+
+img {
+-moz-backface-visibility: hidden;
+}
+
+
+
+
+.darken:hover{
+    background: black;
+    opacity: 0.7;
+        -webkit-transition: all 0.4s ease;
+        -moz-transition: all 0.4s ease;
+        -ms-transition: all 0.4s ease;
+        -o-transition: all 0.4s ease;
+        transition: all 0.4s ease;
+        z-index: 1;
+
+
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*  position adjusters and specific text styling   */
+
+
+
+
+.myname {
+    font-size: 13px;
+    color: #ADADAD;
+    letter-spacing: .5px;
+}
+
+
+
+.myname:hover   {
+    color:#999999; 
+    background-color:transparent; 
+    text-decoration:none
+
+}
+
+
+
+
+.text-nav {
+    float:right;
+    color: #ADADAD;
+    position: relative;
+    top: 11px;
+    font-size: 12px;
+    letter-spacing: 1px;   
+
+}
+
+
+
+.contact_img{
+    margin-bottom: 10px;
+    }
+
+
+
+.reduce-padding {
+            padding-bottom: 10px;
+
+}
+
+
+
+.reduce-padding-roles {
+            padding-top: 0px;
+            padding-bottom: 10px;
+
+}
+
+
+
+.print-padding {
+            margin-top: 15px;
+            margin-bottom: 20px;
+}
+
+
+
+.floatleft {
+    float: left;
+
+}
+
+
+
+.floatright {
+    float: right;
+
+}
+
+.videostyle {
+    margin-left: 50px;
+    margin-top: 100px;
+
+    
+
+}
+
+
+
+
+
+
+
+
+
+
+/*  containers    */
+
+
+
+.fluid_homepage_header {
+    width: 100%;
+    height: 360px;
+    padding-top: 50px;
+    background-image: url("/images/textures/dark_geometric.png");
+    background-repeat: repeat;
+
+
+}
+
+
+
+
+.fluid_container_fixed {
+    width: 100%;
+    background-color: black;
+    position: fixed;
+    padding: 4px;
+    z-index: 1;
+
+    }
+
+
+
+.fluid_container {
+    width: 100%;
+    background-color: black;
+    padding: 4px;
+
+    }
+
+
+
+.centering_content {
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+
+    
+}
+
+
+.third_segments {
+    width: 33%;
+    float: left;
+    padding: 30px;
+
+
+
+}
+
+
+.quarter_segments {
+    width: 25%;
+    float: left;
+    padding: 30px;
+
+
+
+}
+
+
+
+.third_camp_segments {
+    width: 33%;
+    float: left;
+    padding-top 15px;
+    padding-left: 20px;
+    
+
+
+
+}
+
+
+
+
+
+
+
+
+
+   /*    skills bar styling  */
+
+.bar_style {
+    height: 20px;
+    display: block;
+    margin-bottom: 16px;
+    color: #444444;
+    font-size: 10px;
+    letter-spacing: .25px;
+    vertical-align: middle;
+    padding-left: 10px;
+    padding-top: 4.5px;
+
+}
+    
+.strategy {
+    width: 90%;
+    background-color: #80c4af;
+
+
+}
+
+.concept {
+    width: 95%;
+    background-color: #fcb572;
+
+
+}
+
+.branding{
+    width: 80%;
+    background-color: #e8d374;
+    
+}
+
+.process{
+    width: 75%;
+    background-color: #b2db84;
+
+
+}
+
+.ux_bar{
+    width: 80%;
+    background-color: #8ee5ba;
+
+}
+
+.animate{
+    width: 75%;
+    background-color: #9adbd5;
+
+
+}
+
+.code{
+    width: 60%;
+    background-color: #80c4af;
+
+
+
+}
+
+.creativecloud{
+    width: 90%;
+    background-color: #fcb572;
+
+
+
+}
+
+.retouching{
+    width: 75%;
+    background-color: #e8d374;
+
+}
+
+.axure{
+    width: 80%;
+    background-color: #b2db84;
+
+
+}
+
+.interface{
+    width: 60%;
+    background-color: #8ee5ba;
+
+
+}
+
+.proto{
+    width: 50%;
+    background-color: #9adbd5;
+
+
+}
+
+
+
+
+/*    image styling  */
+
+
+
+
+.carouselimage{
+        height: 310px;
+        background-image: url("/images/elements/homepage_header_maker.png");
+
+
+
+}
+
+
+
+/*  magenta placeholders for removed content  */
+
+.placeholder-text {
+    color: #FF00FF;
+    font-family: 'Open+Sans:400, 300', sans-serif;
+    font-weight: 300;
+    font-size: 11.5px;
+    line-height: 22px;
+    padding: 20px 0;
+}
+
+.placeholder-block {
+    background-color: #FF00FF;
+    width: 270px;
+    height: 135px;
+    opacity: 0.6;
+}
+
+.placeholder-block-wide {
+    background-color: #FF00FF;
+    width: 100%;
+    height: 200px;
+    opacity: 0.4;
+    margin: 15px 0 20px;
+}
+
+
+hr{
+
+    width: 1200px;
+    display: block; 
+    height: 1px;
+    border: 0; 
+    border-top: 1px solid #444444;
+    margin-left: auto; 
+    margin-right: auto; 
+
+}
+
+
+
+
+
+
+.bottom_border {
+    border-bottom: thin solid #444444;
+    border-bottom-width: 2px;
+    
+}
+
+
+
+.bottom_shadow {
+-webkit-box-shadow: -4px 2px 17px 8px rgba(0,0,0,0.68);
+-moz-box-shadow: -4px 2px 17px 8px rgba(0,0,0,0.68);
+box-shadow: -4px 2px 17px 8px rgba(0,0,0,0.68);
+
+
+
+}
+
+
+
+.top_border {
+    border-top: thin solid #444444;
+    border-top-width: 2px;
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
