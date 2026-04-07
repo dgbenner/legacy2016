@@ -59,6 +59,22 @@ img {
     /* Tighten headline spacing when images stack above */
     h3 {
         padding-top: 35px;
+        max-width: 100%;
+    }
+
+    /* Let body text fill available width instead of 300px */
+    h4 {
+        max-width: 100%;
+    }
+
+    .widertext {
+        max-width: 100%;
+    }
+
+    /* Segment images scale to fill their container */
+    .quarter_segments img {
+        width: 100%;
+        height: auto;
     }
 
 }
@@ -124,11 +140,25 @@ img {
         font-size: 13px;
     }
 
-    /* About section float */
+    /* About section: un-float bio column, stack everything */
     .centering_content > span[style*="float:left"] {
         float: none !important;
         display: block;
         width: 100%;
+    }
+
+    /* About quarter segments (Skills, Clients, Praise):
+       go wider when bio column is full width above them */
+    span[style*="float:left"] ~ .quarter_segments {
+        width: 50%;
+        box-sizing: border-box;
+    }
+
+    /* Contact icons: horizontal row */
+    .contact_img {
+        display: inline-block;
+        margin-right: 15px;
+        vertical-align: top;
     }
 
     /* Third segments: 2-up */
@@ -158,11 +188,16 @@ img {
     }
 
     .text-nav li {
-        padding: 4px 5px;
+        padding: 3px 4px;
     }
 
     .myname {
         font-size: 11px;
+    }
+
+    /* Hide logo on phone to save space */
+    #nav img {
+        display: none;
     }
 
 
@@ -182,13 +217,24 @@ img {
 
     /* Hero */
     h1 {
-        font-size: 22px;
-        padding-top: 40px;
+        font-size: 20px;
+        padding-top: 30px;
+        max-width: 100%;
     }
 
     h2 {
         font-size: 11px;
         padding-top: 10px;
+        max-width: 100%;
+    }
+
+    .fluid_homepage_header {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .carouselimage {
+        min-height: auto;
     }
 
     h3 {
@@ -204,6 +250,11 @@ img {
         max-width: 100%;
     }
 
+
+    /* About section segments: full width on phone */
+    span[style*="float:left"] ~ .quarter_segments {
+        width: 100%;
+    }
 
     /* Skills bars */
     .bar_style {
