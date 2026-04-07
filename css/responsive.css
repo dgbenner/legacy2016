@@ -11,11 +11,10 @@ img {
 }
 
 
-/* Hero background: anchor to right so the meaningful imagery
-   (Key West sign, Lincoln, woman) stays visible and the
-   decorative dots on the left crop off on smaller screens */
+/* Hero background: fixed to right, crops from left as screen narrows.
+   Hides entirely on tablet and below. */
 .carouselimage {
-    background-size: cover;
+    background-size: auto 100%;
     background-position: right center;
     background-repeat: no-repeat;
 }
@@ -54,7 +53,12 @@ img {
     .centering_content img[style*="float:right"] {
         float: none !important;
         display: block;
-        margin: 15px auto;
+        margin: 10px auto;
+    }
+
+    /* Tighten headline spacing when images stack above */
+    h3 {
+        padding-top: 35px;
     }
 
 }
@@ -104,6 +108,11 @@ img {
         box-sizing: border-box;
     }
 
+
+    /* Hide hero background image on tablet */
+    .carouselimage {
+        background-image: none !important;
+    }
 
     /* Hero text */
     h1 {
