@@ -5,23 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Copy - Dan Benner</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Libre+Caslon+Display&display=swap" rel="stylesheet">
   <style>
     /* ========================================
        CSS CUSTOM PROPERTIES
        ======================================== */
     :root {
-      --color-bg: #f5f2ed;
-      --color-surface: #ffffff;
-      --color-text: #1a1a1a;
+      --color-bg: #eae8e3;
+      --color-surface: #f5f3ee;
+      --color-surface-white: #ffffff;
+      --color-text: rgba(80,75,65,0.85);
       --color-text-secondary: #555;
       --color-text-tertiary: #888;
-      --color-accent: #c44b28;
-      --color-accent-hover: #a33d1f;
+      --color-accent: #1a5fa8;
+      --color-accent-hover: #3b8de0;
+      --color-accent-tint: #e8f1fa;
       --color-border: #ddd;
       --color-border-light: #eee;
 
-      --font-display: 'DM Serif Display', Georgia, serif;
+      --font-display: 'Libre Caslon Display', Georgia, serif;
       --font-body: 'DM Sans', -apple-system, sans-serif;
 
       --space-xs: 0.5rem;
@@ -47,11 +49,30 @@
       background: var(--color-bg);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      position: relative;
+    }
+
+    /* Background grain texture */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
     }
 
     img { max-width: 100%; height: auto; display: block; }
     a { color: var(--color-accent); text-decoration: none; }
     a:hover { color: var(--color-accent-hover); }
+
+    /* Letterpress effect on headings */
+    h1, h2 {
+      color: var(--color-text);
+      text-shadow:
+        0px -1px 0px rgba(30,25,18,0.5),
+        0px 1px 0px rgba(255,255,255,0.35);
+    }
 
     /* ========================================
        LAYOUT
@@ -254,6 +275,40 @@
       margin-top: var(--space-sm);
       font-weight: 500;
       font-size: 0.9rem;
+      color: var(--color-accent);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      padding: 0.5rem 1.25rem;
+      border-radius: 6px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      border: none;
+      text-align: center;
+    }
+
+    .btn--primary {
+      background: var(--color-accent);
+      color: #fff;
+    }
+
+    .btn--primary:hover {
+      background: var(--color-accent-hover);
+      color: #fff;
+    }
+
+    .btn--secondary {
+      background: transparent;
+      color: var(--color-accent);
+      border: 1px solid var(--color-accent);
+    }
+
+    .btn--secondary:hover {
+      background: var(--color-accent-tint);
     }
 
     /* --- Media (images) --- */
@@ -321,6 +376,7 @@
       border-radius: 4px;
       overflow: hidden;
       transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
     }
 
     .category-card:hover {
@@ -328,10 +384,44 @@
       box-shadow: 0 8px 24px rgba(0,0,0,0.08);
     }
 
+    .category-card__img-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+
     .category-card img {
       width: 100%;
       aspect-ratio: 2/1;
       object-fit: cover;
+    }
+
+    .category-card__overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 30%, rgba(20,20,18,0.0) 100%);
+      transition: background 0.5s ease;
+      display: flex;
+      align-items: flex-end;
+      padding: var(--space-sm);
+    }
+
+    .category-card:hover .category-card__overlay {
+      background: radial-gradient(ellipse at center, transparent 10%, rgba(20,20,18,0.65) 100%);
+    }
+
+    .category-card__overlay-text {
+      color: #fff;
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    }
+
+    .category-card:hover .category-card__overlay-text {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .category-card__body {
