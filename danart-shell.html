@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dan Benner - Art Director</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <style>
+    /* ========================================
+       CSS CUSTOM PROPERTIES
+       ======================================== */
+    :root {
+      --color-bg: #f5f2ed;
+      --color-surface: #ffffff;
+      --color-text: #1a1a1a;
+      --color-text-secondary: #555;
+      --color-text-tertiary: #888;
+      --color-accent: #c44b28;
+      --color-accent-hover: #a33d1f;
+      --color-border: #ddd;
+      --color-border-light: #eee;
+
+      --font-display: 'DM Serif Display', Georgia, serif;
+      --font-body: 'DM Sans', -apple-system, sans-serif;
+
+      --space-xs: 0.5rem;
+      --space-sm: 1rem;
+      --space-md: 1.5rem;
+      --space-lg: 3rem;
+      --space-xl: 5rem;
+
+      --max-width: 1100px;
+      --nav-height: 64px;
+    }
+
+    /* ========================================
+       RESET + BASE
+       ======================================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background: var(--color-bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: var(--color-accent); text-decoration: none; }
+    a:hover { color: var(--color-accent-hover); }
+
+    /* ========================================
+       LAYOUT
+       ======================================== */
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 var(--space-md);
+    }
+
+    /* ========================================
+       NAV
+       ======================================== */
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--color-bg);
+      border-bottom: 1px solid var(--color-border-light);
+      height: var(--nav-height);
+      display: flex;
+      align-items: center;
+    }
+
+    .site-nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .site-nav__logo {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      color: var(--color-text);
+      letter-spacing: -0.01em;
+    }
+
+    .site-nav__links {
+      display: flex;
+      gap: var(--space-md);
+      list-style: none;
+    }
+
+    .site-nav__links a {
+      color: var(--color-text-secondary);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .site-nav__links a:hover,
+    .site-nav__links a.active {
+      color: var(--color-text);
+    }
+
+    /* Mobile nav toggle */
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: var(--space-xs); }
+    .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--color-text); margin: 5px 0; transition: 0.3s; }
+
+    @media (max-width: 768px) {
+      .nav-toggle { display: block; }
+
+      .site-nav__links {
+        position: fixed;
+        top: var(--nav-height);
+        left: 0;
+        right: 0;
+        background: var(--color-bg);
+        flex-direction: column;
+        padding: var(--space-md);
+        gap: var(--space-sm);
+        border-bottom: 1px solid var(--color-border);
+        transform: translateY(-100%);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.3s, opacity 0.3s;
+      }
+
+      .site-nav__links.open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+    }
+
+    /* ========================================
+       PAGE HEADER (used on inner pages)
+       ======================================== */
+    .page-header {
+      padding: var(--space-xl) 0 var(--space-lg);
+    }
+
+    .page-header h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.2;
+    }
+
+    .page-header p {
+      color: var(--color-text-secondary);
+      font-size: 1.1rem;
+      margin-top: var(--space-xs);
+      max-width: 600px;
+    }
+
+    /* ========================================
+       HERO (homepage only)
+       ======================================== */
+    .hero {
+      padding: var(--space-xl) 0;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.25rem, 5vw, 3.5rem);
+      line-height: 1.15;
+      max-width: 700px;
+    }
+
+    .hero__subtitle {
+      color: var(--color-text-secondary);
+      font-style: italic;
+      margin-top: var(--space-sm);
+      font-size: 1rem;
+    }
+
+    /* ========================================
+       PROJECT SECTIONS - TEMPLATES
+       ======================================== */
+    .project-sections {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xl);
+      padding-bottom: var(--space-xl);
+    }
+
+    /* --- Template A: Text Left / Image Right --- */
+    .project--text-left {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: var(--space-lg);
+      align-items: center;
+    }
+
+    /* --- Template B: Image Left / Text Right --- */
+    .project--text-right {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: var(--space-lg);
+      align-items: center;
+    }
+
+    .project--text-right .project__copy { order: 2; }
+    .project--text-right .project__media { order: 1; }
+
+    /* --- Template C: Full Width Image --- */
+    .project--full-width .project__copy {
+      max-width: 700px;
+      margin-bottom: var(--space-md);
+    }
+
+    /* --- Template D: Three Images Across --- */
+    .project--three-up .project__gallery-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-sm);
+      margin-top: var(--space-md);
+    }
+
+    /* --- Shared project copy styles --- */
+    .project__copy h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      line-height: 1.2;
+      margin-bottom: var(--space-xs);
+    }
+
+    .project__copy h3 {
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-accent);
+      margin-bottom: var(--space-xs);
+    }
+
+    .project__copy p {
+      color: var(--color-text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .project__copy p + p {
+      margin-top: var(--space-sm);
+    }
+
+    .project__cta {
+      display: inline-block;
+      margin-top: var(--space-sm);
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    /* --- Media (images) --- */
+    .project__media img,
+    .project--full-width img,
+    .project--three-up img {
+      border-radius: 4px;
+      width: 100%;
+    }
+
+    /* --- Expandable/clickable images --- */
+    .project__media--expandable {
+      cursor: pointer;
+      position: relative;
+    }
+
+    .project__media--expandable::after {
+      content: '⤢';
+      position: absolute;
+      bottom: var(--space-sm);
+      right: var(--space-sm);
+      background: rgba(0,0,0,0.6);
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .project__media--expandable:hover::after { opacity: 1; }
+
+    /* --- Responsive stacking --- */
+    @media (max-width: 768px) {
+      .project--text-left,
+      .project--text-right {
+        grid-template-columns: 1fr;
+      }
+
+      .project--text-right .project__copy { order: 1; }
+      .project--text-right .project__media { order: 2; }
+
+      .project--three-up .project__gallery-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ========================================
+       CATEGORY CARDS (homepage)
+       ======================================== */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: var(--space-md);
+      padding: var(--space-lg) 0;
+    }
+
+    .category-card {
+      display: block;
+      background: var(--color-surface);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .category-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    .category-card img {
+      width: 100%;
+      aspect-ratio: 2/1;
+      object-fit: cover;
+    }
+
+    .category-card__body {
+      padding: var(--space-sm) var(--space-md);
+    }
+
+    .category-card__body h3 {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      margin-bottom: var(--space-xs);
+    }
+
+    .category-card__body p {
+      font-size: 0.85rem;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ========================================
+       ABOUT / CONTACT (homepage bottom)
+       ======================================== */
+    .about-section {
+      padding: var(--space-xl) 0;
+      border-top: 1px solid var(--color-border-light);
+    }
+
+    .about-section__grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: var(--space-lg);
+    }
+
+    .about-section h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      margin-bottom: var(--space-sm);
+    }
+
+    .about-section p {
+      color: var(--color-text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .contact-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .contact-links li {
+      font-size: 0.9rem;
+    }
+
+    .contact-links span {
+      color: var(--color-text-tertiary);
+      font-size: 0.8rem;
+      display: block;
+    }
+
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      list-style: none;
+      margin-top: var(--space-md);
+    }
+
+    .skills-list li {
+      background: var(--color-surface);
+      padding: 0.25rem 0.75rem;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      color: var(--color-text-secondary);
+      border: 1px solid var(--color-border-light);
+    }
+
+    @media (max-width: 768px) {
+      .about-section__grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ========================================
+       DIVIDER
+       ======================================== */
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--color-border-light);
+      margin: var(--space-lg) 0;
+    }
+
+    /* ========================================
+       FOOTER
+       ======================================== */
+    .site-footer {
+      border-top: 1px solid var(--color-border-light);
+      padding: var(--space-md) 0;
+      text-align: center;
+    }
+
+    .site-footer .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--color-text-tertiary);
+    }
+
+    .site-footer__links {
+      display: flex;
+      gap: var(--space-sm);
+      list-style: none;
+    }
+
+    .site-footer__links a {
+      color: var(--color-text-tertiary);
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 768px) {
+      .site-footer .container {
+        flex-direction: column;
+        gap: var(--space-xs);
+      }
+    }
+
+    /* ========================================
+       LIGHTBOX / GALLERY OVERLAY
+       ======================================== */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.92);
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .lightbox.active { display: flex; }
+
+    .lightbox__close {
+      position: absolute;
+      top: var(--space-md);
+      right: var(--space-md);
+      background: none;
+      border: none;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      line-height: 1;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+
+    .lightbox__close:hover { opacity: 1; }
+
+    .lightbox__img-container {
+      max-height: 85vh;
+      max-width: 90vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox__img-container img {
+      max-height: 85vh;
+      max-width: 90vw;
+      object-fit: contain;
+    }
+
+    .lightbox__nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: white;
+      font-size: 2.5rem;
+      cursor: pointer;
+      padding: var(--space-sm);
+      opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+
+    .lightbox__nav:hover { opacity: 1; }
+    .lightbox__nav--prev { left: var(--space-md); }
+    .lightbox__nav--next { right: var(--space-md); }
+
+    .lightbox__caption {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.85rem;
+      margin-top: var(--space-sm);
+      text-align: center;
+    }
+
+    .lightbox__counter {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.75rem;
+      margin-top: var(--space-xs);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ======== NAV ======== -->
+  <nav class="site-nav">
+    <div class="container">
+      <a href="index.html" class="site-nav__logo">Dan Benner</a>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="site-nav__links">
+        <li><a href="campaigns.html">Campaigns</a></li>
+        <li><a href="web.html">Web</a></li>
+        <li><a href="copy.html">Copy</a></li>
+        <li><a href="broadcast.html">Broadcast</a></li>
+        <li><a href="index.html#contact">Resume + Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <main>
+    <div class="container">
+
+      <!-- ======== HERO (homepage) ======== -->
+      <section class="hero">
+        <h1>I'm Dan, a conceptual art director for the digital age.</h1>
+        <p class="hero__subtitle">"The trick is finding that little coal and then blowin' on it till it's flame." &ndash; Luke Sullivan</p>
+      </section>
+
+
+      <!-- ======== PROJECT SECTIONS ======== -->
+      <div class="project-sections">
+
+        <!-- TEMPLATE A: Text Left / Image Right -->
+        <section class="project--text-left">
+          <div class="project__copy">
+            <h3>Fix The Debt</h3>
+            <h2>Fiscal Cliff Campaign</h2>
+            <p>The bi-partisan, non-profit organization Fix The Debt needed to make an impact during October 2012. The Fiscal Cliff was looming and Congress needed to make a deal. How do you simply demonstrate the short and long-term effects of not solving the Debt Crisis?</p>
+            <a href="campaigns.html#fixthedebt" class="project__cta">View the solution &#8594;</a>
+          </div>
+          <div class="project__media project__media--expandable" data-gallery="fixthedebt">
+            <img src="https://danart.vercel.app/images/work/fixthedebt_promo.png" alt="Fix The Debt campaign">
+          </div>
+        </section>
+
+
+        <!-- TEMPLATE B: Image Left / Text Right -->
+        <section class="project--text-right">
+          <div class="project__copy">
+            <h3>Dominion Energy</h3>
+            <h2>Veteran Recruitment</h2>
+            <p>To raise awareness for a major energy provider's veteran recruitment program, creative executions were tailored specific to each media channel. A story so big, you can't tell it all in a single ad.</p>
+            <a href="campaigns.html#dominion" class="project__cta">See the full campaign &#8594;</a>
+          </div>
+          <div class="project__media project__media--expandable" data-gallery="dominion">
+            <img src="https://danart.vercel.app/images/work/dominion_promo.png" alt="Dominion Energy Veteran Recruitment">
+          </div>
+        </section>
+
+
+        <!-- TEMPLATE C: Full Width -->
+        <section class="project--full-width">
+          <div class="project__copy">
+            <h3>IMAX</h3>
+            <h2>No Substitute</h2>
+            <p>With attendance down, IMAX needed a high-impact message to remind everyone a 34" TV in their living room is no substitute for an IMAX Experience.</p>
+          </div>
+          <div class="project__media project__media--expandable" data-gallery="imax">
+            <img src="https://danart.vercel.app/images/work/imax_posters.png" alt="IMAX campaign posters">
+          </div>
+        </section>
+
+
+        <!-- TEMPLATE D: Three Images Across -->
+        <section class="project--three-up">
+          <div class="project__copy">
+            <h3>Placeholder</h3>
+            <h2>Three-Up Layout Example</h2>
+            <p>This template shows three images in a row, useful for showing a series of executions or multiple formats at a glance.</p>
+          </div>
+          <div class="project__gallery-row">
+            <img src="https://placehold.co/400x300/ddd/888?text=Image+1" alt="Placeholder 1">
+            <img src="https://placehold.co/400x300/ddd/888?text=Image+2" alt="Placeholder 2">
+            <img src="https://placehold.co/400x300/ddd/888?text=Image+3" alt="Placeholder 3">
+          </div>
+        </section>
+
+      </div>
+      <!-- /project-sections -->
+
+
+      <!-- ======== CATEGORY CARDS (homepage) ======== -->
+      <div class="category-grid">
+        <a href="campaigns.html" class="category-card">
+          <img src="https://danart.vercel.app/images/elements/270x135_campaigns.jpg" alt="Campaigns">
+          <div class="category-card__body">
+            <h3>Campaigns</h3>
+            <p>Concept is King. National campaigns, strategic thinking, and walls covered in Sharpie.</p>
+          </div>
+        </a>
+        <a href="web.html" class="category-card">
+          <img src="https://danart.vercel.app/images/elements/270x135_web.jpg" alt="Web">
+          <div class="category-card__body">
+            <h3>Web</h3>
+            <p>Responsive sites, microsites, social media, mobile. Finding the limits and playing within them.</p>
+          </div>
+        </a>
+        <a href="copy.html" class="category-card">
+          <img src="https://danart.vercel.app/images/elements/270x135_copy.jpg" alt="Copy">
+          <div class="category-card__body">
+            <h3>Copy</h3>
+            <p>Headlines, taglines, body copy and scripts. Writing for brands big and small.</p>
+          </div>
+        </a>
+        <a href="broadcast.html" class="category-card">
+          <img src="https://danart.vercel.app/images/elements/270x135_broadcast.jpg" alt="Broadcast">
+          <div class="category-card__body">
+            <h3>Broadcast</h3>
+            <p>TV scripts, video spots and the same enthusiasm for broadcast as day one.</p>
+          </div>
+        </a>
+      </div>
+
+
+      <!-- ======== ABOUT + CONTACT ======== -->
+      <section class="about-section" id="contact">
+        <div class="about-section__grid">
+          <div>
+            <h2>About Dan</h2>
+            <p>A strong strategic, conceptual and systematic thinker. Creative Circus-trained Art Director. UX Designer. Information Architect. Retoucher. Flash Animator. Hand-coder. And every now and then I'll write a decent headline.</p>
+            <ul class="skills-list">
+              <li>Strategy</li>
+              <li>Concept</li>
+              <li>Branding + Identity</li>
+              <li>Process</li>
+              <li>User Experience</li>
+              <li>Wireframing</li>
+              <li>User Interface</li>
+              <li>Prototyping</li>
+              <li>Creative Cloud</li>
+              <li>HTML/CSS</li>
+              <li>Retouching + Compositing</li>
+            </ul>
+          </div>
+          <div>
+            <ul class="contact-links">
+              <li><a href="#">Resume (PDF)</a></li>
+              <li><a href="http://www.linkedin.com/in/danbenner/">LinkedIn</a></li>
+              <li><span>843 504 7221</span></li>
+              <li><a href="mailto:benner.dan@gmail.com">benner.dan@gmail.com</a></li>
+              <li><span>Minneapolis / St Paul</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+
+  <!-- ======== FOOTER ======== -->
+  <footer class="site-footer">
+    <div class="container">
+      <span>&copy; Dan Benner</span>
+      <ul class="site-footer__links">
+        <li><a href="http://www.linkedin.com/in/danbenner/">LinkedIn</a></li>
+        <li><a href="mailto:benner.dan@gmail.com">Email</a></li>
+      </ul>
+    </div>
+  </footer>
+
+
+  <!-- ======== LIGHTBOX ======== -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox__close" aria-label="Close">&times;</button>
+    <button class="lightbox__nav lightbox__nav--prev" aria-label="Previous">&#8249;</button>
+    <button class="lightbox__nav lightbox__nav--next" aria-label="Next">&#8250;</button>
+    <div class="lightbox__img-container">
+      <img src="" alt="" id="lightbox-img">
+    </div>
+    <div class="lightbox__caption" id="lightbox-caption"></div>
+    <div class="lightbox__counter" id="lightbox-counter"></div>
+  </div>
+
+
+  <!-- ======== JS ======== -->
+  <script>
+    // Mobile nav
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.site-nav__links');
+    navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+
+    // Lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    const lbCaption = document.getElementById('lightbox-caption');
+    const lbCounter = document.getElementById('lightbox-counter');
+
+    let galleryImages = [];
+    let currentIndex = 0;
+
+    // Collect gallery groups: each [data-gallery] can hold multiple images
+    // For single-image expandables, clicking opens just that image
+    // For multi-image galleries, group them by data-gallery value
+    document.querySelectorAll('.project__media--expandable').forEach(el => {
+      el.addEventListener('click', () => {
+        const galleryId = el.dataset.gallery;
+        if (galleryId) {
+          // Collect all images in this gallery group
+          const group = document.querySelectorAll(`[data-gallery="${galleryId}"] img`);
+          galleryImages = Array.from(group).map(img => ({
+            src: img.src,
+            alt: img.alt
+          }));
+        } else {
+          // Single image
+          const img = el.querySelector('img');
+          galleryImages = [{ src: img.src, alt: img.alt }];
+        }
+        currentIndex = 0;
+        showLightboxImage();
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    function showLightboxImage() {
+      lbImg.src = galleryImages[currentIndex].src;
+      lbImg.alt = galleryImages[currentIndex].alt;
+      lbCaption.textContent = galleryImages[currentIndex].alt;
+      lbCounter.textContent = galleryImages.length > 1
+        ? `${currentIndex + 1} / ${galleryImages.length}`
+        : '';
+      // Hide nav arrows for single images
+      document.querySelector('.lightbox__nav--prev').style.display = galleryImages.length > 1 ? '' : 'none';
+      document.querySelector('.lightbox__nav--next').style.display = galleryImages.length > 1 ? '' : 'none';
+    }
+
+    document.querySelector('.lightbox__close').addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelector('.lightbox__nav--prev').addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+      showLightboxImage();
+    });
+
+    document.querySelector('.lightbox__nav--next').addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentIndex = (currentIndex + 1) % galleryImages.length;
+      showLightboxImage();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length; showLightboxImage(); }
+      if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % galleryImages.length; showLightboxImage(); }
+    });
+  </script>
+
+</body>
+</html>
