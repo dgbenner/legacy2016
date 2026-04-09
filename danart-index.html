@@ -11,7 +11,7 @@
        CSS CUSTOM PROPERTIES
        ======================================== */
     :root {
-      --color-bg: #eae8e3;
+      --color-bg: #ece8e0;
       --color-surface: #f5f3ee;
       --color-surface-white: #ffffff;
       --color-text: rgba(80,75,65,0.85);
@@ -50,6 +50,18 @@
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       position: relative;
+    }
+
+    /* Subtle edge gradient darkening from left and right */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(to right, rgba(0,0,0,0.06) 0%, transparent 12%),
+        linear-gradient(to left, rgba(0,0,0,0.06) 0%, transparent 12%);
     }
 
     /* Background grain texture */
@@ -231,7 +243,7 @@
 
     /* --- Template C: Full Width Image --- */
     .project--full-width .project__copy {
-      max-width: 700px;
+      max-width: 630px;
       margin-bottom: var(--space-md);
     }
 
@@ -432,12 +444,23 @@
       font-family: var(--font-display);
       font-size: 1.2rem;
       margin-bottom: var(--space-xs);
+      color: var(--color-text);
     }
 
     .category-card__body p {
       font-size: 0.85rem;
       color: var(--color-text-secondary);
       line-height: 1.6;
+    }
+
+    .category-card__link {
+      display: block;
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--color-accent);
+      text-decoration: underline;
+      padding: var(--space-xs) var(--space-md) var(--space-sm);
     }
 
     /* ========================================
@@ -452,6 +475,7 @@
       display: grid;
       grid-template-columns: 2fr 1fr;
       gap: var(--space-lg);
+      align-items: start;
     }
 
     .about-section h2 {
@@ -719,6 +743,7 @@
             <h3>Campaigns</h3>
             <p>Concept is King. National campaigns, strategic thinking, and walls covered in Sharpie.</p>
           </div>
+          <span class="category-card__link">See campaigns</span>
         </a>
         <a href="danart-web.html" class="category-card">
           <div class="category-card__img-wrap">
@@ -731,6 +756,7 @@
             <h3>Web</h3>
             <p>Responsive sites, microsites, social media, mobile. Finding the limits and playing within them.</p>
           </div>
+          <span class="category-card__link">View web work</span>
         </a>
         <a href="danart-copy.html" class="category-card">
           <div class="category-card__img-wrap">
@@ -743,6 +769,7 @@
             <h3>Copy</h3>
             <p>Headlines, taglines, body copy and scripts. Writing for brands big and small.</p>
           </div>
+          <span class="category-card__link">See writing samples</span>
         </a>
         <a href="danart-broadcast.html" class="category-card">
           <div class="category-card__img-wrap">
@@ -755,6 +782,7 @@
             <h3>Broadcast</h3>
             <p>TV scripts, video spots and the same enthusiasm for broadcast as day one.</p>
           </div>
+          <span class="category-card__link">Watch broadcast reel</span>
         </a>
       </div>
 
@@ -764,7 +792,7 @@
         <div class="about-section__grid">
           <div>
             <h2>About Dan</h2>
-            <p>A strong strategic, conceptual and systematic thinker. Creative Circus-trained Art Director. UX Designer. Information Architect. Retoucher. Flash Animator. Hand-coder. And every now and then I'll write a decent headline.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             <ul class="skills-list">
               <li>Strategy</li>
               <li>Concept</li>
