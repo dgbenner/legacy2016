@@ -601,46 +601,32 @@
 
     .credentials {
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
       gap: var(--space-sm);
       margin-top: var(--space-md);
     }
 
     .credential {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       align-items: center;
+      gap: var(--space-xs);
     }
 
     .credential__img {
-      width: 50px;
-      height: auto;
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
       display: block;
-    }
-
-    /* Creative Circus */
-    .credential:first-child .credential__img {
-      width: 55px;
-    }
-
-    /* NNG */
-    .credential--nng .credential__img {
-      width: 43px;
-    }
-
-    /* Scrum badges */
-    .credential--scrum .credential__img {
-      width: 66px;
+      flex-shrink: 0;
     }
 
     .credential__label {
-      font-size: 0.5rem;
+      font-size: 0.65rem;
       font-weight: 500;
       letter-spacing: 0.05em;
       text-transform: uppercase;
       color: var(--color-text-tertiary);
-      text-align: center;
-      margin-top: 4px;
       line-height: 1.3;
     }
 
