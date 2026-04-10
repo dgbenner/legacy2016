@@ -587,6 +587,39 @@
       margin-top: var(--space-xs);
     }
 
+    .credentials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin-top: var(--space-md);
+    }
+
+    .credential {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 50px;
+    }
+
+    .credential__circle {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+    }
+
+    .credential__label {
+      font-size: 0.5rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--color-text-tertiary);
+      text-align: center;
+      margin-top: 4px;
+      line-height: 1.3;
+    }
+
     .skills-list {
       display: flex;
       flex-wrap: wrap;
@@ -864,7 +897,7 @@
         <div class="about-section__grid">
           <div>
             <h2 style="margin-left: -2px;">About Dan</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>At The Creative Circus, I took three teams classes a quarter for two years. Each week, I presented at least 10 concepts per class with a creative partner — roughly 2,400 campaign ideas over two years. I like to think that's more campaigns than most creatives produce in a career. I won't claim they were all great, but I noticed they got better the further I went. Solid thinking is the floor. Great is something else entirely — and it's inspired.</p>
             <ul class="skills-list">
               <li>Strategy</li>
               <li>Concept</li>
@@ -888,6 +921,28 @@
               <span class="btn-email__copy" id="copy-label">Copy</span>
             </button>
             <span class="contact-location">Saint Paul, MN (Central Time)</span>
+            <div class="credentials">
+              <div class="credential">
+                <div class="credential__circle"></div>
+                <span class="credential__label">THE CREATIVE CIRCUS</span>
+              </div>
+              <div class="credential">
+                <div class="credential__circle"></div>
+                <span class="credential__label">NIELSEN NORMAN GROUP</span>
+              </div>
+              <div class="credential">
+                <div class="credential__circle"></div>
+                <span class="credential__label">PMP TRAINED</span>
+              </div>
+              <div class="credential">
+                <div class="credential__circle"></div>
+                <span class="credential__label">SCRUM PRODUCT OWNER</span>
+              </div>
+              <div class="credential">
+                <div class="credential__circle"></div>
+                <span class="credential__label">SCRUM MASTER</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
