@@ -549,7 +549,6 @@
     }
 
     .contact-col .btn {
-      width: 100%;
     }
 
     .btn-email {
@@ -956,8 +955,10 @@
             </ul>
           </div>
           <div class="contact-col">
-            <a href="#" class="btn btn--primary" target="_blank">Resume</a>
-            <a href="http://www.linkedin.com/in/danbenner/" class="btn btn--primary" target="_blank">LinkedIn</a>
+            <div style="display: flex; gap: var(--space-sm);">
+              <a href="http://www.linkedin.com/in/danbenner/" class="btn btn--primary" target="_blank" style="flex: 1; text-align: center;">LinkedIn</a>
+              <a href="#" class="btn btn--primary" target="_blank" style="flex: 1; text-align: center;">Resume</a>
+            </div>
             <button class="btn-email" id="copy-email" onclick="navigator.clipboard.writeText('benner.dan@gmail.com').then(()=>{var c=document.getElementById('copy-label');c.textContent='Copied!';setTimeout(()=>{c.textContent='Copy'},1500)})">
               <span class="btn-email__address">benner.dan@gmail.com</span>
               <span class="btn-email__divider"></span>
