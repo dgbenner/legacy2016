@@ -232,6 +232,17 @@
       font-size: clamp(2.25rem, 5vw, 3.5rem);
       line-height: 1.15;
       max-width: 700px;
+      letter-spacing: -0.02em;
+    }
+
+    .inline-link {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+    }
+
+    .inline-link:hover {
+      text-decoration: underline;
+      color: var(--color-accent);
     }
 
     .hero__subtitle {
@@ -620,6 +631,11 @@
       line-height: 1.3;
     }
 
+    a.credential:hover .credential__label {
+      text-decoration: underline;
+      color: var(--color-accent);
+    }
+
     .skills-list {
       display: flex;
       flex-wrap: wrap;
@@ -897,7 +913,7 @@
         <div class="about-section__grid">
           <div>
             <h2 style="margin-left: -2px;">About Dan</h2>
-            <p>At The Creative Circus, I took three teams classes a quarter for two years. Each week, I presented at least 10 concepts per class with a creative partner — roughly 2,400 campaign ideas over two years. I like to think that's more campaigns than most creatives produce in a career. I won't claim they were all great, but I noticed they got better the further I went. Solid thinking is the floor. Great is something else entirely — and it's inspired.</p>
+            <p>At <a href="https://creativecircus.com/" target="_blank" class="inline-link"><strong>The Creative Circus</strong></a>, I took three teams classes a quarter for two years. Each week, I presented at least 10 concepts per class with a creative partner — roughly 2,400 campaign ideas over two years. I like to think that's more campaigns than most creatives produce in a career. I won't claim they were all great, but I noticed they got better the further I went. Solid thinking is the floor. Great is something else entirely — and it's inspired.</p>
             <ul class="skills-list">
               <li>Strategy</li>
               <li>Concept</li>
@@ -922,10 +938,10 @@
             </button>
             <span class="contact-location">Saint Paul, MN (Central Time)</span>
             <div class="credentials">
-              <div class="credential">
+              <a href="https://creativecircus.com/" target="_blank" class="credential">
                 <div class="credential__circle"></div>
                 <span class="credential__label">THE CREATIVE CIRCUS</span>
-              </div>
+              </a>
               <div class="credential">
                 <div class="credential__circle"></div>
                 <span class="credential__label">NIELSEN NORMAN GROUP</span>
