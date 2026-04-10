@@ -103,12 +103,27 @@
     .site-nav {
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 10000;
       background: var(--color-bg);
-      border-bottom: 1px solid var(--color-border-light);
+      border-bottom: none;
       height: var(--nav-height);
       display: flex;
       align-items: center;
+    }
+
+    .site-nav::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: repeating-linear-gradient(
+        90deg,
+        #ccc 0%, #fff 15%, #ddd 30%, #fff 45%, #ccc 60%, #fff 75%, #ddd 90%, #ccc 100%
+      );
+      filter: blur(0.5px);
+      opacity: 0.6;
     }
 
     .site-nav .container {
@@ -383,7 +398,8 @@
     }
 
     .category-card {
-      display: block;
+      display: flex;
+      flex-direction: column;
       background: var(--color-surface);
       border-radius: 4px;
       overflow: hidden;
@@ -438,6 +454,7 @@
 
     .category-card__body {
       padding: var(--space-sm) var(--space-md);
+      flex: 1;
     }
 
     .category-card__body h3 {
@@ -445,6 +462,10 @@
       font-size: 1.2rem;
       margin-bottom: var(--space-xs);
       color: var(--color-text);
+      font-weight: 400;
+      text-shadow:
+        0px -1px 0px rgba(30,25,18,0.5),
+        0px 1px 0px rgba(255,255,255,0.35);
     }
 
     .category-card__body p {
@@ -457,10 +478,11 @@
       display: block;
       text-align: center;
       font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--color-accent);
+      font-style: italic;
+      color: var(--color-text-secondary);
       text-decoration: underline;
       padding: var(--space-xs) var(--space-md) var(--space-sm);
+      margin-top: auto;
     }
 
     /* ========================================
@@ -490,21 +512,20 @@
       line-height: 1.7;
     }
 
-    .contact-links {
-      list-style: none;
+    .contact-col {
       display: flex;
       flex-direction: column;
-      gap: var(--space-xs);
+      gap: var(--space-sm);
     }
 
-    .contact-links li {
-      font-size: 0.9rem;
+    .contact-col .btn {
+      width: 100%;
     }
 
-    .contact-links span {
+    .contact-location {
       color: var(--color-text-tertiary);
-      font-size: 0.8rem;
-      display: block;
+      font-size: 0.9rem;
+      margin-top: var(--space-xs);
     }
 
     .skills-list {
@@ -693,7 +714,7 @@
             <p>The bi-partisan, non-profit organization Fix The Debt needed to make an impact during October 2012. The Fiscal Cliff was looming and Congress needed to make a deal. How do you simply demonstrate the short and long-term effects of not solving the Debt Crisis?</p>
             <a href="danart-campaigns.html#fixthedebt" class="project__cta">View the solution &#8594;</a>
           </div>
-          <div class="project__media project__media--expandable" data-gallery="fixthedebt">
+          <div class="project__media">
             <img src="https://danart.vercel.app/images/work/fixthedebt_promo.png" alt="Fix The Debt campaign">
           </div>
         </section>
@@ -707,7 +728,7 @@
             <p>To raise awareness for a major energy provider's veteran recruitment program, creative executions were tailored specific to each media channel. A story so big, you can't tell it all in a single ad.</p>
             <a href="danart-campaigns.html#dominion" class="project__cta">See the full campaign &#8594;</a>
           </div>
-          <div class="project__media project__media--expandable" data-gallery="dominion">
+          <div class="project__media">
             <img src="https://danart.vercel.app/images/work/dominion_promo.png" alt="Dominion Energy Veteran Recruitment">
           </div>
         </section>
@@ -735,9 +756,7 @@
         <a href="danart-campaigns.html" class="category-card">
           <div class="category-card__img-wrap">
             <img src="https://danart.vercel.app/images/elements/270x135_campaigns.jpg" alt="Campaigns">
-            <div class="category-card__overlay">
-              <span class="category-card__overlay-text">Campaigns</span>
-            </div>
+            <div class="category-card__overlay"></div>
           </div>
           <div class="category-card__body">
             <h3>Campaigns</h3>
@@ -748,9 +767,7 @@
         <a href="danart-web.html" class="category-card">
           <div class="category-card__img-wrap">
             <img src="https://danart.vercel.app/images/elements/270x135_web.jpg" alt="Web">
-            <div class="category-card__overlay">
-              <span class="category-card__overlay-text">Web</span>
-            </div>
+            <div class="category-card__overlay"></div>
           </div>
           <div class="category-card__body">
             <h3>Web</h3>
@@ -761,9 +778,7 @@
         <a href="danart-copy.html" class="category-card">
           <div class="category-card__img-wrap">
             <img src="https://danart.vercel.app/images/elements/270x135_copy.jpg" alt="Copy">
-            <div class="category-card__overlay">
-              <span class="category-card__overlay-text">Copy</span>
-            </div>
+            <div class="category-card__overlay"></div>
           </div>
           <div class="category-card__body">
             <h3>Copy</h3>
@@ -774,9 +789,7 @@
         <a href="danart-broadcast.html" class="category-card">
           <div class="category-card__img-wrap">
             <img src="https://danart.vercel.app/images/elements/270x135_broadcast.jpg" alt="Broadcast">
-            <div class="category-card__overlay">
-              <span class="category-card__overlay-text">Broadcast</span>
-            </div>
+            <div class="category-card__overlay"></div>
           </div>
           <div class="category-card__body">
             <h3>Broadcast</h3>
@@ -807,14 +820,11 @@
               <li>Retouching + Compositing</li>
             </ul>
           </div>
-          <div>
-            <ul class="contact-links">
-              <li><a href="#">Resume (PDF)</a></li>
-              <li><a href="http://www.linkedin.com/in/danbenner/">LinkedIn</a></li>
-              <li><span>843 504 7221</span></li>
-              <li><a href="mailto:benner.dan@gmail.com">benner.dan@gmail.com</a></li>
-              <li><span>Minneapolis / St Paul</span></li>
-            </ul>
+          <div class="contact-col">
+            <a href="#" class="btn btn--primary" target="_blank">Resume</a>
+            <a href="http://www.linkedin.com/in/danbenner/" class="btn btn--primary" target="_blank">LinkedIn</a>
+            <button class="btn btn--secondary" id="copy-email" onclick="navigator.clipboard.writeText('benner.dan@gmail.com').then(()=>{this.textContent='Copied!';setTimeout(()=>{this.innerHTML='&#9998; Copy email'},1500)})">&#9998; Copy email</button>
+            <span class="contact-location">Minneapolis / St Paul</span>
           </div>
         </div>
       </section>
