@@ -11,7 +11,7 @@
        CSS CUSTOM PROPERTIES
        ======================================== */
     :root {
-      --color-bg: #eae8e3;
+      --color-bg: #ece8e0;
       --color-surface: #f5f3ee;
       --color-surface-white: #ffffff;
       --color-text: rgba(80,75,65,0.85);
@@ -52,6 +52,18 @@
       position: relative;
     }
 
+    /* Subtle edge gradient darkening from left and right */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(to right, rgba(0,0,0,0.06) 0%, transparent 12%),
+        linear-gradient(to left, rgba(0,0,0,0.06) 0%, transparent 12%);
+    }
+
     /* Background grain texture */
     body::after {
       content: '';
@@ -69,6 +81,7 @@
     /* Letterpress effect on headings */
     h1, h2 {
       color: var(--color-text);
+      font-weight: 400;
       letter-spacing: -0.02em;
       text-shadow:
         0px -1px 0px rgba(30,25,18,0.5),
@@ -91,12 +104,40 @@
     .site-nav {
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 10000;
       background: var(--color-bg);
-      border-bottom: 1px solid var(--color-border-light);
+      border-bottom: none;
       height: var(--nav-height);
       display: flex;
       align-items: center;
+    }
+
+    .site-nav::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: repeating-linear-gradient(
+        90deg,
+        #ccc 0%, #fff 15%, #ddd 30%, #fff 45%, #ccc 60%, #fff 75%, #ddd 90%, #ccc 100%
+      );
+      filter: blur(0.5px);
+      opacity: 0.6;
+    }
+
+    /* Gradient + shadow below nav */
+    .site-nav::before {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.04) 0%, transparent 100%);
+      pointer-events: none;
+      z-index: -1;
     }
 
     .site-nav .container {
@@ -246,6 +287,7 @@
 
     /* --- Shared project copy styles --- */
     .project__copy h2 {
+      text-indent: -2px;
       font-family: var(--font-display);
       font-size: clamp(1.5rem, 3vw, 2rem);
       line-height: 1.2;
