@@ -493,9 +493,14 @@
       font-size: 0.85rem;
       font-style: italic;
       color: var(--color-text-secondary);
-      text-decoration: underline;
+      text-decoration: none;
       padding: var(--space-xs) var(--space-md) var(--space-sm);
       margin-top: auto;
+      transition: text-decoration 0.2s;
+    }
+
+    .category-card:hover .category-card__link {
+      text-decoration: underline;
     }
 
     /* ========================================
