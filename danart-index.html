@@ -535,6 +535,47 @@
       width: 100%;
     }
 
+    .btn-email {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      background: transparent;
+      border: 1px solid var(--color-accent);
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      padding: 0;
+      overflow: hidden;
+      transition: background 0.2s;
+    }
+
+    .btn-email:hover {
+      background: var(--color-accent-tint);
+    }
+
+    .btn-email__address {
+      flex: 1;
+      padding: 0.5rem 0.75rem;
+      color: var(--color-accent);
+      font-weight: 500;
+      text-align: left;
+    }
+
+    .btn-email__divider {
+      width: 1px;
+      align-self: stretch;
+      background: var(--color-accent);
+      opacity: 0.3;
+    }
+
+    .btn-email__copy {
+      padding: 0.5rem 0.75rem;
+      color: var(--color-accent);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
     .contact-location {
       color: var(--color-text-tertiary);
       font-size: 0.9rem;
@@ -836,8 +877,12 @@
           <div class="contact-col">
             <a href="#" class="btn btn--primary" target="_blank">Resume</a>
             <a href="http://www.linkedin.com/in/danbenner/" class="btn btn--primary" target="_blank">LinkedIn</a>
-            <button class="btn btn--secondary" id="copy-email" onclick="navigator.clipboard.writeText('benner.dan@gmail.com').then(()=>{this.textContent='Copied!';setTimeout(()=>{this.innerHTML='&#9998; Copy email'},1500)})">&#9998; Copy email</button>
-            <span class="contact-location">Minneapolis / St Paul</span>
+            <button class="btn-email" id="copy-email" onclick="navigator.clipboard.writeText('benner.dan@gmail.com').then(()=>{var c=document.getElementById('copy-label');c.textContent='Copied!';setTimeout(()=>{c.textContent='Copy'},1500)})">
+              <span class="btn-email__address">benner.dan@gmail.com</span>
+              <span class="btn-email__divider"></span>
+              <span class="btn-email__copy" id="copy-label">Copy</span>
+            </button>
+            <span class="contact-location">Saint Paul, MN (Central Time)</span>
           </div>
         </div>
       </section>
@@ -849,11 +894,7 @@
   <!-- ======== FOOTER ======== -->
   <footer class="site-footer">
     <div class="container">
-      <span>&copy; Dan Benner</span>
-      <ul class="site-footer__links">
-        <li><a href="http://www.linkedin.com/in/danbenner/">LinkedIn</a></li>
-        <li><a href="mailto:benner.dan@gmail.com">Email</a></li>
-      </ul>
+      <span></span>
     </div>
   </footer>
 
