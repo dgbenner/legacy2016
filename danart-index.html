@@ -619,6 +619,22 @@
       border-radius: 50%;
       background: var(--color-surface);
       border: 1px solid var(--color-border);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .credential__circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .credential--nng .credential__circle {
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
     }
 
     .credential__label {
@@ -940,25 +956,25 @@
             <span class="contact-location">Saint Paul, MN (Central Time)</span>
             <div class="credentials">
               <a href="https://creativecircus.com/" target="_blank" class="credential">
-                <div class="credential__circle"></div>
+                <div class="credential__circle"><img src="images/elements/creativecircus.png" alt="The Creative Circus"></div>
                 <span class="credential__label">THE CREATIVE CIRCUS</span>
               </a>
-              <div class="credential">
-                <div class="credential__circle"></div>
+              <a href="https://drive.google.com/file/d/12oYYyPOWrtv8fO9ufugPcZNyhaYdA6fT/view?usp=sharing" target="_blank" class="credential credential--nng">
+                <div class="credential__circle"><img src="images/elements/seal-nng.png" alt="Nielsen Norman Group UX Certified"></div>
                 <span class="credential__label">NIELSEN NORMAN GROUP</span>
-              </div>
-              <div class="credential">
-                <div class="credential__circle"></div>
+              </a>
+              <a href="https://drive.google.com/file/d/124QPFP4WYxmq6Ms5wgLIGnJe5XrCMZaI/view?usp=sharing" target="_blank" class="credential">
+                <div class="credential__circle"><img src="images/elements/seal-pmp-300.png" alt="PMP Trained"></div>
                 <span class="credential__label">PMP TRAINED</span>
-              </div>
-              <div class="credential">
-                <div class="credential__circle"></div>
+              </a>
+              <a href="https://bcert.me/bc/html/show-badge.html?b=qoxpnkmy" target="_blank" class="credential">
+                <div class="credential__circle"><img src="images/elements/seal-cspo.png" alt="Certified Scrum Product Owner"></div>
                 <span class="credential__label">SCRUM PRODUCT OWNER</span>
-              </div>
-              <div class="credential">
-                <div class="credential__circle"></div>
+              </a>
+              <a href="https://bcert.me/bc/html/show-badge.html?b=jttbpsao" target="_blank" class="credential">
+                <div class="credential__circle"><img src="images/elements/seal-csm.png" alt="Certified Scrum Master"></div>
                 <span class="credential__label">SCRUM MASTER</span>
-              </div>
+              </a>
             </div>
           </div>
         </div>
