@@ -627,6 +627,42 @@
       font-size: 0.75rem;
       margin-top: var(--space-xs);
     }
+
+    /* Carousel */
+    .carousel {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      aspect-ratio: 16/9;
+      background: #000;
+    }
+
+    .carousel__track {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .carousel__slide {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .carousel__slide.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .carousel__slide.exit-left {
+      opacity: 0;
+      transform: translateX(-40px);
+    }
   </style>
 </head>
 <body>
@@ -685,6 +721,26 @@
             <div style="aspect-ratio: 3/4; overflow: hidden; border-radius: 12px;"><img src="images/work/economist_1.png" alt="The Economist 1" style="width: 100%; height: 100%; object-fit: cover;"></div>
             <div style="aspect-ratio: 3/4; overflow: hidden; border-radius: 12px;"><img src="images/work/economist_2.png" alt="The Economist 2" style="width: 100%; height: 100%; object-fit: cover;"></div>
             <div style="aspect-ratio: 3/4; overflow: hidden; border-radius: 12px;"><img src="images/work/economist_3.png" alt="The Economist 3" style="width: 100%; height: 100%; object-fit: cover;"></div>
+          </div>
+        </section>
+
+        <!-- Marriott Facebook Covers -->
+        <section class="project--full-width">
+          <div class="project__copy">
+            <h3>Marriott Hotels</h3>
+            <h2>Facebook Covers</h2>
+            <p>Placeholder description.</p>
+          </div>
+          <div class="project__media">
+            <div class="carousel" id="marriott-carousel">
+              <div class="carousel__track">
+                <img src="images/work/marriott_fb_1.jpg" alt="Marriott Facebook Cover 1" class="carousel__slide active">
+                <img src="images/work/marriott_fb_2.jpg" alt="Marriott Facebook Cover 2" class="carousel__slide">
+                <img src="images/work/marriott_fb_3.jpg" alt="Marriott Facebook Cover 3" class="carousel__slide">
+                <img src="images/work/marriott_fb_4.jpg" alt="Marriott Facebook Cover 4" class="carousel__slide">
+                <img src="images/work/marriott_fb_5.jpg" alt="Marriott Facebook Cover 5" class="carousel__slide">
+              </div>
+            </div>
           </div>
         </section>
 
@@ -826,6 +882,22 @@
       if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length; showLightboxImage(); }
       if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % galleryImages.length; showLightboxImage(); }
     });
+
+    // Marriott carousel - swipe every 4 seconds
+    (function() {
+      const slides = document.querySelectorAll('#marriott-carousel .carousel__slide');
+      if (!slides.length) return;
+      let current = 0;
+
+      setInterval(() => {
+        slides[current].classList.remove('active');
+        slides[current].classList.add('exit-left');
+        setTimeout(() => slides[current === 0 ? slides.length - 1 : current - 1].classList.remove('exit-left'), 600);
+
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('active');
+      }, 4000);
+    })();
   </script>
 
 </body>
