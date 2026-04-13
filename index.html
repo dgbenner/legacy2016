@@ -212,7 +212,7 @@
       padding-top: 2px;
     }
 
-    /* Downward bar */
+    /* Downward bar - hidden by default, grows on hover */
     .site-nav__links a.nav-campaigns > span::after,
     .site-nav__links a.nav-web > span::after,
     .site-nav__links a.nav-copy > span::after,
@@ -222,7 +222,7 @@
       left: 0;
       right: 0;
       top: calc(100% - 5px);
-      height: 3px;
+      height: 0;
       transition: height 0.13s cubic-bezier(0.55, 0, 0.67, 0.3);
     }
     .site-nav__links a.nav-campaigns:hover > span::after,
