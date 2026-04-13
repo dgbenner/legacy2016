@@ -209,9 +209,9 @@
       position: absolute;
       left: 0;
       right: 0;
-      top: calc(100% - 3px);
+      top: calc(100% - 5px);
       height: 3px;
-      border-radius: 2px;
+      border-radius: 3px;
       transition: height 0.6s cubic-bezier(0.22, 1, 0.36, 1);
     }
     .site-nav__links a.nav-campaigns:hover::after,
@@ -302,18 +302,17 @@
       line-height: 1.15;
       max-width: 700px;
       letter-spacing: -0.02em;
-      color: #40382e;
+      color: #808080;
       background-image: linear-gradient(
         180deg,
-        #1a1612 0%,
-        #40382e 40%,
-        #40382e 60%,
-        #8a7e68 100%
+        #000000 0%,
+        #808080 40%,
+        #808080 60%,
+        #FF00FF 100%
       );
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 1px 0 rgba(255,255,255,0.6));
     }
 
     .inline-link {
@@ -505,31 +504,15 @@
     .category-card {
       display: flex;
       flex-direction: column;
-      width: 100%;
       background: var(--color-surface);
       border-radius: 12px;
       overflow: hidden;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-      transform-origin: center center;
-      will-change: transform;
-      position: relative;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .category-card:hover {
-      transform: scale3d(1.06, 1.06, 1);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.18);
-      z-index: 2;
-    }
-
-    /* Colored strip as a real element inside the card */
-    .category-card__strip {
-      height: 8px;
-      background: var(--card-color, #ccc);
-      transition: height 0.25s ease;
-    }
-
-    .category-card:hover .category-card__strip {
-      height: 14px;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
     }
 
     .category-card--campaigns { --card-color: #e03a3e; }
@@ -1005,7 +988,6 @@
             <p>Big ideas that connect. From the first scribbled thumbnail to the national media buy &mdash; strategy, concept, and craft, start to finish.</p>
           </div>
           <span class="category-card__link">See campaigns</span>
-          <div class="category-card__strip"></div>
         </a>
         <a href="web.html" class="category-card category-card--web">
           <div class="category-card__img-wrap">
@@ -1017,7 +999,6 @@
             <p>Responsive sites, microsites, apps, portals, social. Every format has its own rules &mdash; the trick is learning how each one bends.</p>
           </div>
           <span class="category-card__link">View web work</span>
-          <div class="category-card__strip"></div>
         </a>
         <a href="copy.html" class="category-card category-card--copy">
           <div class="category-card__img-wrap">
@@ -1029,7 +1010,6 @@
             <p>The shortest path between a brand and a human. Whether it's a billboard or a loading screen, good copy gets out of the way.</p>
           </div>
           <span class="category-card__link">See writing samples</span>
-          <div class="category-card__strip"></div>
         </a>
         <a href="broadcast.html" class="category-card category-card--broadcast">
           <div class="category-card__img-wrap">
@@ -1041,7 +1021,6 @@
             <p>Spots, reels, storytelling in motion. The medium that taught me concept, pacing, and when to let the silence do the work.</p>
           </div>
           <span class="category-card__link">Watch broadcast reel</span>
-          <div class="category-card__strip"></div>
         </a>
       </div>
 
