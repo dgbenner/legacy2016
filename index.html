@@ -334,12 +334,12 @@
       padding: var(--space-xl) 0;
     }
 
-    .hero-headline {
-      display: block;
-      width: 100%;
-      max-width: 900px;
-      height: auto;
-      margin-left: -2px;
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      line-height: 1.15;
+      max-width: 100%;
+      letter-spacing: -0.02em;
     }
 
     .inline-link {
@@ -948,34 +948,7 @@
 
       <!-- ======== HERO (homepage) ======== -->
       <section class="hero">
-        <svg class="hero-headline" viewBox="0 0 1200 260" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMid meet" aria-label="I art direct. I write. I don't pick sides.">
-          <defs>
-            <filter id="deboss" x="-10%" y="-10%" width="120%" height="120%">
-              <feColorMatrix in="SourceAlpha" type="matrix"
-                values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1 1"
-                result="inv"/>
-              <feOffset in="inv" dx="4" dy="4" result="darkOff"/>
-              <feGaussianBlur in="darkOff" stdDeviation="1" result="darkBlur"/>
-              <feComposite in="darkBlur" in2="SourceAlpha" operator="in" result="darkIn"/>
-              <feFlood flood-color="#000" flood-opacity="0.95" result="darkCol"/>
-              <feComposite in="darkCol" in2="darkIn" operator="in" result="dark"/>
-              <feOffset in="inv" dx="-2" dy="-2" result="lightOff"/>
-              <feGaussianBlur in="lightOff" stdDeviation="0.5" result="lightBlur"/>
-              <feComposite in="lightBlur" in2="SourceAlpha" operator="in" result="lightIn"/>
-              <feFlood flood-color="#fff" flood-opacity="0.85" result="lightCol"/>
-              <feComposite in="lightCol" in2="lightIn" operator="in" result="light"/>
-              <feMerge>
-                <feMergeNode in="SourceGraphic"/>
-                <feMergeNode in="dark"/>
-                <feMergeNode in="light"/>
-              </feMerge>
-            </filter>
-          </defs>
-          <text x="-2" y="90" font-family="'Libre Caslon Text', Georgia, serif" font-size="90" fill="#3d3d3d" filter="url(#deboss)">
-            <tspan x="-2" dy="0">I art direct. I write.</tspan>
-            <tspan x="-2" dy="1.15em">I don't pick sides.</tspan>
-          </text>
-        </svg>
+        <h1 style="margin-left: -2px;">I art direct. I write.<br>I don't pick sides.</h1>
         <p class="hero__subtitle">Campaign ideas, brand thinking, and the craft to make it all real.<br>From national media buys to the headline on a banner ad.</p>
       </section>
 
