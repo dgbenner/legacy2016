@@ -208,6 +208,20 @@
     .site-nav__links a.nav-copy::after { background: #fdb827; }
     .site-nav__links a.nav-broadcast::after { background: #61bb46; }
 
+
+    /* Hover: text color matches underline */
+    .site-nav__links a.nav-campaigns:hover { color: #e03a3e; }
+    .site-nav__links a.nav-web:hover { color: #009ddc; }
+    .site-nav__links a.nav-copy:hover { color: #fdb827; }
+    .site-nav__links a.nav-broadcast:hover { color: #61bb46; }
+
+    .site-nav__links a.nav-campaigns,
+    .site-nav__links a.nav-web,
+    .site-nav__links a.nav-copy,
+    .site-nav__links a.nav-broadcast {
+      transition: color 0.2s;
+    }
+
     /* Mobile nav toggle */
     .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: var(--space-xs); }
     .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--color-text); margin: 5px 0; transition: 0.3s; }
