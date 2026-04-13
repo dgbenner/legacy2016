@@ -86,14 +86,11 @@
     a { color: var(--color-accent); text-decoration: none; }
     a:hover { color: var(--color-accent-hover); }
 
-    /* Inverted letterpress effect for dark bg */
+    /* No letterpress on dark bg - flat crisp text */
     h1, h2 {
-      color: rgba(220,218,210,0.85);
+      color: rgba(220,218,210,0.9);
       font-weight: 400;
       letter-spacing: -0.02em;
-      text-shadow:
-        0px -1px 0px rgba(0,0,0,0.6),
-        0px 1px 0px rgba(255,255,255,0.08);
     }
 
     /* ========================================
@@ -699,6 +696,7 @@
       max-width: 60%;
       border-radius: 12px;
     }
+
     .flash-embed {
       border-radius: 12px;
       margin-top: var(--space-sm);
@@ -738,7 +736,22 @@
       <!-- ======== PROJECT SECTIONS ======== -->
       <div class="project-sections">
 
-        <!-- BellSouth -->
+        <!-- Crescent Bank -->
+        <section class="project--full-width">
+          <div class="project__copy">
+            <h3>Crescent Bank</h3>
+            <h2>TV Spot</h2>
+            <p>Placeholder description.</p>
+          </div>
+          <div class="project__media">
+            <video controls poster="images/work/crescent_poster.jpg" style="width: 60%; border-radius: 12px;">
+              <source src="video/crescent.mp4" type="video/mp4">
+            </video>
+          </div>
+        </section>
+
+        <!--
+        BellSouth - The Magician (commented out)
         <section class="project--full-width">
           <div class="project__copy">
             <h3>BellSouth</h3>
@@ -752,6 +765,7 @@
             </video>
           </div>
         </section>
+        -->
 
         <!-- CHKD -->
         <section class="project--full-width">
@@ -765,20 +779,6 @@
               <source src="video/chkd.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
-          </div>
-        </section>
-
-        <!-- Crescent Bank -->
-        <section class="project--full-width">
-          <div class="project__copy">
-            <h3>Crescent Bank</h3>
-            <h2>TV Spot</h2>
-            <p>Placeholder description.</p>
-          </div>
-          <div class="project__media">
-            <div class="video-embed">
-              <iframe src="//player.vimeo.com/video/119061444?title=0&byline=0&portrait=0" allowfullscreen></iframe>
-            </div>
           </div>
         </section>
 
@@ -835,9 +835,9 @@
             <p>Placeholder description.</p>
           </div>
           <div class="project__media">
-            <div class="video-embed">
-              <iframe src="//player.vimeo.com/video/118965415?title=0&byline=0&portrait=0" allowfullscreen></iframe>
-            </div>
+            <video controls poster="images/work/zipit_poster.jpg" style="width: 60%; border-radius: 12px;">
+              <source src="video/zipit.mp4" type="video/mp4">
+            </video>
           </div>
         </section>
 
