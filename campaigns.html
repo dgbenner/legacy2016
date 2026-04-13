@@ -187,18 +187,33 @@
     }
 
 
-    /* Colored nav underlines with rounded ends */
+    /* Nav links fill full nav height for big hit area */
     .site-nav__links a.nav-campaigns,
     .site-nav__links a.nav-web,
     .site-nav__links a.nav-copy,
     .site-nav__links a.nav-broadcast {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: var(--nav-height);
+      padding: 0 var(--space-xs);
+    }
+
+    /* Inner span wraps the text and hosts the color bars */
+    .site-nav__links a.nav-campaigns > span,
+    .site-nav__links a.nav-web > span,
+    .site-nav__links a.nav-copy > span,
+    .site-nav__links a.nav-broadcast > span {
       position: relative;
       padding-bottom: 6px;
+      padding-top: 2px;
     }
-    .site-nav__links a.nav-campaigns::after,
-    .site-nav__links a.nav-web::after,
-    .site-nav__links a.nav-copy::after,
-    .site-nav__links a.nav-broadcast::after {
+
+    /* Downward bar */
+    .site-nav__links a.nav-campaigns > span::after,
+    .site-nav__links a.nav-web > span::after,
+    .site-nav__links a.nav-copy > span::after,
+    .site-nav__links a.nav-broadcast > span::after {
       content: '';
       position: absolute;
       left: 0;
@@ -208,41 +223,41 @@
       border-radius: 3px;
       transition: height 0.4s cubic-bezier(0.55, 0, 0.67, 0.3);
     }
-    .site-nav__links a.nav-campaigns:hover::after,
-    .site-nav__links a.nav-web:hover::after,
-    .site-nav__links a.nav-copy:hover::after,
-    .site-nav__links a.nav-broadcast:hover::after {
+    .site-nav__links a.nav-campaigns:hover > span::after,
+    .site-nav__links a.nav-web:hover > span::after,
+    .site-nav__links a.nav-copy:hover > span::after,
+    .site-nav__links a.nav-broadcast:hover > span::after {
       height: 20px;
     }
-    .site-nav__links a.nav-campaigns::after { background: #e03a3e; }
-    .site-nav__links a.nav-web::after { background: #009ddc; }
-    .site-nav__links a.nav-copy::after { background: #fdb827; }
-    .site-nav__links a.nav-broadcast::after { background: #61bb46; }
+    .site-nav__links a.nav-campaigns > span::after { background: #e03a3e; }
+    .site-nav__links a.nav-web > span::after { background: #009ddc; }
+    .site-nav__links a.nav-copy > span::after { background: #fdb827; }
+    .site-nav__links a.nav-broadcast > span::after { background: #61bb46; }
 
-    /* Upward bar matching the underline */
-    .site-nav__links a.nav-campaigns::before,
-    .site-nav__links a.nav-web::before,
-    .site-nav__links a.nav-copy::before,
-    .site-nav__links a.nav-broadcast::before {
+    /* Upward bar */
+    .site-nav__links a.nav-campaigns > span::before,
+    .site-nav__links a.nav-web > span::before,
+    .site-nav__links a.nav-copy > span::before,
+    .site-nav__links a.nav-broadcast > span::before {
       content: '';
       position: absolute;
       left: 0;
       right: 0;
-      bottom: calc(100% + 2px);
+      bottom: calc(100% + 0px);
       height: 0;
       border-radius: 3px;
       transition: height 0.4s cubic-bezier(0.55, 0, 0.67, 0.3);
     }
-    .site-nav__links a.nav-campaigns:hover::before,
-    .site-nav__links a.nav-web:hover::before,
-    .site-nav__links a.nav-copy:hover::before,
-    .site-nav__links a.nav-broadcast:hover::before {
+    .site-nav__links a.nav-campaigns:hover > span::before,
+    .site-nav__links a.nav-web:hover > span::before,
+    .site-nav__links a.nav-copy:hover > span::before,
+    .site-nav__links a.nav-broadcast:hover > span::before {
       height: 22px;
     }
-    .site-nav__links a.nav-campaigns::before { background: #e03a3e; }
-    .site-nav__links a.nav-web::before { background: #009ddc; }
-    .site-nav__links a.nav-copy::before { background: #fdb827; }
-    .site-nav__links a.nav-broadcast::before { background: #61bb46; }
+    .site-nav__links a.nav-campaigns > span::before { background: #e03a3e; }
+    .site-nav__links a.nav-web > span::before { background: #009ddc; }
+    .site-nav__links a.nav-copy > span::before { background: #fdb827; }
+    .site-nav__links a.nav-broadcast > span::before { background: #61bb46; }
 
 
     /* Hover: text color matches underline */
@@ -828,10 +843,10 @@
         <span></span><span></span><span></span>
       </button>
       <ul class="site-nav__links">
-        <li><a href="campaigns.html" class="nav-campaigns active">Campaigns</a></li>
-        <li><a href="web.html" class="nav-web">Web</a></li>
-        <li><a href="copy.html" class="nav-copy">Copy</a></li>
-        <li><a href="broadcast.html" class="nav-broadcast">Broadcast</a></li>
+        <li><a href="campaigns.html" class="nav-campaigns active"><span>Campaigns</span></a></li>
+        <li><a href="web.html" class="nav-web"><span>Web</span></a></li>
+        <li><a href="copy.html" class="nav-copy"><span>Copy</span></a></li>
+        <li><a href="broadcast.html" class="nav-broadcast"><span>Broadcast</span></a></li>
         <li><a href="index.html#contact">Resume + Contact</a></li>
       </ul>
     </div>
