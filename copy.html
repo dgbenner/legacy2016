@@ -200,6 +200,13 @@
       color: var(--color-text);
     }
 
+
+    /* Colored nav underlines - always visible */
+    .site-nav__links a.nav-campaigns { border-bottom: 3px solid #e03a3e; padding-bottom: 2px; }
+    .site-nav__links a.nav-web { border-bottom: 3px solid #009ddc; padding-bottom: 2px; }
+    .site-nav__links a.nav-copy { border-bottom: 3px solid #fdb827; padding-bottom: 2px; }
+    .site-nav__links a.nav-broadcast { border-bottom: 3px solid #61bb46; padding-bottom: 2px; }
+
     /* Mobile nav toggle */
     .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: var(--space-xs); }
     .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--color-text); margin: 5px 0; transition: 0.3s; }
@@ -744,6 +751,9 @@
       opacity: 0;
       transform: translateX(-40px);
     }
+
+    /* Copy page header colored underline */
+    .page-header h1 { display: inline-block; border-bottom: 6px solid #fdb827; padding-bottom: 8px; }
   </style>
 </head>
 <body>
@@ -758,10 +768,10 @@
         <span></span><span></span><span></span>
       </button>
       <ul class="site-nav__links">
-        <li><a href="campaigns.html">Campaigns</a></li>
-        <li><a href="web.html">Web</a></li>
-        <li><a href="copy.html" class="active">Copy</a></li>
-        <li><a href="broadcast.html">Broadcast</a></li>
+        <li><a href="campaigns.html" class="nav-campaigns">Campaigns</a></li>
+        <li><a href="web.html" class="nav-web">Web</a></li>
+        <li><a href="copy.html" class="nav-copy active">Copy</a></li>
+        <li><a href="broadcast.html" class="nav-broadcast">Broadcast</a></li>
         <li><a href="index.html#contact">Resume + Contact</a></li>
       </ul>
     </div>
