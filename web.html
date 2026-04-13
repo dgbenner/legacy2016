@@ -199,9 +199,16 @@
       position: absolute;
       left: 0;
       right: 0;
-      bottom: 0;
+      top: calc(100% - 3px);
       height: 3px;
       border-radius: 2px;
+      transition: height 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .site-nav__links a.nav-campaigns:hover::after,
+    .site-nav__links a.nav-web:hover::after,
+    .site-nav__links a.nav-copy:hover::after,
+    .site-nav__links a.nav-broadcast:hover::after {
+      height: 30px;
     }
     .site-nav__links a.nav-campaigns::after { background: #e03a3e; }
     .site-nav__links a.nav-web::after { background: #009ddc; }
