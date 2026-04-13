@@ -209,6 +209,11 @@
       height: 0;
       transition: height 0.13s cubic-bezier(0.55, 0, 0.67, 0.3);
     }
+
+    /* Active page: persistent 3px underline */
+    .site-nav__links a.active > span::after {
+      height: 3px;
+    }
     .site-nav__links a.nav-campaigns:hover > span::after,
     .site-nav__links a.nav-web:hover > span::after,
     .site-nav__links a.nav-copy:hover > span::after,
