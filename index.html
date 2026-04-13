@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dan Benner • Advertising Creative • Copywriter • Conceptual Thinker</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Libre+Caslon+Text:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=EB+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     /* ========================================
        CSS CUSTOM PROPERTIES
@@ -23,7 +23,7 @@
       --color-border: #ddd;
       --color-border-light: #eee;
 
-      --font-display: 'Libre Caslon Text', Georgia, serif;
+      --font-display: 'EB Garamond', Georgia, serif;
       --font-body: 'DM Sans', -apple-system, sans-serif;
 
       --space-xs: 0.5rem;
@@ -186,6 +186,12 @@
       color: var(--color-text);
     }
 
+    /* Colored underline for active nav per page */
+    .site-nav__links a.active-campaigns { border-bottom: 3px solid #e03a3e; padding-bottom: 2px; }
+    .site-nav__links a.active-web { border-bottom: 3px solid #009ddc; padding-bottom: 2px; }
+    .site-nav__links a.active-copy { border-bottom: 3px solid #fdb827; padding-bottom: 2px; }
+    .site-nav__links a.active-broadcast { border-bottom: 3px solid #61bb46; padding-bottom: 2px; }
+
     /* Mobile nav toggle */
     .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: var(--space-xs); }
     .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--color-text); margin: 5px 0; transition: 0.3s; }
@@ -249,10 +255,11 @@
       line-height: 1.15;
       max-width: 700px;
       letter-spacing: -0.02em;
-      color: rgba(220,218,210,0.85);
+      color: rgba(235,230,218,0.95);
       text-shadow:
-        0px -1px 0px rgba(0,0,0,0.6),
-        0px 1px 0px rgba(255,255,255,0.08);
+        0px -1px 0px rgba(0,0,0,1),
+        0px -1px 0px rgba(0,0,0,1),
+        0px 1px 0px rgba(255,255,255,0.9);
     }
 
     .inline-link {
@@ -446,9 +453,37 @@
       flex-direction: column;
       background: var(--color-surface);
       border-radius: 12px;
-      overflow: hidden;
       transition: transform 0.2s, box-shadow 0.2s;
       position: relative;
+    }
+
+    /* Colored card peeking out below */
+    .category-card::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -8px;
+      height: 20px;
+      background: var(--card-color, #ccc);
+      border-radius: 12px;
+      z-index: -1;
+      transition: bottom 0.2s;
+    }
+
+    .category-card:hover::after {
+      bottom: -12px;
+    }
+
+    .category-card--campaigns { --card-color: #e03a3e; }
+    .category-card--web { --card-color: #009ddc; }
+    .category-card--copy { --card-color: #fdb827; }
+    .category-card--broadcast { --card-color: #61bb46; }
+
+    .category-card__img-wrap {
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      overflow: hidden;
     }
 
     .category-card:hover {
@@ -846,7 +881,7 @@
 
       <!-- ======== HERO (homepage) ======== -->
       <section class="hero">
-        <h1 style="margin-left: -2px;">I art direct. I write.<br>I don't pick sides.</h1>
+        <h1 style="margin-left: -2px;">I art direct. I write.<br>I don't pick <span style="color: #f5821f; -webkit-text-fill-color: #f5821f;">sides</span>.</h1>
         <p class="hero__subtitle">Campaign ideas, brand thinking, and the craft to make it all real.<br>From national media buys to the headline on a banner ad.</p>
       </section>
 
@@ -903,7 +938,7 @@
 
       <!-- ======== CATEGORY CARDS (homepage) ======== -->
       <div class="category-grid">
-        <a href="campaigns.html" class="category-card">
+        <a href="campaigns.html" class="category-card category-card--campaigns">
           <div class="category-card__img-wrap">
             <img src="https://danart.vercel.app/images/elements/270x135_campaigns.jpg" alt="Campaigns">
             <div class="category-card__overlay"></div>
@@ -914,7 +949,7 @@
           </div>
           <span class="category-card__link">See campaigns</span>
         </a>
-        <a href="web.html" class="category-card">
+        <a href="web.html" class="category-card category-card--web">
           <div class="category-card__img-wrap">
             <img src="https://danart.vercel.app/images/elements/270x135_web.jpg" alt="Web">
             <div class="category-card__overlay"></div>
@@ -925,7 +960,7 @@
           </div>
           <span class="category-card__link">View web work</span>
         </a>
-        <a href="copy.html" class="category-card">
+        <a href="copy.html" class="category-card category-card--copy">
           <div class="category-card__img-wrap">
             <img src="https://danart.vercel.app/images/elements/270x135_copy.jpg" alt="Copy">
             <div class="category-card__overlay"></div>
@@ -936,7 +971,7 @@
           </div>
           <span class="category-card__link">See writing samples</span>
         </a>
-        <a href="broadcast.html" class="category-card">
+        <a href="broadcast.html" class="category-card category-card--broadcast">
           <div class="category-card__img-wrap">
             <img src="https://danart.vercel.app/images/elements/270x135_broadcast.jpg" alt="Broadcast">
             <div class="category-card__overlay"></div>
