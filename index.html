@@ -494,17 +494,27 @@
       background: var(--color-surface);
       border-radius: 12px;
       overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      transform-origin: center center;
+      will-change: transform;
+    }
+
+    .category-card:hover {
+      transform: scale(1.06);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.18);
+      z-index: 2;
+      position: relative;
     }
 
     /* Colored strip as a real element inside the card */
     .category-card__strip {
       height: 8px;
       background: var(--card-color, #ccc);
-      transition: height 0.2s;
+      transition: height 0.25s ease;
     }
 
     .category-card:hover .category-card__strip {
-      height: 16px;
+      height: 14px;
     }
 
     .category-card--campaigns { --card-color: #e03a3e; }
