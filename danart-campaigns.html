@@ -46,7 +46,22 @@
     body {
       font-family: var(--font-body);
       color: var(--color-text);
-      background: var(--color-bg);
+      background-color: var(--color-bg);
+      background-image:
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 3px,
+          rgba(180,175,165,0.06) 3px,
+          rgba(180,175,165,0.06) 4px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 3px,
+          rgba(180,175,165,0.06) 3px,
+          rgba(180,175,165,0.06) 4px
+        );
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       position: relative;

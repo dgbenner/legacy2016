@@ -11,11 +11,11 @@
        CSS CUSTOM PROPERTIES
        ======================================== */
     :root {
-      --color-bg: #ece8e0;
-      --color-surface: #f5f3ee;
+      --color-bg: #2a2a28;
+      --color-surface: #3a3a38;
       --color-surface-white: #ffffff;
-      --color-text: rgba(80,75,65,0.85);
-      --color-text-secondary: #555;
+      --color-text: rgba(220,218,210,0.85);
+      --color-text-secondary: #aaa;
       --color-text-tertiary: #888;
       --color-accent: #1a5fa8;
       --color-accent-hover: #3b8de0;
@@ -45,8 +45,16 @@
 
     body {
       font-family: var(--font-body);
-      color: var(--color-text);
-      background: var(--color-bg);
+      color: rgba(220,218,210,0.85);
+      background-color: #2a2a28;
+      background-image:
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 2px,
+          rgba(255,255,255,0.02) 2px,
+          rgba(255,255,255,0.02) 3px
+        );
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       position: relative;
@@ -78,14 +86,14 @@
     a { color: var(--color-accent); text-decoration: none; }
     a:hover { color: var(--color-accent-hover); }
 
-    /* Letterpress effect on headings */
+    /* Inverted letterpress effect for dark bg */
     h1, h2 {
-      color: var(--color-text);
+      color: rgba(220,218,210,0.85);
       font-weight: 400;
       letter-spacing: -0.02em;
       text-shadow:
-        0px -1px 0px rgba(30,25,18,0.5),
-        0px 1px 0px rgba(255,255,255,0.35);
+        0px -1px 0px rgba(0,0,0,0.6),
+        0px 1px 0px rgba(255,255,255,0.08);
     }
 
     /* ========================================

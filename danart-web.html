@@ -46,10 +46,21 @@
     body {
       font-family: var(--font-body);
       color: var(--color-text);
-      background: var(--color-bg);
+      background-color: #eae8e3;
+      background-image:
+        linear-gradient(rgba(160,158,150,0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(160,158,150,0.15) 1px, transparent 1px);
+      background-size: 20px 20px;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       position: relative;
+    }
+
+    /* Isometric boxes scattered in background */
+    .iso-box {
+      position: absolute;
+      pointer-events: none;
+      z-index: 0;
     }
 
     /* Subtle edge gradient darkening from left and right */
@@ -692,6 +703,33 @@
   <script src="https://unpkg.com/@nickersoft/ruffle@latest/ruffle.js"></script>
 </head>
 <body>
+
+  <!-- Isometric boxes scattered in background -->
+  <svg class="iso-box" style="top: 320px; left: 3%; width: 80px; height: 70px;" viewBox="0 0 80 70">
+    <polygon points="10,30 50,30 50,60 10,60" fill="none" stroke="rgba(100,98,90,0.2)" stroke-width="0.5"/>
+    <polygon points="10,30 30,15 70,15 50,30" fill="rgba(200,198,190,0.15)" stroke="rgba(100,98,90,0.2)" stroke-width="0.5"/>
+    <polygon points="50,30 70,15 70,45 50,60" fill="rgba(170,168,160,0.12)" stroke="rgba(100,98,90,0.2)" stroke-width="0.5"/>
+  </svg>
+  <svg class="iso-box" style="top: 1200px; right: 4%; width: 120px; height: 105px;" viewBox="0 0 80 70">
+    <polygon points="10,30 50,30 50,60 10,60" fill="none" stroke="rgba(100,98,90,0.2)" stroke-width="0.5"/>
+    <polygon points="10,30 30,15 70,15 50,30" fill="rgba(200,198,190,0.15)" stroke="rgba(100,98,90,0.2)" stroke-width="0.5"/>
+    <polygon points="50,30 70,15 70,45 50,60" fill="rgba(170,168,160,0.12)" stroke="rgba(100,98,90,0.2)" stroke-width="0.5"/>
+  </svg>
+  <svg class="iso-box" style="top: 2400px; left: 5%; width: 60px; height: 52px;" viewBox="0 0 80 70">
+    <polygon points="10,30 50,30 50,60 10,60" fill="none" stroke="rgba(100,98,90,0.2)" stroke-width="0.5"/>
+    <polygon points="10,30 30,15 70,15 50,30" fill="rgba(200,198,190,0.15)" stroke="rgba(100,98,90,0.2)" stroke-width="0.5"/>
+    <polygon points="50,30 70,15 70,45 50,60" fill="rgba(170,168,160,0.12)" stroke="rgba(100,98,90,0.2)" stroke-width="0.5"/>
+  </svg>
+  <svg class="iso-box" style="top: 3600px; right: 3%; width: 100px; height: 88px;" viewBox="0 0 80 70">
+    <polygon points="10,30 50,30 50,60 10,60" fill="none" stroke="rgba(100,98,90,0.2)" stroke-width="0.5"/>
+    <polygon points="10,30 30,15 70,15 50,30" fill="rgba(200,198,190,0.15)" stroke="rgba(100,98,90,0.2)" stroke-width="0.5"/>
+    <polygon points="50,30 70,15 70,45 50,60" fill="rgba(170,168,160,0.12)" stroke="rgba(100,98,90,0.2)" stroke-width="0.5"/>
+  </svg>
+  <svg class="iso-box" style="top: 4800px; left: 4%; width: 140px; height: 122px;" viewBox="0 0 80 70">
+    <polygon points="10,30 50,30 50,60 10,60" fill="none" stroke="rgba(100,98,90,0.2)" stroke-width="0.5"/>
+    <polygon points="10,30 30,15 70,15 50,30" fill="rgba(200,198,190,0.15)" stroke="rgba(100,98,90,0.2)" stroke-width="0.5"/>
+    <polygon points="50,30 70,15 70,45 50,60" fill="rgba(170,168,160,0.12)" stroke="rgba(100,98,90,0.2)" stroke-width="0.5"/>
+  </svg>
 
   <!-- ======== NAV ======== -->
   <nav class="site-nav">

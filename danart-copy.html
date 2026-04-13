@@ -46,10 +46,39 @@
     body {
       font-family: var(--font-body);
       color: var(--color-text);
-      background: var(--color-bg);
+      background-color: #e8e4da;
+      background-image:
+        repeating-linear-gradient(
+          to bottom,
+          transparent 0px,
+          transparent 31px,
+          #a8c4d8 31px,
+          #a8c4d8 32px,
+          transparent 32px,
+          transparent 47px,
+          #c2d5e2 47px,
+          #c2d5e2 47.5px,
+          transparent 47.5px,
+          transparent 63px,
+          #a8c4d8 63px,
+          #a8c4d8 64px
+        );
+      background-size: 100% 64px;
+      background-position: 0 16px;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       position: relative;
+    }
+
+    /* Red margin line */
+    body > .copy-margin-line {
+      content: '';
+      position: fixed;
+      top: 0; bottom: 0; left: 64px;
+      width: 1px;
+      background: rgba(200,80,80,0.35);
+      z-index: 1;
+      pointer-events: none;
     }
 
     /* Subtle edge gradient darkening from left and right */
@@ -718,6 +747,8 @@
   </style>
 </head>
 <body>
+
+  <div class="copy-margin-line"></div>
 
   <!-- ======== NAV ======== -->
   <nav class="site-nav">
