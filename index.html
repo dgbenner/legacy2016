@@ -218,7 +218,7 @@
     .site-nav__links a.nav-web:hover::after,
     .site-nav__links a.nav-copy:hover::after,
     .site-nav__links a.nav-broadcast:hover::after {
-      height: 30px;
+      height: 20px;
     }
     .site-nav__links a.nav-campaigns::after { background: #e03a3e; }
     .site-nav__links a.nav-web::after { background: #009ddc; }
@@ -302,11 +302,18 @@
       line-height: 1.15;
       max-width: 700px;
       letter-spacing: -0.02em;
-      color: rgba(190,180,165,0.95);
-      text-shadow:
-        0px -1px 0px rgba(0,0,0,1),
-        0px -1px 0px rgba(0,0,0,1),
-        0px 1px 0px rgba(255,255,255,0.9);
+      color: #40382e;
+      background-image: linear-gradient(
+        180deg,
+        #1a1612 0%,
+        #40382e 40%,
+        #40382e 60%,
+        #8a7e68 100%
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 1px 0 rgba(255,255,255,0.6));
     }
 
     .inline-link {
@@ -972,7 +979,7 @@
           <div class="project__copy">
             <h3>IMAX</h3>
             <h2 style="margin-left: -2px;">No Substitute</h2>
-            <p style="max-width: 40%;">With attendance down, IMAX needed a high-impact message to remind everyone a 55" TV in their living room is no substitute for an IMAX Experience.</p>
+            <p style="max-width: 60%;">With attendance down, IMAX needed a high-impact message to remind everyone a 55" TV in their living room is no substitute for an IMAX Experience.</p>
           </div>
           <div class="project__gallery-row" style="align-items: start; gap: 0.5rem;">
             <div class="project__media--expandable" data-gallery="imax"><img src="images/work/imax_1.png" alt="IMAX 1" style="width: 100%; border-radius: 12px;"></div>
