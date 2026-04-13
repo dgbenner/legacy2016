@@ -491,19 +491,20 @@
     .category-card {
       display: flex;
       flex-direction: column;
+      width: 100%;
       background: var(--color-surface);
       border-radius: 12px;
       overflow: hidden;
       transition: transform 0.25s ease, box-shadow 0.25s ease;
       transform-origin: center center;
       will-change: transform;
+      position: relative;
     }
 
     .category-card:hover {
-      transform: scale(1.06);
+      transform: scale3d(1.06, 1.06, 1);
       box-shadow: 0 16px 40px rgba(0,0,0,0.18);
       z-index: 2;
-      position: relative;
     }
 
     /* Colored strip as a real element inside the card */
