@@ -531,9 +531,15 @@
        ======================================== */
     .category-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: var(--space-md);
       padding: var(--space-lg) 0;
+    }
+
+    @media (max-width: 600px) {
+      .category-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     .category-card {
