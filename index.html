@@ -493,27 +493,24 @@
       flex-direction: column;
       background: var(--color-surface);
       border-radius: 12px;
-      transition: transform 0.2s, box-shadow 0.2s;
       position: relative;
-      isolation: isolate;
     }
 
-    /* Colored card peeking out below */
+    /* Colored strip sitting below the card */
     .category-card::after {
       content: '';
       position: absolute;
       left: 0;
       right: 0;
-      bottom: -8px;
-      height: 20px;
+      top: 100%;
+      height: 8px;
       background: var(--card-color, #ccc);
-      border-radius: 12px;
-      z-index: -1;
-      transition: bottom 0.2s;
+      border-radius: 0 0 12px 12px;
+      transition: height 0.2s;
     }
 
     .category-card:hover::after {
-      bottom: -12px;
+      height: 14px;
     }
 
     .category-card--campaigns { --card-color: #e03a3e; }
