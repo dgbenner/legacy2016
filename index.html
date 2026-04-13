@@ -193,11 +193,30 @@
     .site-nav__links a.active-broadcast { border-bottom: 3px solid #61bb46; padding-bottom: 0; }
 
 
-    /* Colored nav underlines - always visible */
-    .site-nav__links a.nav-campaigns { border-bottom: 3px solid #e03a3e; padding-bottom: 0; }
-    .site-nav__links a.nav-web { border-bottom: 3px solid #009ddc; padding-bottom: 0; }
-    .site-nav__links a.nav-copy { border-bottom: 3px solid #fdb827; padding-bottom: 0; }
-    .site-nav__links a.nav-broadcast { border-bottom: 3px solid #61bb46; padding-bottom: 0; }
+    /* Colored nav underlines with rounded ends */
+    .site-nav__links a.nav-campaigns,
+    .site-nav__links a.nav-web,
+    .site-nav__links a.nav-copy,
+    .site-nav__links a.nav-broadcast {
+      position: relative;
+      padding-bottom: 6px;
+    }
+    .site-nav__links a.nav-campaigns::after,
+    .site-nav__links a.nav-web::after,
+    .site-nav__links a.nav-copy::after,
+    .site-nav__links a.nav-broadcast::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 3px;
+      border-radius: 2px;
+    }
+    .site-nav__links a.nav-campaigns::after { background: #e03a3e; }
+    .site-nav__links a.nav-web::after { background: #009ddc; }
+    .site-nav__links a.nav-copy::after { background: #fdb827; }
+    .site-nav__links a.nav-broadcast::after { background: #61bb46; }
 
     /* Mobile nav toggle */
     .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: var(--space-xs); }
@@ -888,7 +907,7 @@
 
       <!-- ======== HERO (homepage) ======== -->
       <section class="hero">
-        <h1 style="margin-left: -2px;">I art direct. I write.<br>I don't pick <span style="color: #f5821f; -webkit-text-fill-color: #f5821f;">sides</span>.</h1>
+        <h1 style="margin-left: -2px;">I art direct. I write.<br>I don't pick sides.</h1>
         <p class="hero__subtitle">Campaign ideas, brand thinking, and the craft to make it all real.<br>From national media buys to the headline on a banner ad.</p>
       </section>
 
