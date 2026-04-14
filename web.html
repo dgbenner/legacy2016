@@ -295,6 +295,22 @@
       padding-bottom: 3px;
     }
 
+
+    /* Disable hover effects on the active page's own nav link */
+    .site-nav__links a.active:hover::before,
+    .site-nav__links a.active:hover .bar-bottom {
+      transform: scaleY(0) translateX(-12px);
+    }
+    .site-nav__links a.active:hover .bar-bottom {
+      transform: scaleY(0) translateX(12px);
+    }
+    .site-nav__links a.nav-campaigns.active:hover,
+    .site-nav__links a.nav-web.active:hover,
+    .site-nav__links a.nav-copy.active:hover,
+    .site-nav__links a.nav-broadcast.active:hover {
+      color: var(--color-text-secondary);
+    }
+
     /* Mobile nav toggle */
     .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: var(--space-xs); }
     .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--color-text); margin: 5px 0; transition: 0.3s; }
