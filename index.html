@@ -531,12 +531,18 @@
        ======================================== */
     .category-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: var(--space-md);
       padding: var(--space-lg) 0;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 900px) {
+      .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 500px) {
       .category-grid {
         grid-template-columns: 1fr;
       }
@@ -969,7 +975,7 @@
 
       <!-- ======== HERO (homepage) ======== -->
       <section class="hero">
-        <h1 style="margin-left: -2px;">I art direct. I write.<br>I don't pick sides.</h1>
+        <h1 style="margin-left: -2px;">I art direct. I write.<br>I don't pick sides.<br>I just make it.</h1>
         <p class="hero__subtitle">Campaign ideas, brand thinking, and the craft to make it all real.<br>From national media buys to the headline on a banner ad.</p>
       </section>
 
