@@ -196,7 +196,7 @@
       padding-top: 2px;
     }
 
-    /* Downward bar - hidden by default, grows on hover */
+    /* Active page: persistent 3px underline on the span */
     .site-nav__links a.nav-campaigns > span::after,
     .site-nav__links a.nav-web > span::after,
     .site-nav__links a.nav-copy > span::after,
@@ -207,49 +207,64 @@
       right: 0;
       top: calc(100% - 3px);
       height: 0;
-      transform: skewX(30deg);
-      transition: height 0.13s cubic-bezier(0.55, 0, 0.67, 0.3);
     }
-
-    /* Active page: persistent 3px underline */
     .site-nav__links a.active > span::after {
       height: 3px;
-    }
-    .site-nav__links a.nav-campaigns:hover > span::after,
-    .site-nav__links a.nav-web:hover > span::after,
-    .site-nav__links a.nav-copy:hover > span::after,
-    .site-nav__links a.nav-broadcast:hover > span::after {
-      height: 20px;
     }
     .site-nav__links a.nav-campaigns > span::after { background: #e03a3e; }
     .site-nav__links a.nav-web > span::after { background: #009ddc; }
     .site-nav__links a.nav-copy > span::after { background: #fdb827; }
     .site-nav__links a.nav-broadcast > span::after { background: #61bb46; }
 
-    /* Upward bar */
-    .site-nav__links a.nav-campaigns > span::before,
-    .site-nav__links a.nav-web > span::before,
-    .site-nav__links a.nav-copy > span::before,
-    .site-nav__links a.nav-broadcast > span::before {
+    /* Top bar - anchored at nav top, slides down on hover */
+    .site-nav__links a.nav-campaigns::before,
+    .site-nav__links a.nav-web::before,
+    .site-nav__links a.nav-copy::before,
+    .site-nav__links a.nav-broadcast::before {
       content: '';
       position: absolute;
+      top: 0;
       left: 0;
       right: 0;
-      bottom: calc(100% + 0px);
-      height: 0;
-      transform: skewX(30deg);
-      transition: height 0.13s cubic-bezier(0.55, 0, 0.67, 0.3);
-    }
-    .site-nav__links a.nav-campaigns:hover > span::before,
-    .site-nav__links a.nav-web:hover > span::before,
-    .site-nav__links a.nav-copy:hover > span::before,
-    .site-nav__links a.nav-broadcast:hover > span::before {
       height: 22px;
+      transform: scaleY(0) skewX(30deg);
+      transform-origin: top;
+      transition: transform 0.13s cubic-bezier(0.55, 0, 0.67, 0.3);
+      pointer-events: none;
     }
-    .site-nav__links a.nav-campaigns > span::before { background: #e03a3e; }
-    .site-nav__links a.nav-web > span::before { background: #009ddc; }
-    .site-nav__links a.nav-copy > span::before { background: #fdb827; }
-    .site-nav__links a.nav-broadcast > span::before { background: #61bb46; }
+    .site-nav__links a.nav-campaigns:hover::before,
+    .site-nav__links a.nav-web:hover::before,
+    .site-nav__links a.nav-copy:hover::before,
+    .site-nav__links a.nav-broadcast:hover::before {
+      transform: scaleY(1) skewX(30deg);
+    }
+    .site-nav__links a.nav-campaigns::before { background: #e03a3e; }
+    .site-nav__links a.nav-web::before { background: #009ddc; }
+    .site-nav__links a.nav-copy::before { background: #fdb827; }
+    .site-nav__links a.nav-broadcast::before { background: #61bb46; }
+
+    /* Bottom bar - anchored at nav bottom, slides up on hover */
+    .site-nav__links .bar-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 22px;
+      transform: scaleY(0) skewX(30deg);
+      transform-origin: bottom;
+      transition: transform 0.13s cubic-bezier(0.55, 0, 0.67, 0.3);
+      pointer-events: none;
+    }
+    .site-nav__links a.nav-campaigns:hover .bar-bottom,
+    .site-nav__links a.nav-web:hover .bar-bottom,
+    .site-nav__links a.nav-copy:hover .bar-bottom,
+    .site-nav__links a.nav-broadcast:hover .bar-bottom {
+      transform: scaleY(1) skewX(30deg);
+    }
+    .site-nav__links a.nav-campaigns .bar-bottom { background: #e03a3e; }
+    .site-nav__links a.nav-web .bar-bottom { background: #009ddc; }
+    .site-nav__links a.nav-copy .bar-bottom { background: #fdb827; }
+    .site-nav__links a.nav-broadcast .bar-bottom { background: #61bb46; }
 
 
     /* Hover: deeper, more saturated versions of bar colors */
@@ -825,10 +840,10 @@
         <span></span><span></span><span></span>
       </button>
       <ul class="site-nav__links">
-        <li><a href="campaigns.html" class="nav-campaigns"><span>Campaigns</span></a></li>
-        <li><a href="web.html" class="nav-web"><span>Web</span></a></li>
-        <li><a href="copy.html" class="nav-copy"><span>Copy</span></a></li>
-        <li><a href="broadcast.html" class="nav-broadcast active"><span>Broadcast</span></a></li>
+        <li><a href="campaigns.html" class="nav-campaigns"><i class="bar-bottom"></i><span>Campaigns</span></a></li>
+        <li><a href="web.html" class="nav-web"><i class="bar-bottom"></i><span>Web</span></a></li>
+        <li><a href="copy.html" class="nav-copy"><i class="bar-bottom"></i><span>Copy</span></a></li>
+        <li><a href="broadcast.html" class="nav-broadcast active"><i class="bar-bottom"></i><span>Broadcast</span></a></li>
         <li><a href="index.html#contact"><span class="nav-resume-inner">Resume + Contact</span></a></li>
       </ul>
     </div>
