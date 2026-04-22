@@ -158,6 +158,26 @@
       letter-spacing: -0.01em;
     }
 
+
+    .site-nav__logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .site-nav__logo-prefix {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--color-text-secondary);
+    }
+    .site-nav__logo-img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
     .site-nav__links {
       display: flex;
       gap: var(--space-md);
@@ -312,7 +332,27 @@
     @media (max-width: 768px) {
       .nav-toggle { display: block; }
 
-      .site-nav__links {
+  
+    .site-nav__logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .site-nav__logo-prefix {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--color-text-secondary);
+    }
+    .site-nav__logo-img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .site-nav__links {
         position: fixed;
         top: var(--nav-height);
         left: 0;
@@ -863,7 +903,7 @@
   <!-- ======== NAV ======== -->
   <nav class="site-nav">
     <div class="container">
-      <a href="index.html" class="site-nav__logo">Dan Benner</a>
+      <a href="index.html" class="site-nav__logo"><span class="site-nav__logo-prefix">I Am</span><img src="images/elements/headshot.png" alt="Dan Benner" class="site-nav__logo-img">Dan Benner</a>
       <button class="nav-toggle" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
