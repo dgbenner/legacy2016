@@ -413,15 +413,12 @@
        HERO (homepage only)
        ======================================== */
     .hero {
-      padding: 0 0 var(--space-xl) 0;
-      background-image: url('images/elements/hero_header.png');
-      background-repeat: no-repeat;
-      background-position: right bottom;
-      background-size: auto 100%;
-      min-height: 340px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
+      padding: var(--space-xl) 0;
+      background-image: url('images/elements/hero_header.png'), url('images/elements/hero_header_left.png');
+      background-repeat: no-repeat, no-repeat;
+      background-position: right center, left center;
+      background-size: contain, contain;
+      min-height: 320px;
     }
 
     @media (max-width: 768px) {
