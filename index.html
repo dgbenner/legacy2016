@@ -375,18 +375,23 @@
        HERO (homepage only)
        ======================================== */
     .hero {
-      padding: var(--space-xl) 0;
+      padding: 0 0 var(--space-xl) 0;
       background-image: url('images/elements/hero_header.png');
       background-repeat: no-repeat;
-      background-position: right center;
-      background-size: contain;
-      min-height: 320px;
+      background-position: bottom right;
+      background-size: auto 100%;
+      min-height: 460px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
     }
 
     @media (max-width: 768px) {
       .hero {
         background-image: none;
         min-height: 0;
+        padding: var(--space-xl) 0;
+        display: block;
       }
     }
 
