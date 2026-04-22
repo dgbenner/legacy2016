@@ -46,40 +46,36 @@
     body {
       font-family: var(--font-body);
       color: var(--color-text);
-      background-color: #e8e4da;
+      background-color: #faf3cd;
       background-image:
+        /* Solid horizontal blue lines every 32px (top layer) */
         repeating-linear-gradient(
           to bottom,
           transparent 0px,
           transparent 31px,
           #a8c4d8 31px,
-          #a8c4d8 32px,
-          transparent 32px,
-          transparent 47px,
-          #c2d5e2 47px,
-          #c2d5e2 47.5px,
-          transparent 47.5px,
-          transparent 63px,
-          #a8c4d8 63px,
-          #a8c4d8 64px
+          #a8c4d8 32px
+        ),
+        /* Pink margin line at left: 64px (behind the blue lines) */
+        linear-gradient(
+          to right,
+          transparent 0,
+          transparent 64px,
+          rgba(232,110,145,0.45) 64px,
+          rgba(232,110,145,0.45) 68px,
+          transparent 68px
         );
-      background-size: 100% 64px;
-      background-position: 0 16px;
+      background-size: 100% 32px, 100% 100%;
+      background-position: 0 16px, 0 0;
+      background-repeat: repeat, no-repeat;
+      background-attachment: scroll, fixed;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       position: relative;
     }
 
-    /* Red margin line */
-    body > .copy-margin-line {
-      content: '';
-      position: fixed;
-      top: 0; bottom: 0; left: 64px;
-      width: 1px;
-      background: rgba(200,80,80,0.35);
-      z-index: 1;
-      pointer-events: none;
-    }
+    /* Pink margin line now part of body background-image */
+    body > .copy-margin-line { display: none; }
 
     /* Subtle edge gradient darkening from left and right */
     body::before {
@@ -1040,7 +1036,7 @@
           <div class="project__copy">
             <h3>Hargray</h3>
             <h2>Bundle Savings</h2>
-            <p>Placeholder description.</p>
+            <p>Making the case to a Lowcountry retiree: bundle the home services and the savings show up where you'd never expect them.</p>
           </div>
           <div class="project__media" style="display: flex; gap: var(--space-sm); flex-wrap: wrap;">
             <div class="project__media--expandable" data-gallery="hargray" style="max-width: 48%;"><img src="images/work/hargray_bundle_1.png" alt="Hargray Bundle Savings 1" style="width: 100%; border-radius: 12px;"></div>
