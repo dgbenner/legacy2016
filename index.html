@@ -414,35 +414,13 @@
        ======================================== */
     .hero {
       padding: var(--space-lg) 0;
+      background-image: url('images/elements/hero_header.png'), url('images/elements/hero_header_left.png');
+      background-repeat: no-repeat, no-repeat;
+      background-position: right center, left center;
+      background-size: 56% auto, auto 100%;
       min-height: 260px;
       border-bottom: 1px solid rgba(0,0,0,0.08);
       margin-bottom: var(--space-xl);
-      position: relative;
-    }
-    .hero__bg-right,
-    .hero__bg-left {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      background-repeat: no-repeat;
-      background-size: contain;
-      pointer-events: none;
-    }
-    .hero__bg-right {
-      right: 0;
-      width: 56%;
-      background-position: right center;
-      background-image: url('images/elements/hero_header.png');
-    }
-    .hero__bg-left {
-      left: 0;
-      width: 32%;
-      background-position: left center;
-      background-image: url('images/elements/hero_header_left.png');
-    }
-    .hero > * {
-      position: relative;
-      z-index: 1;
     }
 
     @media (max-width: 768px) {
@@ -1096,8 +1074,6 @@
 
       <!-- ======== HERO (homepage) ======== -->
       <section class="hero">
-        <div class="hero__bg-left"></div>
-        <div class="hero__bg-right"></div>
         <h1 style="margin-left: -2px;">I art direct. I write.<br>I don't pick sides.<br>I <em>just do it</em>.</h1>
         <p style="margin-left: calc(3.5rem - 5px); margin-top: calc(-0.5rem - 1px); font-family: var(--font-display); font-size: 0.75rem; font-style: italic; color: var(--color-text-secondary); letter-spacing: -0.01em;">And I try not to steal famous tag lines.</p>
       </section>
