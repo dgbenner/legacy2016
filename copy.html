@@ -53,17 +53,17 @@
           to bottom,
           transparent 0px,
           transparent 31px,
-          #a8c4d8 31px,
-          #a8c4d8 32px
+          rgba(168,196,216,0.55) 31px,
+          rgba(168,196,216,0.55) 32px
         ),
-        /* Pink margin line at left: 64px (behind the blue lines) */
+        /* Pink margin line: 50px left of container content (responsive) */
         linear-gradient(
           to right,
           transparent 0,
-          transparent 64px,
-          rgba(232,110,145,0.45) 64px,
-          rgba(232,110,145,0.45) 68px,
-          transparent 68px
+          transparent max(14px, calc(50% - 600px)),
+          rgba(232,110,145,0.3) max(14px, calc(50% - 600px)),
+          rgba(232,110,145,0.3) max(18px, calc(50% - 596px)),
+          transparent max(18px, calc(50% - 596px))
         );
       background-size: 100% 32px, 100% 100%;
       background-position: 0 16px, 0 0;
@@ -879,7 +879,7 @@
       overflow: hidden;
       border-radius: 12px;
       aspect-ratio: 16/9;
-      background: #000;
+      background: #E6EBF1;
     }
 
     .carousel__track {
@@ -1036,7 +1036,7 @@
           <div class="project__copy">
             <h3>Hargray</h3>
             <h2>Bundle Savings</h2>
-            <p>Making the case to a Lowcountry retiree: bundle the home services and the savings show up where you'd never expect them.</p>
+            <p>Making the case to a Lowcountry retiree: bundle the home services and free up the budget for whatever upgrade comes next.</p>
           </div>
           <div class="project__media" style="display: flex; gap: var(--space-sm); flex-wrap: wrap;">
             <div class="project__media--expandable" data-gallery="hargray" style="max-width: 48%;"><img src="images/work/hargray_bundle_1.png" alt="Hargray Bundle Savings 1" style="width: 100%; border-radius: 12px;"></div>
