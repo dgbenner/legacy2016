@@ -413,12 +413,13 @@
        HERO (homepage only)
        ======================================== */
     .hero {
-      padding: var(--space-xl) 0;
+      padding: var(--space-lg) 0;
       background-image: url('images/elements/hero_header.png'), url('images/elements/hero_header_left.png');
       background-repeat: no-repeat, no-repeat;
       background-position: right center, left center;
-      background-size: 56% auto, 32% auto;
-      min-height: 320px;
+      background-size: 56% auto, auto 100%;
+      min-height: 260px;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
     }
 
     @media (max-width: 768px) {
