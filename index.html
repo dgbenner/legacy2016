@@ -376,6 +376,18 @@
        ======================================== */
     .hero {
       padding: var(--space-xl) 0;
+      background-image: url('images/elements/hero_header.png');
+      background-repeat: no-repeat;
+      background-position: right center;
+      background-size: contain;
+      min-height: 320px;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        background-image: none;
+        min-height: 0;
+      }
     }
 
     .hero h1 {
@@ -985,6 +997,15 @@
       margin-top: var(--space-xs);
     }
   </style>
+  <!-- Default Statcounter code for DanArt https://danart.vercel.app/ -->
+  <script type="text/javascript">
+    var sc_project=13223749;
+    var sc_invisible=1;
+    var sc_security="9e6c8e12";
+  </script>
+  <script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script>
+  <noscript><div class="statcounter"><a title="website statistics" href="https://statcounter.com/" target="_blank"><img class="statcounter" src="https://c.statcounter.com/13223749/0/9e6c8e12/1/" alt="website statistics" referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+  <!-- End of Statcounter Code -->
 </head>
 <body>
 
@@ -1011,7 +1032,7 @@
 
       <!-- ======== HERO (homepage) ======== -->
       <section class="hero">
-        <h1 style="margin-left: -2px;">I art direct. I write.<br>I don't pick sides.<br>I just do it.</h1>
+        <h1 style="margin-left: -2px;">I art direct. I write.<br>I don't pick sides.<br>I <em>just do it</em>.</h1>
         <p class="hero__subtitle">Campaign ideas, brand thinking, and the craft to make it all real.<br>From national media buys to the headline on a banner ad.</p>
       </section>
 
