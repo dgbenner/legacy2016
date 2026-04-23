@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Particle System Test</title>
+  <style>
+    :root {
+      --gutter: 24px;
+      --bg: #ece8e0;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      background: var(--bg);
+      overflow: hidden;
+    }
+    .stage {
+      display: flex;
+      gap: var(--gutter);
+      height: 100vh;
+      padding: 0;
+    }
+    canvas {
+      display: block;
+      width: calc(50% - var(--gutter) / 2);
+      height: 100%;
+      background: transparent;
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <canvas id="canvas-left"></canvas>
+    <canvas id="canvas-right"></canvas>
+  </div>
+
+  <script>
+  (function () {
+    'use strict';
+
+    const PALETTE = [
+      '#ff8800', '#feed00', '#8bc53f', '#006b2d', '#00a68c',
+      '#00adeb', '#0070c5', '#691599', '#980095', '#e6007e',
+      '#ff66a9', '#de004d', '#e8222e'
+    ];
+
+    const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // --- Global mouse tracking ---
+    const mouse = { x: -99999, y: -99999 };
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+    window.addEventListener('mouseleave', () => {
+      mouse.x = -99999;
+      mouse.y = -99999;
+    });
+
+    // --- Visibility pause ---
+    let running = true;
+    document.addEventListener('visibilitychange', () => {
+      running = document.visibilityState === 'visible';
+      if (running) {
+        rafIds.forEach(id => cancelAnimationFrame(id));
+        rafIds.length = 0;
+        systems.forEach(s => s.start());
+      }
+    });
+
+    const rafIds = [];
+    const systems = [];
+
+    // ===========================================================
+    // RIGHT CANVAS — dense / spiral cluster
+    // ===========================================================
+    const RIGHT_CONFIG = {
+      COUNT: 180,
+      MOUSE_RADIUS: 300,
+      MOUSE_FORCE: 0.015,
+      DAMPING: 0.985,
+      AMBIENT_SPEED: 0.15,
+      ROTATION_RPM: 0.5,         // 0.5 rpm = 1 rotation per 120s
+      WANDER_AMPLITUDE: 8,       // px of in/out drift
+      WANDER_PERIOD: 6,          // seconds for one breath
+      RADIAL_BIAS: 0.7,          // 0–1, higher = denser core
+    };
+
+    // ===========================================================
+    // LEFT CANVAS — sparse / ambient
+    // ===========================================================
+    const LEFT_CONFIG = {
+      COUNT: 60,
+      MOUSE_RADIUS: 300,
+      MOUSE_FORCE: 0.008,
+      DAMPING: 0.985,
+      AMBIENT_SPEED: 0.08,
+      BAND_HEIGHT: 0.10,         // top/bottom 10% each
+    };
+
+    // ===========================================================
+    function ParticleSystem(canvasId, config, mode) {
+      const canvas = document.getElementById(canvasId);
+      const ctx = canvas.getContext('2d');
+      let dpr = window.devicePixelRatio || 1;
+      let cssW = 0, cssH = 0;
+      let particles = [];
+      let lastTime = 0;
+      let elapsed = 0; // seconds since start
+
+      function resize() {
+        const rect = canvas.getBoundingClientRect();
+        cssW = rect.width;
+        cssH = rect.height;
+        dpr = window.devicePixelRatio || 1;
+        canvas.width = cssW * dpr;
+        canvas.height = cssH * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        seed();
+      }
+
+      function rand(min, max) { return Math.random() * (max - min) + min; }
+      function pickColor() { return PALETTE[Math.floor(Math.random() * PALETTE.length)]; }
+
+      function seedRight() {
+        particles = [];
+        const cx = cssW / 2;
+        const cy = cssH / 2;
+        const maxR = Math.min(cssW, cssH) * 0.45;
+        for (let i = 0; i < config.COUNT; i++) {
+          const angle = Math.random() * Math.PI * 2;
+          // Bias radius toward middle for denser core
+          const r = Math.pow(Math.random(), config.RADIAL_BIAS) * maxR;
+          const x = cx + Math.cos(angle) * r;
+          const y = cy + Math.sin(angle) * r;
+          particles.push({
+            x, y,
+            vx: rand(-config.AMBIENT_SPEED, config.AMBIENT_SPEED),
+            vy: rand(-config.AMBIENT_SPEED, config.AMBIENT_SPEED),
+            radius: rand(2, 7),
+            color: pickColor(),
+            opacity: rand(0.5, 0.9),
+            wanderPhase: Math.random() * Math.PI * 2,
+            baseAngle: angle,
+            baseRadius: r,
+          });
+        }
+      }
+
+      // Two-band respawn logic for the left canvas:
+      // particles live only in top 10% or bottom 10% of canvas height.
+      // when one drifts off the top/bottom, respawn it in the OPPOSITE band.
+      function spawnInBand(p, band) {
+        const bandH = cssH * config.BAND_HEIGHT;
+        if (band === 'top') {
+          p.y = rand(0, bandH);
+        } else {
+          p.y = rand(cssH - bandH, cssH);
+        }
+        p.x = rand(0, cssW);
+      }
+
+      function seedLeft() {
+        particles = [];
+        for (let i = 0; i < config.COUNT; i++) {
+          const band = Math.random() < 0.5 ? 'top' : 'bottom';
+          const p = {
+            x: 0, y: 0,
+            vx: rand(-config.AMBIENT_SPEED, config.AMBIENT_SPEED),
+            vy: rand(-config.AMBIENT_SPEED * 0.5, config.AMBIENT_SPEED * 0.5),
+            radius: rand(2, 7),
+            color: pickColor(),
+            opacity: rand(0.5, 0.9),
+          };
+          spawnInBand(p, band);
+          particles.push(p);
+        }
+      }
+
+      function seed() {
+        if (mode === 'right') seedRight();
+        else seedLeft();
+      }
+
+      function getLocalMouse() {
+        const rect = canvas.getBoundingClientRect();
+        return { x: mouse.x - rect.left, y: mouse.y - rect.top };
+      }
+
+      function applyMouseForce(p, lm) {
+        const dx = lm.x - p.x;
+        const dy = lm.y - p.y;
+        const dist = Math.hypot(dx, dy);
+        if (dist > 0 && dist < config.MOUSE_RADIUS) {
+          // strength = falloff factor * MOUSE_FORCE. Applied as a unit-direction
+          // force; magnitude does not scale with distance.
+          const strength = (1 - dist / config.MOUSE_RADIUS) * config.MOUSE_FORCE;
+          p.vx += (dx / dist) * strength;
+          p.vy += (dy / dist) * strength;
+        }
+      }
+
+      function update(dt) {
+        const lm = getLocalMouse();
+
+        // Rotation math for right canvas:
+        // ROTATION_RPM = revolutions per minute. Convert to radians per second:
+        //   omega = ROTATION_RPM * 2π / 60
+        // We rotate each particle's offset-from-center by (omega * dt) each
+        // frame — applied directly to position (not via velocity) so it
+        // doesn't spiral. Velocity (vx/vy) is reserved for ambient drift,
+        // mouse pull, and the breathing wander, which layer on top.
+        let cx, cy, angleDelta, cosA, sinA;
+        if (mode === 'right') {
+          cx = cssW / 2;
+          cy = cssH / 2;
+          const omega = (config.ROTATION_RPM * Math.PI * 2) / 60;
+          angleDelta = omega * dt;
+          cosA = Math.cos(angleDelta);
+          sinA = Math.sin(angleDelta);
+        }
+
+        for (let p of particles) {
+          if (mode === 'right') {
+            // Rotate offset around center directly (no velocity accumulation)
+            const ox = p.x - cx;
+            const oy = p.y - cy;
+            p.x = cx + (ox * cosA - oy * sinA);
+            p.y = cy + (ox * sinA + oy * cosA);
+
+            // Breathing wander as a tiny direct radial offset
+            const wanderRate = (Math.PI * 2) / config.WANDER_PERIOD;
+            const wander = Math.sin(elapsed * wanderRate + p.wanderPhase) * config.WANDER_AMPLITUDE;
+            const dist = Math.hypot(p.x - cx, p.y - cy) || 1;
+            const wanderStep = wander * dt * 0.05;
+            p.x += ((p.x - cx) / dist) * wanderStep;
+            p.y += ((p.y - cy) / dist) * wanderStep;
+          }
+
+          applyMouseForce(p, lm);
+
+          p.vx *= config.DAMPING;
+          p.vy *= config.DAMPING;
+          p.x += p.vx;
+          p.y += p.vy;
+
+          // Horizontal: HARD bounds — bounce
+          if (p.x - p.radius < 0) {
+            p.x = p.radius;
+            p.vx = Math.abs(p.vx);
+          } else if (p.x + p.radius > cssW) {
+            p.x = cssW - p.radius;
+            p.vx = -Math.abs(p.vx);
+          }
+
+          // Vertical: SOFT bounds
+          if (mode === 'left') {
+            // two-band respawn: if particle exits top, respawn in bottom band; vice versa
+            if (p.y < -p.radius) {
+              spawnInBand(p, 'bottom');
+              p.vy = rand(-config.AMBIENT_SPEED * 0.5, 0);
+            } else if (p.y > cssH + p.radius) {
+              spawnInBand(p, 'top');
+              p.vy = rand(0, config.AMBIENT_SPEED * 0.5);
+            }
+          } else {
+            // right canvas: wrap vertically
+            if (p.y < -p.radius) p.y = cssH + p.radius;
+            if (p.y > cssH + p.radius) p.y = -p.radius;
+          }
+        }
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, cssW, cssH);
+        for (let p of particles) {
+          ctx.globalAlpha = p.opacity;
+          ctx.fillStyle = p.color;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+      }
+
+      function loop(t) {
+        if (!running) return;
+        const dt = lastTime ? (t - lastTime) / 1000 : 0.016;
+        lastTime = t;
+        elapsed += dt;
+        if (!REDUCED_MOTION) update(Math.min(dt, 0.05));
+        draw();
+        rafIds.push(requestAnimationFrame(loop));
+      }
+
+      window.addEventListener('resize', resize);
+      resize();
+      draw();
+
+      return {
+        start: () => { lastTime = 0; rafIds.push(requestAnimationFrame(loop)); }
+      };
+    }
+
+    const left = ParticleSystem('canvas-left', LEFT_CONFIG, 'left');
+    const right = ParticleSystem('canvas-right', RIGHT_CONFIG, 'right');
+    systems.push(left, right);
+    if (!REDUCED_MOTION) {
+      left.start();
+      right.start();
+    }
+  })();
+  </script>
+</body>
+</html>
