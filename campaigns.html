@@ -930,7 +930,16 @@
       border-radius: 3px;
     }
   </style>
-  <script src="https://unpkg.com/@nickersoft/ruffle@latest/ruffle.js"></script>
+  <!-- Ruffle Flash emulator: polyfills <embed type="application/x-shockwave-flash"> -->
+  <script>
+    window.RufflePlayer = window.RufflePlayer || {};
+    window.RufflePlayer.config = {
+      "autoplay": "on",
+      "unmuteOverlay": "hidden",
+      "contextMenu": "off"
+    };
+  </script>
+  <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
   <!-- Default Statcounter code for DanArt https://danart.vercel.app/ -->
   <script type="text/javascript">
     var sc_project=13223749;

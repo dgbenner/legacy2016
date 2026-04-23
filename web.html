@@ -13,7 +13,8 @@
     window.RufflePlayer.config = {
       "autoplay": "on",
       "unmuteOverlay": "hidden",
-      "contextMenu": "off"
+      "contextMenu": "off",
+      "splashScreen": false
     };
   </script>
   <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
@@ -914,8 +915,59 @@
       background: #009ddc;
       border-radius: 3px;
     }
+    /* SWF click-to-play poster + caption (Best Buy whitepaper-style caption) */
+    .swf-slot {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .swf-poster {
+      position: relative;
+      background: #2a2a2a;
+      color: #fff;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-family: var(--font-display);
+      user-select: none;
+      transition: filter 0.2s;
+    }
+    .swf-poster:hover { filter: brightness(1.15); }
+    .swf-poster__title {
+      font-size: 0.95rem;
+      margin-bottom: 0.6rem;
+      text-align: center;
+      padding: 0 1rem;
+    }
+    .swf-poster__icon {
+      width: 56px; height: 56px;
+      background: rgba(255,255,255,0.18);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 0.6rem;
+      transition: background 0.2s;
+    }
+    .swf-poster:hover .swf-poster__icon { background: rgba(255,255,255,0.28); }
+    .swf-poster__icon svg { width: 22px; height: 22px; fill: #fff; margin-left: 3px; }
+    .swf-poster__dims {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 0.05em;
+    }
+    .swf-caption {
+      text-align: center;
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 0.85rem;
+      color: #2a2a2a;
+      margin-top: 0.5rem;
+      cursor: pointer;
+    }
+    .swf-caption:hover { color: #555; }
   </style>
-  <script src="https://unpkg.com/@nickersoft/ruffle@latest/ruffle.js"></script>
   <!-- Default Statcounter code for DanArt https://danart.vercel.app/ -->
   <script type="text/javascript">
     var sc_project=13223749;
@@ -1095,7 +1147,14 @@
             <p>Part of a branding campaign for a South Carolina provider of wireless, internet and digital cable service. Campaign objective was to rally support for Hargray as a local provider, during fear of a takeover. The strategy positions Hargray as being a local business, but with global quality service.</p>
           </div>
           <div class="project__media">
-            <embed src="images/work/ads/hargray_368x308OT.swf" type="application/x-shockwave-flash" width="368" height="308" quality="high" wmode="opaque" style="border-radius: 12px; max-width: 100%;">
+            <div class="swf-slot" data-swf="images/work/ads/hargray_368x308OT.swf" data-w="368" data-h="308">
+              <div class="swf-poster" style="width: 368px; height: 308px;">
+                <div class="swf-poster__title">Hargray</div>
+                <div class="swf-poster__icon"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+                <div class="swf-poster__dims">368 &times; 308 &nbsp;|&nbsp; 12 seconds</div>
+              </div>
+              <div class="swf-caption">Tap to Play</div>
+            </div>
           </div>
         </section>
 
@@ -1110,7 +1169,14 @@
           </div>
           <div class="project__media" style="display: flex; gap: 0.75rem; align-items: start; flex-wrap: wrap;">
             <div class="flash-placeholder" style="width: 300px; height: 250px; background: #e5e2db; border: 1px dashed #aaa; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; text-align: center;">Flash Banner Placeholder<br>300 &times; 250</div>
-            <embed src="images/work/ads/FITCH_Leveraged_Elevator_300x250v3.swf" type="application/x-shockwave-flash" width="300" height="250" quality="high" wmode="opaque" style="border-radius: 12px;">
+            <div class="swf-slot" data-swf="images/work/ads/FITCH_Leveraged_Elevator_300x250v3.swf" data-w="300" data-h="250">
+              <div class="swf-poster" style="width: 300px; height: 250px;">
+                <div class="swf-poster__title">Fitch &mdash; Leveraged Elevator</div>
+                <div class="swf-poster__icon"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+                <div class="swf-poster__dims">300 &times; 250 &nbsp;|&nbsp; 15 seconds</div>
+              </div>
+              <div class="swf-caption">Tap to Play</div>
+            </div>
           </div>
         </section>
 
@@ -1120,7 +1186,7 @@
         <section class="project--full-width">
           <div class="project__copy">
             <h3>Intel</h3>
-            <h2>Big Data</h2>
+            <h2>Big Vision</h2>
             <p>Part of a campaign to position Intel as a leader in "Big Data".</p>
           </div>
           <div class="project__media">
@@ -1158,8 +1224,22 @@
             <p>A series of rich media banner ads designed to compete with Google search results for staffing-related queries.</p>
           </div>
           <div class="project__media" style="display: flex; gap: 0.75rem; align-items: start; flex-wrap: wrap;">
-            <embed src="images/work/ads/10363_Aerotek_VsGoogle_300x250A.swf" type="application/x-shockwave-flash" width="300" height="250" quality="high" wmode="opaque" style="border-radius: 12px;">
-            <embed src="images/work/ads/10363_Aerotek_VsGoogle_300x250B.swf" type="application/x-shockwave-flash" width="300" height="250" quality="high" wmode="opaque" style="border-radius: 12px;">
+            <div class="swf-slot" data-swf="images/work/ads/10363_Aerotek_VsGoogle_300x250A.swf" data-w="300" data-h="250">
+              <div class="swf-poster" style="width: 300px; height: 250px;">
+                <div class="swf-poster__title">Aerotek vs. Google &mdash; A</div>
+                <div class="swf-poster__icon"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+                <div class="swf-poster__dims">300 &times; 250 &nbsp;|&nbsp; 10 seconds</div>
+              </div>
+              <div class="swf-caption">Tap to Play</div>
+            </div>
+            <div class="swf-slot" data-swf="images/work/ads/10363_Aerotek_VsGoogle_300x250B.swf" data-w="300" data-h="250">
+              <div class="swf-poster" style="width: 300px; height: 250px;">
+                <div class="swf-poster__title">Aerotek vs. Google &mdash; B</div>
+                <div class="swf-poster__icon"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+                <div class="swf-poster__dims">300 &times; 250 &nbsp;|&nbsp; 10 seconds</div>
+              </div>
+              <div class="swf-caption">Tap to Play</div>
+            </div>
             <div class="flash-placeholder" style="width: 300px; height: 250px; background: #e5e2db; border: 1px dashed #aaa; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; text-align: center;">Flash Banner Placeholder<br>300 &times; 250</div>
           </div>
         </section>
@@ -1274,6 +1354,48 @@
       if (e.key === 'Escape') closeLightbox();
       if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length; showLightboxImage(); }
       if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % galleryImages.length; showLightboxImage(); }
+    });
+  </script>
+
+  <script>
+    /* Click-to-play: poster + caption stays inert until clicked.
+       On click we drop in either a fresh <embed> (SWF — Ruffle polyfills
+       and autoplays) or a <video> (mp4/webm — autoplays muted inline). */
+    document.addEventListener('click', function (e) {
+      var slot = e.target.closest('.swf-slot');
+      if (!slot) return;
+      if (slot.querySelector('embed, ruffle-player, video')) return;  // already playing
+
+      var src = slot.dataset.swf;
+      var w = slot.dataset.w;
+      var h = slot.dataset.h;
+      var isVideo = /\.(mp4|webm|m4v|mov)$/i.test(src);
+
+      var media;
+      if (isVideo) {
+        media = document.createElement('video');
+        media.src = src;
+        media.width = w;
+        media.height = h;
+        media.autoplay = true;
+        media.loop = true;
+        media.muted = true;
+        media.playsInline = true;
+        media.controls = false;
+      } else {
+        media = document.createElement('embed');
+        media.src = src;
+        media.type = 'application/x-shockwave-flash';
+        media.width = w;
+        media.height = h;
+        media.setAttribute('quality', 'high');
+        media.setAttribute('wmode', 'opaque');
+      }
+      media.style.borderRadius = '12px';
+      media.style.display = 'block';
+
+      slot.innerHTML = '';
+      slot.appendChild(media);
     });
   </script>
 
