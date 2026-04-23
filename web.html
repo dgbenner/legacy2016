@@ -6,6 +6,18 @@
   <title>Web • Dan Benner • Advertising Creative • Copywriter • Conceptual Thinker</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Libre+Caslon+Text:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Ruffle Flash emulator: polyfills <embed type="application/x-shockwave-flash"> -->
+  <script>
+    window.RufflePlayer = window.RufflePlayer || {};
+    window.RufflePlayer.config = {
+      "autoplay": "on",
+      "unmuteOverlay": "hidden",
+      "contextMenu": "off"
+    };
+  </script>
+  <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+
   <style>
     /* ========================================
        CSS CUSTOM PROPERTIES
@@ -264,7 +276,7 @@
       height: 22px;
       clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 100%, 15px 100%);
       /* unfold vertically AND slide horizontally during transition */
-      transform: scaleY(0) translateX(-24px);
+      transform: scaleY(0) translateX(-22px);
       transform-origin: top;
       transition: transform 0.13s cubic-bezier(0.55, 0, 0.67, 0.3);
       pointer-events: none;
@@ -289,7 +301,7 @@
       height: 22px;
       clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 100%, 15px 100%);
       /* unfold vertically AND slide horizontally during transition */
-      transform: scaleY(0) translateX(24px);
+      transform: scaleY(0) translateX(22px);
       transform-origin: bottom;
       transition: transform 0.13s cubic-bezier(0.55, 0, 0.67, 0.3);
       pointer-events: none;
@@ -1083,7 +1095,7 @@
             <p>Part of a branding campaign for a South Carolina provider of wireless, internet and digital cable service. Campaign objective was to rally support for Hargray as a local provider, during fear of a takeover. The strategy positions Hargray as being a local business, but with global quality service.</p>
           </div>
           <div class="project__media">
-            <div class="flash-placeholder" style="width: 368px; height: 308px; background: #e5e2db; border: 1px dashed #aaa; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em;">Flash Banner Placeholder</div>
+            <embed src="images/work/ads/hargray_368x308OT.swf" type="application/x-shockwave-flash" width="368" height="308" quality="high" wmode="opaque" style="border-radius: 12px; max-width: 100%;">
           </div>
         </section>
 
@@ -1096,22 +1108,23 @@
             <h2>Financial Ratings</h2>
             <p>Fitch is a provider of financial ratings that gives investors a detailed look at particular investment sectors.</p>
           </div>
-          <div class="project__media">
-            <div class="flash-placeholder" style="width: 300px; height: 250px; background: #e5e2db; border: 1px dashed #aaa; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em;">Flash Banner Placeholder</div>
+          <div class="project__media" style="display: flex; gap: 0.75rem; align-items: start; flex-wrap: wrap;">
+            <div class="flash-placeholder" style="width: 300px; height: 250px; background: #e5e2db; border: 1px dashed #aaa; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; text-align: center;">Flash Banner Placeholder<br>300 &times; 250</div>
+            <embed src="images/work/ads/FITCH_Leveraged_Elevator_300x250v3.swf" type="application/x-shockwave-flash" width="300" height="250" quality="high" wmode="opaque" style="border-radius: 12px;">
           </div>
         </section>
 
 
 
         <!-- Intel -->
-        <section class="project--text-left">
+        <section class="project--full-width">
           <div class="project__copy">
             <h3>Intel</h3>
             <h2>Big Data</h2>
             <p>Part of a campaign to position Intel as a leader in "Big Data".</p>
           </div>
           <div class="project__media">
-            <object width="300" height="600"><param name="movie" value="/flash/intel_vision_300x600.swf"><embed src="/flash/intel_vision_300x600.swf" width="300" height="600"></embed></object>
+            <div class="flash-placeholder" style="width: 300px; height: 600px; background: #e5e2db; border: 1px dashed #aaa; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; text-align: center;">Flash Banner Placeholder<br>300 &times; 600</div>
           </div>
         </section>
 
@@ -1138,16 +1151,16 @@
 
 
         <!-- Aerotek -->
-        <section class="project--three-up">
+        <section class="project--full-width">
           <div class="project__copy">
             <h3>Aerotek</h3>
             <h2>Vs. Google Search Ads</h2>
             <p>A series of rich media banner ads designed to compete with Google search results for staffing-related queries.</p>
           </div>
-          <div class="project__gallery-row">
-            <div class="flash-placeholder" style="aspect-ratio: 300/250; background: #e5e2db; border: 1px dashed #aaa; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;">Flash Placeholder A</div>
-            <div class="flash-placeholder" style="aspect-ratio: 300/250; background: #e5e2db; border: 1px dashed #aaa; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;">Flash Placeholder B</div>
-            <div class="flash-placeholder" style="aspect-ratio: 300/250; background: #e5e2db; border: 1px dashed #aaa; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;">Flash Placeholder C</div>
+          <div class="project__media" style="display: flex; gap: 0.75rem; align-items: start; flex-wrap: wrap;">
+            <embed src="images/work/ads/10363_Aerotek_VsGoogle_300x250A.swf" type="application/x-shockwave-flash" width="300" height="250" quality="high" wmode="opaque" style="border-radius: 12px;">
+            <embed src="images/work/ads/10363_Aerotek_VsGoogle_300x250B.swf" type="application/x-shockwave-flash" width="300" height="250" quality="high" wmode="opaque" style="border-radius: 12px;">
+            <div class="flash-placeholder" style="width: 300px; height: 250px; background: #e5e2db; border: 1px dashed #aaa; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; text-align: center;">Flash Banner Placeholder<br>300 &times; 250</div>
           </div>
         </section>
 
