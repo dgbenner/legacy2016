@@ -255,7 +255,8 @@
       right: 0;
       height: 22px;
       clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 100%, 15px 100%);
-      transform: scaleY(0) translateX(-12px);
+      /* unfold vertically AND slide horizontally during transition */
+      transform: scaleY(0) translateX(-24px);
       transform-origin: top;
       transition: transform 0.13s cubic-bezier(0.55, 0, 0.67, 0.3);
       pointer-events: none;
@@ -279,7 +280,8 @@
       right: 0;
       height: 22px;
       clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 100%, 15px 100%);
-      transform: scaleY(0) translateX(12px);
+      /* unfold vertically AND slide horizontally during transition */
+      transform: scaleY(0) translateX(24px);
       transform-origin: bottom;
       transition: transform 0.13s cubic-bezier(0.55, 0, 0.67, 0.3);
       pointer-events: none;

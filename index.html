@@ -253,7 +253,7 @@
     .site-nav__links a.nav-copy > span::after { background: #fdb827; }
     .site-nav__links a.nav-broadcast > span::after { background: #61bb46; }
 
-    /* Top bar - anchored at nav top, slides down on hover */
+    /* Top bar - slides in from upper-left along compass 160° (down-right) */
     .site-nav__links a.nav-campaigns::before,
     .site-nav__links a.nav-web::before,
     .site-nav__links a.nav-copy::before,
@@ -265,7 +265,8 @@
       right: 0;
       height: 22px;
       clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 100%, 15px 100%);
-      transform: scaleY(0) translateX(-12px);
+      /* unfold vertically AND slide horizontally during transition */
+      transform: scaleY(0) translateX(-24px);
       transform-origin: top;
       transition: transform 0.13s cubic-bezier(0.55, 0, 0.67, 0.3);
       pointer-events: none;
@@ -281,7 +282,7 @@
     .site-nav__links a.nav-copy::before { background: #fdb827; }
     .site-nav__links a.nav-broadcast::before { background: #61bb46; }
 
-    /* Bottom bar - anchored at nav bottom, slides up on hover */
+    /* Bottom bar - slides in from lower-right along compass 340° (up-left) */
     .site-nav__links .bar-bottom {
       position: absolute;
       bottom: 0;
@@ -289,7 +290,8 @@
       right: 0;
       height: 22px;
       clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 100%, 15px 100%);
-      transform: scaleY(0) translateX(12px);
+      /* unfold vertically AND slide horizontally during transition */
+      transform: scaleY(0) translateX(24px);
       transform-origin: bottom;
       transition: transform 0.13s cubic-bezier(0.55, 0, 0.67, 0.3);
       pointer-events: none;
