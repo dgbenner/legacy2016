@@ -1428,16 +1428,24 @@
     });
 
     const RIGHT_CONFIG = {
-      COUNT: 90, MOUSE_RADIUS: 200, MOUSE_FORCE: 0, DAMPING: 0.985,
+      COUNT: 90, DAMPING: 0.985,
       AMBIENT_SPEED: 0.06,
       ROTATION_RPM: 0.275,      // ~10% faster than 0.25
       WANDER_AMPLITUDE: 8,
       WANDER_PERIOD: 6,
       RADIAL_BIAS: 0.7,
+      MOUSE_RADIUS: 130,        // px from cursor that influences a particle
+      MOUSE_IMPULSE: 0.55,      // per-frame velocity added when cursor touches
+      SPRING_K: 0.020,          // per-frame pull of displacement back toward home
+      DISP_DAMP: 0.955,         // per-frame velocity damping (lower = drifts less)
     };
     const LEFT_CONFIG = {
-      COUNT: 30, MOUSE_RADIUS: 200, MOUSE_FORCE: 0, DAMPING: 0.985,
+      COUNT: 30, DAMPING: 0.985,
       AMBIENT_SPEED: 0.04, BAND_HEIGHT: 0.11,
+      MOUSE_RADIUS: 130,
+      MOUSE_IMPULSE: 0.65,
+      SPRING_K: 0.020,
+      DISP_DAMP: 0.955,
     };
 
     function ParticleSystem(canvasId, config, mode) {
@@ -1496,6 +1504,7 @@
             radius, color: pickColor(), opacity: rand(0.5, 0.9),
             wanderPhase: Math.random() * Math.PI * 2,
             speedMult: speedFromRadius(radius),
+            dispX: 0, dispY: 0, dvX: 0, dvY: 0,
           });
         }
 
@@ -1517,6 +1526,7 @@
             radius, color: pickColor(), opacity: rand(0.5, 0.9),
             wanderPhase: Math.random() * Math.PI * 2,
             speedMult: speedFromRadius(radius),
+            dispX: 0, dispY: 0, dvX: 0, dvY: 0,
           });
         }
 
@@ -1534,6 +1544,7 @@
             radius, color: pickColor(), opacity: rand(0.5, 0.9),
             wanderPhase: Math.random() * Math.PI * 2,
             speedMult: speedFromRadius(radius),
+            dispX: 0, dispY: 0, dvX: 0, dvY: 0,
           });
         }
 
@@ -1553,6 +1564,7 @@
             radius, color: pickColor(), opacity: rand(0.5, 0.9),
             wanderPhase: Math.random() * Math.PI * 2,
             speedMult: speedFromRadius(radius),
+            dispX: 0, dispY: 0, dvX: 0, dvY: 0,
           });
         }
       }
@@ -1588,6 +1600,7 @@
             x: homeX, y: homeY,
             radius, color: pickColor(), opacity: rand(0.5, 0.9),
             band, homeX, homeY, amplX, amplY, periodX, periodY, phaseX, phaseY,
+            dispX: 0, dispY: 0, dvX: 0, dvY: 0,
           });
         }
       }
@@ -1599,22 +1612,11 @@
         return { x: mouse.x - rect.left, y: mouse.y - rect.top };
       }
 
-      function applyMouseForce(p, lm) {
-        const dx = lm.x - p.x, dy = lm.y - p.y;
-        const dist = Math.hypot(dx, dy);
-        if (dist > 0 && dist < config.MOUSE_RADIUS) {
-          const strength = (1 - dist / config.MOUSE_RADIUS) * config.MOUSE_FORCE;
-          p.vx += (dx / dist) * strength;
-          p.vy += (dy / dist) * strength;
-        }
-      }
-
       function update(dt) {
         const lm = getLocalMouse();
+        // Only react when the cursor is actually inside this canvas's box.
+        const mouseIn = lm.x >= 0 && lm.x <= cssW && lm.y >= 0 && lm.y <= cssH;
 
-        // Right-canvas rotation: rotate each particle's offset around center
-        // directly (no velocity accumulation, so it doesn't spiral out).
-        // Per-particle speedMult — small dots orbit slower than big ones.
         let cx, cy, omega, wanderRate;
         if (mode === 'right') {
           cx = cssW * 0.50 + 20; cy = cssH * 0.59 + 20;
@@ -1623,34 +1625,59 @@
         }
 
         for (let p of particles) {
+          // --- 1) Natural (un-mouse) position ---
           if (mode === 'right') {
+            // Rotate the orbit position stored in p.x, p.y
             const angleDelta = omega * dt * p.speedMult;
             const cosA = Math.cos(angleDelta);
             const sinA = Math.sin(angleDelta);
             const ox = p.x - cx, oy = p.y - cy;
             p.x = cx + (ox * cosA - oy * sinA);
             p.y = cy + (ox * sinA + oy * cosA);
-
-            // gentle radial breathing
+            // Radial breathing
             const wander = Math.sin(elapsed * wanderRate + p.wanderPhase) * config.WANDER_AMPLITUDE;
-            const dist = Math.hypot(p.x - cx, p.y - cy) || 1;
+            const distC = Math.hypot(p.x - cx, p.y - cy) || 1;
             const wanderStep = wander * dt * 0.05;
-            p.x += ((p.x - cx) / dist) * wanderStep;
-            p.y += ((p.y - cy) / dist) * wanderStep;
-          }
-
-          applyMouseForce(p, lm);
-
-          if (mode === 'left') {
-            // Pure sin-based sway around (homeX, homeY); no velocity, no walls.
-            // amplX is bounded so we never reach the L/R edges; amplY is small
-            // enough to keep top/bottom groups in their respective strips.
+            p.x += ((p.x - cx) / distC) * wanderStep;
+            p.y += ((p.y - cy) / distC) * wanderStep;
+          } else {
+            // Left: recompute sin-driven anchor each frame
             p.x = p.homeX + Math.sin(elapsed * (Math.PI * 2 / p.periodX) + p.phaseX) * p.amplX;
             p.y = p.homeY + Math.sin(elapsed * (Math.PI * 2 / p.periodY) + p.phaseY) * p.amplY;
-          } else {
-            // right: rotation handles position; nothing else needed.
-            p.vx *= config.DAMPING; p.vy *= config.DAMPING;
-            p.x += p.vx; p.y += p.vy;
+          }
+
+          // --- 2) Spring-damper displacement with mouse impulse ---
+          // Each particle carries its own velocity (dvX/dvY) so when the
+          // cursor brushes past, energy is transferred and the particle
+          // keeps drifting after the cursor has moved on. A spring force
+          // pulls displacement back to zero; damping bleeds the velocity.
+          if (mouseIn) {
+            const rx = p.x + p.dispX, ry = p.y + p.dispY;
+            const dx = rx - lm.x, dy = ry - lm.y;
+            const dist = Math.hypot(dx, dy);
+            if (dist > 0 && dist < config.MOUSE_RADIUS) {
+              const strength = 1 - dist / config.MOUSE_RADIUS;
+              p.dvX += (dx / dist) * strength * config.MOUSE_IMPULSE;
+              p.dvY += (dy / dist) * strength * config.MOUSE_IMPULSE;
+            }
+          }
+          // Spring pull toward home
+          p.dvX -= p.dispX * config.SPRING_K;
+          p.dvY -= p.dispY * config.SPRING_K;
+          // Velocity damping
+          p.dvX *= config.DISP_DAMP;
+          p.dvY *= config.DISP_DAMP;
+          // Integrate
+          p.dispX += p.dvX;
+          p.dispY += p.dvY;
+
+          // --- 3) L/R collision: clamp disp so the rendered particle can't
+          // cross the canvas left/right edges (top/bottom stay unbounded). ---
+          const renderX = p.x + p.dispX;
+          if (renderX - p.radius < 0) {
+            p.dispX = p.radius - p.x;
+          } else if (renderX + p.radius > cssW) {
+            p.dispX = cssW - p.radius - p.x;
           }
         }
       }
@@ -1661,7 +1688,7 @@
           ctx.globalAlpha = p.opacity;
           ctx.fillStyle = p.color;
           ctx.beginPath();
-          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.arc(p.x + p.dispX, p.y + p.dispY, p.radius, 0, Math.PI * 2);
           ctx.fill();
         }
         ctx.globalAlpha = 1;

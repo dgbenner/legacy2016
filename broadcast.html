@@ -93,6 +93,18 @@
       letter-spacing: -0.02em;
     }
 
+    /* Broadcast runtime tag at the end of h2 — dimmer, smaller, tabular */
+    h2 .runtime {
+      font-family: var(--font-body);
+      font-size: 0.65em;
+      font-weight: 400;
+      color: rgba(220,218,210,0.5);
+      margin-left: 0.6em;
+      letter-spacing: 0.05em;
+      vertical-align: middle;
+      font-variant-numeric: tabular-nums;
+    }
+
     /* ========================================
        LAYOUT
        ======================================== */
@@ -952,7 +964,7 @@
         <section class="project--full-width">
           <div class="project__copy">
             <h3>Crescent Bank</h3>
-            <h2>&ldquo;Racket-Free&rdquo; Checking</h2>
+            <h2>&ldquo;Racket-Free&rdquo; Checking <span class="runtime">0:30</span></h2>
             <p>Placeholder description.</p>
           </div>
           <div class="project__media">
@@ -967,7 +979,7 @@
         <section class="project--full-width">
           <div class="project__copy">
             <h3>BellSouth</h3>
-            <h2>The Magician</h2>
+            <h2>The Magician <span class="runtime">0:30</span></h2>
             <p>Placeholder description.</p>
           </div>
           <div class="project__media">
@@ -983,7 +995,7 @@
         <section class="project--full-width">
           <div class="project__copy">
             <h3>Children's Hospital of The King's Daughters</h3>
-            <h2>Success Story Promotion</h2>
+            <h2>Success Story Promotion <span class="runtime">0:45</span></h2>
             <p>Placeholder description.</p>
           </div>
           <div class="project__media">
@@ -995,10 +1007,10 @@
         </section>
 
         <!-- Microsoft -->
-        <section class="project--full-width">
+        <section class="project--full-width" id="microsoft">
           <div class="project__copy">
             <h3>Microsoft</h3>
-            <h2>Browser Privacy</h2>
+            <h2>Browser Privacy <span class="runtime">0:30</span></h2>
             <p>Placeholder description.</p>
           </div>
           <div class="project__media">
@@ -1012,7 +1024,7 @@
         <section class="project--full-width">
           <div class="project__copy">
             <h3>Dominion Energy</h3>
-            <h2>Veteran Recruitment</h2>
+            <h2>Veteran Recruitment <span class="runtime">0:30</span></h2>
             <p>A Fortune 500 energy company needed a simple way to get job-seeking veterans' attention, as well as point out Dominion Energy makes the military to civilian transition an easy one.</p>
           </div>
           <div class="project__media">
@@ -1029,7 +1041,7 @@
         <section class="project--full-width">
           <div class="project__copy">
             <h3>Cars That Rock</h3>
-            <h2>Brian Johnson's Collection</h2>
+            <h2>Brian Johnson's Collection <span class="runtime">0:40</span></h2>
             <p>A Quest UK show featuring AC/DC's Brian Johnson and his impressive car collection.</p>
           </div>
           <div class="project__media">
@@ -1043,7 +1055,7 @@
         <section class="project--full-width">
           <div class="project__copy">
             <h3>Zipit</h3>
-            <h2>It's Where Your Friends Are</h2>
+            <h2>It's Where Your Friends Are <span class="runtime">0:30</span></h2>
             <p>The Zipit Z2 was a pocket Wi-Fi messenger for the generation that wasn't old enough for a mobile plan but wasn't willing to be out of the loop.</p>
           </div>
           <div class="project__media">

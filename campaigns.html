@@ -929,6 +929,59 @@
       background: #e03a3e;
       border-radius: 3px;
     }
+
+    /* SWF/MP4 click-to-play poster + caption (Best Buy whitepaper-style caption) */
+    .swf-slot {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .swf-poster {
+      position: relative;
+      background: #2a2a2a;
+      color: #fff;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-family: var(--font-display);
+      user-select: none;
+      transition: filter 0.2s;
+    }
+    .swf-poster:hover { filter: brightness(1.15); }
+    .swf-poster__title {
+      font-size: 0.95rem;
+      margin-bottom: 0.6rem;
+      text-align: center;
+      padding: 0 1rem;
+    }
+    .swf-poster__icon {
+      width: 56px; height: 56px;
+      background: rgba(255,255,255,0.18);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 0.6rem;
+      transition: background 0.2s;
+    }
+    .swf-poster:hover .swf-poster__icon { background: rgba(255,255,255,0.28); }
+    .swf-poster__icon svg { width: 22px; height: 22px; fill: #fff; margin-left: 3px; }
+    .swf-poster__dims {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 0.05em;
+    }
+    .swf-caption {
+      text-align: center;
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 0.85rem;
+      color: #2a2a2a;
+      margin-top: 0.5rem;
+      cursor: pointer;
+    }
+    .swf-caption:hover { color: #555; }
   </style>
   <!-- Ruffle Flash emulator: polyfills <embed type="application/x-shockwave-flash"> -->
   <script>
@@ -1028,7 +1081,14 @@
               <div class="video-embed" style="margin-top: 0;">
                 <iframe src="//player.vimeo.com/video/118965241?title=0&byline=0&portrait=0" allowfullscreen></iframe>
               </div>
-              <div class="flash-placeholder" style="width: 300px; height: 250px; background: #e5e2db; border: 1px dashed #aaa; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em;">300&times;250 Placeholder</div>
+              <div class="swf-slot" data-swf="images/work/ads/dominion_troops.mp4" data-w="300" data-h="250">
+                <div class="swf-poster" style="width: 300px; height: 250px;">
+                  <div class="swf-poster__title">Dominion &mdash; Troops to Energy</div>
+                  <div class="swf-poster__icon"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+                  <div class="swf-poster__dims">300 &times; 250 &nbsp;|&nbsp; 17 seconds</div>
+                </div>
+                <div class="swf-caption">Tap to Play</div>
+              </div>
             </div>
           </div>
         </section>
@@ -1270,6 +1330,55 @@
       if (e.key === 'Escape') closeLightbox();
       if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length; showLightboxImage(); }
       if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % galleryImages.length; showLightboxImage(); }
+    });
+  </script>
+
+  <script>
+    /* Click-to-play: poster + caption stays inert until clicked.
+       SWFs loop natively (Ruffle obeys the SWF); videos play once and
+       freeze on the last frame, click again to rewind + replay. */
+    document.addEventListener('click', function (e) {
+      var slot = e.target.closest('.swf-slot');
+      if (!slot) return;
+
+      if (slot.querySelector('embed, ruffle-player')) return;
+      var existingVideo = slot.querySelector('video');
+      if (existingVideo) {
+        existingVideo.currentTime = 0;
+        existingVideo.play();
+        return;
+      }
+
+      var src = slot.dataset.swf;
+      var w = slot.dataset.w;
+      var h = slot.dataset.h;
+      var isVideo = /\.(mp4|webm|m4v|mov)$/i.test(src);
+
+      var media;
+      if (isVideo) {
+        media = document.createElement('video');
+        media.src = src;
+        media.width = w;
+        media.height = h;
+        media.autoplay = true;
+        media.loop = false;
+        media.muted = true;
+        media.playsInline = true;
+        media.controls = false;
+      } else {
+        media = document.createElement('embed');
+        media.src = src;
+        media.type = 'application/x-shockwave-flash';
+        media.width = w;
+        media.height = h;
+        media.setAttribute('quality', 'high');
+        media.setAttribute('wmode', 'opaque');
+      }
+      media.style.borderRadius = '12px';
+      media.style.display = 'block';
+
+      slot.innerHTML = '';
+      slot.appendChild(media);
     });
   </script>
 

@@ -1168,7 +1168,14 @@
             <p>Fitch is a provider of financial ratings that gives investors a detailed look at particular investment sectors.</p>
           </div>
           <div class="project__media" style="display: flex; gap: 0.75rem; align-items: start; flex-wrap: wrap;">
-            <div class="flash-placeholder" style="width: 300px; height: 250px; background: #e5e2db; border: 1px dashed #aaa; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; text-align: center;">Flash Banner Placeholder<br>300 &times; 250</div>
+            <div class="swf-slot" data-swf="images/work/ads/fitch_leveraged_blood.mp4" data-w="300" data-h="250">
+              <div class="swf-poster" style="width: 300px; height: 250px;">
+                <div class="swf-poster__title">Fitch &mdash; Leveraged Blood</div>
+                <div class="swf-poster__icon"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+                <div class="swf-poster__dims">300 &times; 250 &nbsp;|&nbsp; 22 seconds</div>
+              </div>
+              <div class="swf-caption">Tap to Play</div>
+            </div>
             <div class="swf-slot" data-swf="images/work/ads/FITCH_Leveraged_Elevator_300x250v3.swf" data-w="300" data-h="250">
               <div class="swf-poster" style="width: 300px; height: 250px;">
                 <div class="swf-poster__title">Fitch &mdash; Leveraged Elevator</div>
@@ -1190,7 +1197,35 @@
             <p>Part of a campaign to position Intel as a leader in "Big Data".</p>
           </div>
           <div class="project__media">
-            <div class="flash-placeholder" style="width: 300px; height: 600px; background: #e5e2db; border: 1px dashed #aaa; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; text-align: center;">Flash Banner Placeholder<br>300 &times; 600</div>
+            <div class="swf-slot" data-swf="images/work/ads/intel_big_vision.mp4" data-w="300" data-h="600">
+              <div class="swf-poster" style="width: 300px; height: 600px;">
+                <div class="swf-poster__title">Intel &mdash; Big Vision</div>
+                <div class="swf-poster__icon"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+                <div class="swf-poster__dims">300 &times; 600 &nbsp;|&nbsp; 14 seconds</div>
+              </div>
+              <div class="swf-caption">Tap to Play</div>
+            </div>
+          </div>
+        </section>
+
+
+
+        <!-- Microsoft Internet Explorer Privacy -->
+        <section class="project--full-width">
+          <div class="project__copy">
+            <h3>Microsoft &mdash; Internet Explorer</h3>
+            <h2>Privacy by Default</h2>
+            <p>In 2012, Microsoft drew a line in the sand by shipping Internet Explorer 10 with Do Not Track turned on out of the box &mdash; a position that put the browser ahead of any settled standard and squarely against the prevailing ad-industry winds. The work positioned IE as the browser that respected its users by default rather than asking them to opt in. The campaign extended into broadcast &mdash; see the <a href="broadcast.html#microsoft" class="inline-link"><strong>Browser Privacy TV spot &#8594;</strong></a>.</p>
+          </div>
+          <div class="project__media">
+            <div class="swf-slot" data-swf="images/work/ads/microsoft_privacy.mp4" data-w="300" data-h="600">
+              <div class="swf-poster" style="width: 300px; height: 600px;">
+                <div class="swf-poster__title">Microsoft &mdash; Privacy by Default</div>
+                <div class="swf-poster__icon"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+                <div class="swf-poster__dims">300 &times; 600 &nbsp;|&nbsp; 16 seconds</div>
+              </div>
+              <div class="swf-caption">Tap to Play</div>
+            </div>
           </div>
         </section>
 
@@ -1240,7 +1275,15 @@
               </div>
               <div class="swf-caption">Tap to Play</div>
             </div>
-            <div class="flash-placeholder" style="width: 300px; height: 250px; background: #e5e2db; border: 1px dashed #aaa; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; text-align: center;">Flash Banner Placeholder<br>300 &times; 250</div>
+            <div class="flash-placeholder" style="width: 300px; height: 250px; background: #e5e2db; border: 1px dashed #aaa; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; text-align: center;">Flash Banner Placeholder<br>300 &times; 250 &nbsp;|&nbsp; C</div>
+            <div class="swf-slot" data-swf="images/work/ads/aerotek_vs_google_d.mp4" data-w="300" data-h="250">
+              <div class="swf-poster" style="width: 300px; height: 250px;">
+                <div class="swf-poster__title">Aerotek vs. Google &mdash; D</div>
+                <div class="swf-poster__icon"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+                <div class="swf-poster__dims">300 &times; 250 &nbsp;|&nbsp; 10 seconds</div>
+              </div>
+              <div class="swf-caption">Tap to Play</div>
+            </div>
           </div>
         </section>
 
@@ -1360,11 +1403,22 @@
   <script>
     /* Click-to-play: poster + caption stays inert until clicked.
        On click we drop in either a fresh <embed> (SWF — Ruffle polyfills
-       and autoplays) or a <video> (mp4/webm — autoplays muted inline). */
+       and autoplays, loops natively) or a <video> (mp4/webm — autoplays
+       muted inline, plays ONCE then stops; click again to replay). */
     document.addEventListener('click', function (e) {
       var slot = e.target.closest('.swf-slot');
       if (!slot) return;
-      if (slot.querySelector('embed, ruffle-player, video')) return;  // already playing
+
+      // Already-running embed/ruffle: leave it alone (they loop natively).
+      if (slot.querySelector('embed, ruffle-player')) return;
+
+      // Already-played video: rewind + play on re-click.
+      var existingVideo = slot.querySelector('video');
+      if (existingVideo) {
+        existingVideo.currentTime = 0;
+        existingVideo.play();
+        return;
+      }
 
       var src = slot.dataset.swf;
       var w = slot.dataset.w;
@@ -1378,7 +1432,7 @@
         media.width = w;
         media.height = h;
         media.autoplay = true;
-        media.loop = true;
+        media.loop = false;       // stop at the end (was looping)
         media.muted = true;
         media.playsInline = true;
         media.controls = false;
