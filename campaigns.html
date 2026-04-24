@@ -837,17 +837,25 @@
       position: absolute;
       top: var(--space-md);
       right: var(--space-md);
-      background: none;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      background: rgba(255,255,255,0.95);
       border: none;
-      color: white;
-      font-size: 2rem;
-      cursor: pointer;
+      border-radius: 50%;
+      color: #1a1a1a;
+      font-size: 1.6rem;
       line-height: 1;
-      opacity: 0.7;
-      transition: opacity 0.2s;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+      transition: transform 0.15s ease, background 0.15s;
+      z-index: 2;
     }
 
-    .lightbox__close:hover { opacity: 1; }
+    .lightbox__close:hover { background: #fff; transform: scale(1.08); }
 
     .lightbox__img-container {
       max-height: 85vh;
@@ -1043,10 +1051,10 @@
             <h2>Keeping 8 Million Lights On</h2>
             <p>Entergy's Long Island power plant license was up for renewal. To rally support for the renewal process, they needed to communicate the importance of the plant as well as Entergy's hand in powering all the things New Yorkers love, regardless of size.</p>
           </div>
-          <div class="project__gallery-row" style="align-items: start; gap: 0.5rem;">
-            <div class="project__media--expandable" data-gallery="entergy"><img src="images/work/entergy_1.png" alt="Entergy - Big or Small 1" style="width: 100%; border-radius: 12px;"></div>
-            <div class="project__media--expandable" data-gallery="entergy"><img src="images/work/entergy_2.png" alt="Entergy - Big or Small 2" style="width: 100%; border-radius: 12px;"></div>
-            <div class="project__media--expandable" data-gallery="entergy"><img src="images/work/entergy_3.png" alt="Entergy - Big or Small 3" style="width: 100%; border-radius: 12px;"></div>
+          <div class="project__gallery-row" style="align-items: stretch; gap: 0.5rem;">
+            <div style="aspect-ratio: 332 / 507; overflow: hidden; border-radius: 12px;"><img src="images/work/entergy_1.png" alt="Entergy - Big or Small 1" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
+            <div style="aspect-ratio: 332 / 507; overflow: hidden; border-radius: 12px;"><img src="images/work/entergy_2.png" alt="Entergy - Big or Small 2" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
+            <div style="aspect-ratio: 332 / 507; overflow: hidden; border-radius: 12px;"><img src="images/work/entergy_3.png" alt="Entergy - Big or Small 3" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
           </div>
         </section>
 
@@ -1058,10 +1066,10 @@
             <h2>Life on the Waterway</h2>
             <p>Prior to construction, a waterside development in Cape Fear, North Carolina needed to paint a picture of what life would be like living on the Intracoastal Waterway.</p>
           </div>
-          <div class="project__gallery-row" style="align-items: start; gap: 0.5rem;">
-            <div class="project__media--expandable" data-gallery="sgr"><img src="images/work/sgr_1.png" alt="St George's Reach 1" style="width: 100%; border-radius: 12px;"></div>
-            <div class="project__media--expandable" data-gallery="sgr"><img src="images/work/sgr_2.png" alt="St George's Reach 2" style="width: 100%; border-radius: 12px;"></div>
-            <div class="project__media--expandable" data-gallery="sgr"><img src="images/work/sgr_3.png" alt="St George's Reach 3" style="width: 100%; border-radius: 12px;"></div>
+          <div class="project__gallery-row" style="align-items: stretch; gap: 0.5rem;">
+            <div style="aspect-ratio: 367 / 473; overflow: hidden; border-radius: 12px;"><img src="images/work/sgr_1.png" alt="St George's Reach 1" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
+            <div style="aspect-ratio: 367 / 473; overflow: hidden; border-radius: 12px;"><img src="images/work/sgr_2.png" alt="St George's Reach 2" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
+            <div style="aspect-ratio: 367 / 473; overflow: hidden; border-radius: 12px;"><img src="images/work/sgr_3.png" alt="St George's Reach 3" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
           </div>
         </section>
 
@@ -1074,20 +1082,22 @@
             <p>A Fortune 500 energy company needed a simple way to get job-seeking veterans' attention, as well as point out Dominion Energy makes the military to civilian transition an easy one.</p>
           </div>
           <div class="project__media" style="display: flex; gap: var(--space-md); align-items: start;">
-            <div class="project__media--expandable" data-gallery="dominion" style="flex: 0 0 36%;">
-              <img src="images/work/dominion_troopstoenergy.jpg" alt="Dominion Energy Veteran Recruitment" style="width: 100%; border-radius: 12px;">
+            <div style="flex: 0 0 36%;">
+              <img src="images/work/dominion_troopstoenergy.jpg" alt="Dominion Energy Veteran Recruitment" style="width: 100%; border-radius: 12px; display: block;">
             </div>
-            <div style="flex: 1; display: flex; flex-direction: column; gap: var(--space-md);">
-              <div class="video-embed" style="margin-top: 0;">
+            <div style="flex: 1; display: flex; flex-direction: column; gap: var(--space-md); align-items: center;">
+              <div class="video-embed" style="margin-top: 0; width: 100%;">
                 <iframe src="//player.vimeo.com/video/118965241?title=0&byline=0&portrait=0" allowfullscreen></iframe>
               </div>
-              <div class="swf-slot" data-swf="images/work/ads/dominion_troops.mp4" data-w="300" data-h="250">
-                <div class="swf-poster" style="width: 300px; height: 250px;">
-                  <div class="swf-poster__title">Dominion &mdash; Troops to Energy</div>
-                  <div class="swf-poster__icon"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
-                  <div class="swf-poster__dims">300 &times; 250 &nbsp;|&nbsp; 17 seconds</div>
+              <div style="background: #fff; padding: 8px; border-radius: 14px; display: inline-block;">
+                <div class="swf-slot" data-swf="images/work/ads/dominion_troops.mp4" data-w="300" data-h="250">
+                  <div class="swf-poster" style="width: 300px; height: 250px;">
+                    <div class="swf-poster__title">Dominion &mdash; Troops to Energy</div>
+                    <div class="swf-poster__icon"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+                    <div class="swf-poster__dims">300 &times; 250 &nbsp;|&nbsp; 17 seconds</div>
+                  </div>
+                  <div class="swf-caption">Tap to Play</div>
                 </div>
-                <div class="swf-caption">Tap to Play</div>
               </div>
             </div>
           </div>
@@ -1101,10 +1111,10 @@
             <h2>No Substitute</h2>
             <p style="max-width: 60%;">With attendance down, IMAX needed a high-impact message to remind everyone a 55" TV in their living room is no substitute for an IMAX Experience.</p>
           </div>
-          <div class="project__gallery-row" style="align-items: start; gap: 0.5rem;">
-            <div class="project__media--expandable" data-gallery="imax"><img src="images/work/imax_1.png" alt="IMAX 1" style="width: 100%; border-radius: 12px;"></div>
-            <div class="project__media--expandable" data-gallery="imax"><img src="images/work/imax_2.png" alt="IMAX 2" style="width: 100%; border-radius: 12px;"></div>
-            <div class="project__media--expandable" data-gallery="imax"><img src="images/work/imax_3.png" alt="IMAX 3" style="width: 100%; border-radius: 12px;"></div>
+          <div class="project__gallery-row" style="align-items: stretch; gap: 0.5rem;">
+            <div style="aspect-ratio: 354 / 458; overflow: hidden; border-radius: 12px;"><img src="images/work/imax_1.png" alt="IMAX 1" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
+            <div style="aspect-ratio: 354 / 458; overflow: hidden; border-radius: 12px;"><img src="images/work/imax_2.png" alt="IMAX 2" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
+            <div style="aspect-ratio: 354 / 458; overflow: hidden; border-radius: 12px;"><img src="images/work/imax_3.png" alt="IMAX 3" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
           </div>
         </section>
 
@@ -1129,8 +1139,8 @@
             <h2>Almost There</h2>
             <p>A series of consecutive outdoor boards on I-95, aimed at vacationeers traveling the long, long journey to Florida. The intent of the ever-increasing mileage is to discourage the road-weary traveler (and their children), to change their plans now, or have Myrtle Beach on their radar for next vacation.</p>
           </div>
-          <div class="project__media project__media--expandable" data-gallery="myrtlebeach">
-            <img src="https://danart.vercel.app/images/work/myrtle_beach_chamber.png" alt="Myrtle Beach Chamber of Commerce outdoor boards">
+          <div class="project__media">
+            <img src="https://danart.vercel.app/images/work/myrtle_beach_chamber.png" alt="Myrtle Beach Chamber of Commerce outdoor boards" style="display: block;">
           </div>
         </section>
 
@@ -1157,10 +1167,10 @@
             <p>During the final days of the year, <a href="https://fixthedebt.org/" target="_blank" class="inline-link"><strong>Fix the Debt</strong></a> needed to give one last push to get the bill across the finish line. Arresting Doomsday imagery was the appropriate attention-grabber for Congress and the President.</p>
             <p>The campaign ran in Politico, The Hill, and Roll Call &mdash; the political publications inside the Beltway.</p>
           </div>
-          <div class="project__gallery-row" style="align-items: start; gap: 0.5rem;">
-            <div class="project__media--expandable" data-gallery="fixthedebt-doomsday"><img src="images/work/doomsday_1.png" alt="Doomsday 1" style="width: 100%; border-radius: 12px;"></div>
-            <div class="project__media--expandable" data-gallery="fixthedebt-doomsday"><img src="images/work/doomsday_2.png" alt="Doomsday 2" style="width: 100%; border-radius: 12px;"></div>
-            <div class="project__media--expandable" data-gallery="fixthedebt-doomsday"><img src="images/work/doomsday_3.png" alt="Doomsday 3" style="width: 100%; border-radius: 12px;"></div>
+          <div class="project__gallery-row" style="align-items: stretch; gap: 0.5rem;">
+            <div style="aspect-ratio: 347 / 542; overflow: hidden; border-radius: 12px;"><img src="images/work/doomsday_1.png" alt="Doomsday 1" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
+            <div style="aspect-ratio: 347 / 542; overflow: hidden; border-radius: 12px;"><img src="images/work/doomsday_2.png" alt="Doomsday 2" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
+            <div style="aspect-ratio: 347 / 542; overflow: hidden; border-radius: 12px;"><img src="images/work/doomsday_3.png" alt="Doomsday 3" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
           </div>
         </section>
 
@@ -1211,7 +1221,7 @@
           <div class="project__copy">
             <h3>PlayStation</h3>
             <h2>Simpler Times</h2>
-            <p>Campaign for PlayStation's classics reissue series.</p>
+            <p>Campaign for classic games. One button, one rule: &ldquo;walk right.&rdquo;</p>
           </div>
           <div class="project__gallery-row" style="align-items: start;">
             <div class="project__media--expandable" data-gallery="playstation"><img src="images/work/playstation_1.png" alt="PlayStation Classics 1" style="width: 100%; aspect-ratio: 1429/909; object-fit: cover; border-radius: 12px;"></div>

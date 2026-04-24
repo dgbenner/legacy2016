@@ -824,17 +824,25 @@
       position: absolute;
       top: var(--space-md);
       right: var(--space-md);
-      background: none;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      background: rgba(255,255,255,0.95);
       border: none;
-      color: white;
-      font-size: 2rem;
-      cursor: pointer;
+      border-radius: 50%;
+      color: #1a1a1a;
+      font-size: 1.6rem;
       line-height: 1;
-      opacity: 0.7;
-      transition: opacity 0.2s;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+      transition: transform 0.15s ease, background 0.15s;
+      z-index: 2;
     }
 
-    .lightbox__close:hover { opacity: 1; }
+    .lightbox__close:hover { background: #fff; transform: scale(1.08); }
 
     .lightbox__img-container {
       max-height: 85vh;
@@ -1065,8 +1073,8 @@
             <p>The object of the game is to match iconic (and usually quirky) Baltimore pairs that are "better together". A touch screen version debuted at a Baltimore art festival and had over 1,500 players opening weekend.</p>
             <a href="http://tftnpy.axshare.com/" target="_blank" class="project__cta">See a pre-development walkthru &#8594;</a>
           </div>
-          <div class="project__media project__media--expandable" data-gallery="kaiser-game">
-            <img src="https://danart.vercel.app/images/work/kaiser_game.png" alt="Kaiser Permanente Better Together Game">
+          <div class="project__media">
+            <img src="https://danart.vercel.app/images/work/kaiser_game.png" alt="Kaiser Permanente Better Together Game" style="display: block;">
           </div>
         </section>
 
@@ -1132,8 +1140,8 @@
             <p>The Zipit Z2 was a pocket Wi-Fi messenger for the generation that wasn't old enough for a mobile plan but wasn't willing to be out of the loop. The microsite let teens and pre-teens spend time in their own world: demo the product, customize their device, write their own social media slang dictionary, share videos, and play games like 99 Conversations.</p>
             <a href="http://www.adweek.com/news/advertising/wings-dove-zipit-touts-z2-device-91043" target="_blank" class="project__cta">Read about the campaign in Adweek &#8594;</a>
           </div>
-          <div class="project__media project__media--expandable" data-gallery="zipit">
-            <img src="https://danart.vercel.app/images/work/zipit_web.png" alt="Zipit">
+          <div class="project__media">
+            <img src="https://danart.vercel.app/images/work/zipit_web.png" alt="Zipit" style="display: block;">
           </div>
         </section>
 
@@ -1147,8 +1155,8 @@
             <p>Part of a branding campaign for a South Carolina provider of wireless, internet and digital cable service. Campaign objective was to rally support for Hargray as a local provider, during fear of a takeover. The strategy positions Hargray as being a local business, but with global quality service.</p>
           </div>
           <div class="project__media">
-            <div class="swf-slot" data-swf="images/work/ads/hargray_368x308OT.swf" data-w="368" data-h="308">
-              <div class="swf-poster" style="width: 368px; height: 308px;">
+            <div class="swf-slot" data-swf="images/work/ads/hargray_368x308OT.swf" data-w="300" data-h="251">
+              <div class="swf-poster" style="width: 300px; height: 251px;">
                 <div class="swf-poster__title">Hargray</div>
                 <div class="swf-poster__icon"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
                 <div class="swf-poster__dims">368 &times; 308 &nbsp;|&nbsp; 12 seconds</div>
@@ -1416,10 +1424,8 @@
       var slot = e.target.closest('.swf-slot');
       if (!slot) return;
 
-      // Already-running embed/ruffle: leave it alone (they loop natively).
       if (slot.querySelector('embed, ruffle-player')) return;
 
-      // Already-played video: rewind + play on re-click.
       var existingVideo = slot.querySelector('video');
       if (existingVideo) {
         existingVideo.currentTime = 0;
@@ -1439,7 +1445,7 @@
         media.width = w;
         media.height = h;
         media.autoplay = true;
-        media.loop = false;       // stop at the end (was looping)
+        media.loop = false;
         media.muted = true;
         media.playsInline = true;
         media.controls = false;
