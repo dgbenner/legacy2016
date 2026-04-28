@@ -69,11 +69,13 @@
       position: relative;
     }
 
-    /* Isometric boxes scattered in background */
+    /* Decorative geometric shapes scattered in background.
+       z-index: -1 so they sit behind ALL content (including
+       static-positioned imagery like the Zipit screenshot). */
     .iso-box {
       position: absolute;
       pointer-events: none;
-      z-index: 0;
+      z-index: -1;
     }
 
     /* Subtle edge gradient darkening from left and right */
@@ -134,6 +136,8 @@
       height: var(--nav-height);
       display: flex;
       align-items: center;
+      overflow: hidden;
+      box-shadow: 0 18px 22px -14px rgba(0,0,0,0.10);
     }
 
     .site-nav::after {
@@ -151,18 +155,9 @@
       opacity: 0;
     }
 
-    /* Gradient + shadow below nav */
-    .site-nav::before {
-      content: '';
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      height: 40px;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.04) 0%, transparent 100%);
-      pointer-events: none;
-      z-index: -1;
-    }
+    /* Below-nav gradient is now a box-shadow on .site-nav so it survives
+       overflow:hidden (which we use to clip the nav hover bars at the
+       nav's bottom edge). */
 
     .site-nav .container {
       display: flex;
@@ -277,16 +272,17 @@
       height: 22px;
       clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 100%, 15px 100%);
       /* unfold vertically AND slide horizontally during transition */
-      transform: scaleY(0) translateX(-22px);
-      transform-origin: top;
-      transition: transform 0.13s cubic-bezier(0.55, 0, 0.67, 0.3);
+      transform: translate(-22px, -22px);
+      transition: transform 0.13s cubic-bezier(0.55, 0, 0.67, 0.3), opacity 0.13s cubic-bezier(0.55, 0, 0.67, 0.3);
+      opacity: 0;
       pointer-events: none;
     }
     .site-nav__links a.nav-campaigns:hover::before,
     .site-nav__links a.nav-web:hover::before,
     .site-nav__links a.nav-copy:hover::before,
     .site-nav__links a.nav-broadcast:hover::before {
-      transform: scaleY(1) translateX(-12px);
+      transform: translate(-12px, 0);
+      opacity: 1;
     }
     .site-nav__links a.nav-campaigns::before { background: #e03a3e; }
     .site-nav__links a.nav-web::before { background: #009ddc; }
@@ -302,16 +298,17 @@
       height: 22px;
       clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 100%, 15px 100%);
       /* unfold vertically AND slide horizontally during transition */
-      transform: scaleY(0) translateX(22px);
-      transform-origin: bottom;
-      transition: transform 0.13s cubic-bezier(0.55, 0, 0.67, 0.3);
+      transform: translate(22px, 22px);
+      transition: transform 0.13s cubic-bezier(0.55, 0, 0.67, 0.3), opacity 0.13s cubic-bezier(0.55, 0, 0.67, 0.3);
+      opacity: 0;
       pointer-events: none;
     }
     .site-nav__links a.nav-campaigns:hover .bar-bottom,
     .site-nav__links a.nav-web:hover .bar-bottom,
     .site-nav__links a.nav-copy:hover .bar-bottom,
     .site-nav__links a.nav-broadcast:hover .bar-bottom {
-      transform: scaleY(1) translateX(12px);
+      transform: translate(12px, 0);
+      opacity: 1;
     }
     .site-nav__links a.nav-campaigns .bar-bottom { background: #e03a3e; }
     .site-nav__links a.nav-web .bar-bottom { background: #009ddc; }
@@ -971,10 +968,23 @@
       font-style: italic;
       font-size: 0.85rem;
       color: #2a2a2a;
-      margin-top: 0.5rem;
+      margin-top: 0.15rem;
       cursor: pointer;
     }
     .swf-caption:hover { color: #555; }
+
+    /* Slot backdrop colors (visible during the load gap and behind any
+       embed that doesn't carry the border-radius). overflow:hidden +
+       border-radius clip the polyfilled <ruffle-player> to rounded
+       corners, fixing the missing corners on the SWF banners. */
+    .swf-slot--light,
+    .swf-slot--dark {
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .swf-slot--light { background: #ffffff; }
+    .swf-slot--dark  { background: #1a1a1a; }
+    .swf-slot--dark .swf-caption { color: rgba(255,255,255,0.85); }
 
     /* Aerotek banner row: explicit 2-up grid so it never lands at 3+1.
        Drops to a single column on phones. (Adding a 4-up tier would
@@ -991,6 +1001,15 @@
         justify-content: center;
       }
     }
+
+    /* Same subtle dual-shadow treatment used on copy.html, retuned for
+       the web page's gray background. Tiny down-right shadow + slim glow. */
+    .web-shadow,
+    .web-shadow img {
+      filter:
+        drop-shadow(1px 2px 2px rgba(50, 45, 35, 0.18))
+        drop-shadow(0 0 2px rgba(255, 250, 230, 0.28));
+    }
   </style>
   <!-- Default Statcounter code for DanArt https://danart.vercel.app/ -->
   <script type="text/javascript">
@@ -1004,31 +1023,71 @@
 </head>
 <body>
 
-  <!-- Isometric boxes scattered in background -->
-  <svg class="iso-box" style="top: 320px; left: 3%; width: 80px; height: 70px;" viewBox="0 0 80 70">
-    <polygon points="10,30 50,30 50,60 10,60" fill="none" stroke="rgba(100,98,90,0.2)" stroke-width="0.5"/>
-    <polygon points="10,30 30,15 70,15 50,30" fill="rgba(200,198,190,0.15)" stroke="rgba(100,98,90,0.2)" stroke-width="0.5"/>
-    <polygon points="50,30 70,15 70,45 50,60" fill="rgba(170,168,160,0.12)" stroke="rgba(100,98,90,0.2)" stroke-width="0.5"/>
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Decorative geometric shapes scattered in background -->
+  <svg class="iso-box" style="top: 5268px; left: 8%; width: 106px; height: 103px;" viewBox="0 0 70 70">
+    <circle cx="35" cy="35" r="25" fill="rgba(195,215,195,0.22)" stroke="rgba(85,130,75,0.30)" stroke-width="0.7"/>
+    <ellipse cx="35" cy="35" rx="25" ry="8" fill="none" stroke="rgba(85,130,75,0.30)" stroke-width="0.7"/>
+    <ellipse cx="35" cy="35" rx="8" ry="25" fill="none" stroke="rgba(85,130,75,0.30)" stroke-width="0.7"/>
   </svg>
-  <svg class="iso-box" style="top: 1200px; right: 4%; width: 120px; height: 105px;" viewBox="0 0 80 70">
-    <polygon points="10,30 50,30 50,60 10,60" fill="none" stroke="rgba(100,98,90,0.2)" stroke-width="0.5"/>
-    <polygon points="10,30 30,15 70,15 50,30" fill="rgba(200,198,190,0.15)" stroke="rgba(100,98,90,0.2)" stroke-width="0.5"/>
-    <polygon points="50,30 70,15 70,45 50,60" fill="rgba(170,168,160,0.12)" stroke="rgba(100,98,90,0.2)" stroke-width="0.5"/>
+  <svg class="iso-box" style="top: 3507px; left: 38%; width: 122px; height: 109px;" viewBox="0 0 80 70">
+    <polygon points="10,30 50,30 50,60 10,60" fill="none" stroke="rgba(100,98,90,0.28)" stroke-width="0.7"/>
+    <polygon points="10,30 30,15 70,15 50,30" fill="rgba(200,198,190,0.20)" stroke="rgba(100,98,90,0.28)" stroke-width="0.7"/>
+    <polygon points="50,30 70,15 70,45 50,60" fill="rgba(170,168,160,0.18)" stroke="rgba(100,98,90,0.28)" stroke-width="0.7"/>
   </svg>
-  <svg class="iso-box" style="top: 2400px; left: 5%; width: 60px; height: 52px;" viewBox="0 0 80 70">
-    <polygon points="10,30 50,30 50,60 10,60" fill="none" stroke="rgba(100,98,90,0.2)" stroke-width="0.5"/>
-    <polygon points="10,30 30,15 70,15 50,30" fill="rgba(200,198,190,0.15)" stroke="rgba(100,98,90,0.2)" stroke-width="0.5"/>
-    <polygon points="50,30 70,15 70,45 50,60" fill="rgba(170,168,160,0.12)" stroke="rgba(100,98,90,0.2)" stroke-width="0.5"/>
+  <svg class="iso-box" style="top: 1595px; right: 9%; width: 78px; height: 87px; transform: rotate(-10deg);" viewBox="0 0 60 90">
+    <rect x="12" y="15" width="36" height="60" fill="rgba(220,213,178,0.22)" stroke="none"/>
+    <ellipse cx="30" cy="15" rx="18" ry="6" fill="rgba(200,190,150,0.20)" stroke="rgba(150,130,65,0.30)" stroke-width="0.7"/>
+    <ellipse cx="30" cy="75" rx="18" ry="6" fill="rgba(220,213,178,0.22)" stroke="rgba(150,130,65,0.30)" stroke-width="0.7"/>
+    <line x1="12" y1="15" x2="12" y2="75" stroke="rgba(150,130,65,0.30)" stroke-width="0.7"/>
+    <line x1="48" y1="15" x2="48" y2="75" stroke="rgba(150,130,65,0.30)" stroke-width="0.7"/>
   </svg>
-  <svg class="iso-box" style="top: 3600px; right: 3%; width: 100px; height: 88px;" viewBox="0 0 80 70">
-    <polygon points="10,30 50,30 50,60 10,60" fill="none" stroke="rgba(100,98,90,0.2)" stroke-width="0.5"/>
-    <polygon points="10,30 30,15 70,15 50,30" fill="rgba(200,198,190,0.15)" stroke="rgba(100,98,90,0.2)" stroke-width="0.5"/>
-    <polygon points="50,30 70,15 70,45 50,60" fill="rgba(170,168,160,0.12)" stroke="rgba(100,98,90,0.2)" stroke-width="0.5"/>
+  <svg class="iso-box" style="top: 4991px; left: 37%; width: 73px; height: 76px; transform: rotate(15deg);" viewBox="0 0 60 90">
+    <rect x="12" y="15" width="36" height="60" fill="rgba(200,198,190,0.20)" stroke="none"/>
+    <ellipse cx="30" cy="15" rx="18" ry="6" fill="rgba(170,168,160,0.18)" stroke="rgba(100,98,90,0.28)" stroke-width="0.7"/>
+    <ellipse cx="30" cy="75" rx="18" ry="6" fill="rgba(200,198,190,0.20)" stroke="rgba(100,98,90,0.28)" stroke-width="0.7"/>
+    <line x1="12" y1="15" x2="12" y2="75" stroke="rgba(100,98,90,0.28)" stroke-width="0.7"/>
+    <line x1="48" y1="15" x2="48" y2="75" stroke="rgba(100,98,90,0.28)" stroke-width="0.7"/>
   </svg>
-  <svg class="iso-box" style="top: 4800px; left: 4%; width: 140px; height: 122px;" viewBox="0 0 80 70">
-    <polygon points="10,30 50,30 50,60 10,60" fill="none" stroke="rgba(100,98,90,0.2)" stroke-width="0.5"/>
-    <polygon points="10,30 30,15 70,15 50,30" fill="rgba(200,198,190,0.15)" stroke="rgba(100,98,90,0.2)" stroke-width="0.5"/>
-    <polygon points="50,30 70,15 70,45 50,60" fill="rgba(170,168,160,0.12)" stroke="rgba(100,98,90,0.2)" stroke-width="0.5"/>
+  <svg class="iso-box" style="top: 783px; right: 6%; width: 87px; height: 101px;" viewBox="0 0 70 70">
+    <circle cx="35" cy="35" r="25" fill="rgba(220,195,193,0.22)" stroke="rgba(165,80,80,0.30)" stroke-width="0.7"/>
+    <ellipse cx="35" cy="35" rx="25" ry="8" fill="none" stroke="rgba(165,80,80,0.30)" stroke-width="0.7"/>
+    <ellipse cx="35" cy="35" rx="8" ry="25" fill="none" stroke="rgba(165,80,80,0.30)" stroke-width="0.7"/>
+  </svg>
+  <svg class="iso-box" style="top: 7289px; right: 12%; width: 129px; height: 138px; transform: rotate(5deg);" viewBox="0 0 60 90">
+    <rect x="12" y="15" width="36" height="60" fill="rgba(200,198,190,0.20)" stroke="none"/>
+    <ellipse cx="30" cy="15" rx="18" ry="6" fill="rgba(170,168,160,0.18)" stroke="rgba(100,98,90,0.28)" stroke-width="0.7"/>
+    <ellipse cx="30" cy="75" rx="18" ry="6" fill="rgba(200,198,190,0.20)" stroke="rgba(100,98,90,0.28)" stroke-width="0.7"/>
+    <line x1="12" y1="15" x2="12" y2="75" stroke="rgba(100,98,90,0.28)" stroke-width="0.7"/>
+    <line x1="48" y1="15" x2="48" y2="75" stroke="rgba(100,98,90,0.28)" stroke-width="0.7"/>
+  </svg>
+  <svg class="iso-box" style="top: 5720px; right: 4%; width: 100px; height: 114px; transform: rotate(20deg);" viewBox="0 0 80 90">
+    <polygon points="40,15 15,75 65,75" fill="rgba(220,195,193,0.22)" stroke="rgba(165,80,80,0.30)" stroke-width="0.7"/>
+    <ellipse cx="40" cy="75" rx="25" ry="8" fill="rgba(200,170,170,0.20)" stroke="rgba(165,80,80,0.30)" stroke-width="0.7"/>
+  </svg>
+  <svg class="iso-box" style="top: 6662px; right: 7%; width: 139px; height: 120px;" viewBox="0 0 80 90">
+    <polygon points="40,15 15,75 65,75" fill="rgba(220,195,193,0.22)" stroke="rgba(165,80,80,0.30)" stroke-width="0.7"/>
+    <ellipse cx="40" cy="75" rx="25" ry="8" fill="rgba(200,170,170,0.20)" stroke="rgba(165,80,80,0.30)" stroke-width="0.7"/>
+  </svg>
+  <svg class="iso-box" style="top: 3213px; left: 3%; width: 103px; height: 108px; transform: rotate(10deg);" viewBox="0 0 80 90">
+    <polygon points="40,15 15,75 65,75" fill="rgba(200,198,190,0.20)" stroke="rgba(100,98,90,0.28)" stroke-width="0.7"/>
+    <ellipse cx="40" cy="75" rx="25" ry="8" fill="rgba(170,168,160,0.18)" stroke="rgba(100,98,90,0.28)" stroke-width="0.7"/>
+  </svg>
+  <svg class="iso-box" style="top: 300px; left: 3%; width: 78px; height: 86px;" viewBox="0 0 80 70">
+    <polygon points="10,30 50,30 50,60 10,60" fill="none" stroke="rgba(150,130,65,0.30)" stroke-width="0.7"/>
+    <polygon points="10,30 30,15 70,15 50,30" fill="rgba(220,213,178,0.22)" stroke="rgba(150,130,65,0.30)" stroke-width="0.7"/>
+    <polygon points="50,30 70,15 70,45 50,60" fill="rgba(200,190,150,0.20)" stroke="rgba(150,130,65,0.30)" stroke-width="0.7"/>
   </svg>
 
   <!-- ======== NAV ======== -->
@@ -1105,7 +1164,7 @@
           </div>
           <div class="project__media" style="display: flex; gap: var(--space-sm); align-items: start;">
             <div class="project__media--expandable" data-gallery="carsthatrock" style="flex: 1;">
-              <img src="https://danart.vercel.app/images/work/carsthatrock_web.png" alt="Cars That Rock" style="width: 100%; border-radius: 12px;">
+              <img class="web-shadow" src="https://danart.vercel.app/images/work/carsthatrock_web.png" alt="Cars That Rock" style="width: 100%; border-radius: 12px;">
             </div>
             <div class="video-embed" style="flex: 1; margin-top: 0;">
               <iframe src="//player.vimeo.com/video/118965031?title=0&byline=0&portrait=0" allowfullscreen></iframe>
@@ -1122,8 +1181,8 @@
             <p>A British vet, his puppy patients, and the people who bring them in.</p>
           </div>
           <div class="project__media" style="display: flex; gap: var(--space-sm); flex-wrap: wrap; justify-content: flex-start;">
-            <img src="images/work/supervet_apple.png" alt="The Supervet - Apple Store" style="max-width: 240px; border-radius: 12px;">
-            <img src="images/work/supervet_android.png" alt="The Supervet - Android Store" style="max-width: 240px; border-radius: 12px;">
+            <img class="web-shadow" src="images/work/supervet_apple.png" alt="The Supervet - Apple Store" style="max-width: 240px; border-radius: 12px;">
+            <img class="web-shadow" src="images/work/supervet_android.png" alt="The Supervet - Android Store" style="max-width: 240px; border-radius: 12px;">
           </div>
         </section>
 
@@ -1138,10 +1197,10 @@
           </div>
           <div class="project__media" style="display: flex; gap: var(--space-sm); align-items: start;">
             <div class="project__media--expandable" data-gallery="icelake-ekit" style="flex: 1.44;">
-              <img src="https://danart.vercel.app/images/work/icelake_ekit.png" alt="Ice Lake Rebels E-Press Kit" style="width: 100%; border-radius: 12px;">
+              <img class="web-shadow" src="https://danart.vercel.app/images/work/icelake_ekit.png" alt="Ice Lake Rebels E-Press Kit" style="width: 100%; border-radius: 12px;">
             </div>
             <div class="project__media--expandable" data-gallery="icelake-storefront" style="flex: 1;">
-              <img src="https://danart.vercel.app/images/work/icelake_storefront.png" alt="Ice Lake Rebels digital storefront" style="width: 100%; border-radius: 12px;">
+              <img class="web-shadow" src="https://danart.vercel.app/images/work/icelake_storefront.png" alt="Ice Lake Rebels digital storefront" style="width: 100%; border-radius: 12px;">
             </div>
           </div>
         </section>
@@ -1171,7 +1230,7 @@
             <p>Part of a branding campaign for a South Carolina provider of wireless, internet and digital cable service. Campaign objective was to rally support for Hargray as a local provider, during fear of a takeover. The strategy positions Hargray as being a local business, but with global quality service.</p>
           </div>
           <div class="project__media">
-            <div class="swf-slot" data-swf="images/work/ads/hargray_368x308OT.swf" data-w="300" data-h="251">
+            <div class="swf-slot swf-slot--light" data-swf="images/work/ads/hargray_368x308OT.swf" data-w="300" data-h="251">
               <div class="swf-poster" style="width: 300px; height: 251px;">
                 <div class="swf-poster__title">Hargray</div>
                 <div class="swf-poster__icon"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
@@ -1192,7 +1251,7 @@
             <p>Fitch is a provider of financial ratings that gives investors a detailed look at particular investment sectors.</p>
           </div>
           <div class="project__media" style="display: flex; gap: 0.75rem; align-items: start; flex-wrap: wrap;">
-            <div class="swf-slot" data-swf="images/work/ads/fitch_leveraged_blood.mp4" data-w="300" data-h="250">
+            <div class="swf-slot swf-slot--light" data-swf="images/work/ads/fitch_leveraged_blood.mp4" data-w="300" data-h="250">
               <div class="swf-poster" style="width: 300px; height: 250px;">
                 <div class="swf-poster__title">Fitch &mdash; Leveraged Blood</div>
                 <div class="swf-poster__icon"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
@@ -1200,7 +1259,7 @@
               </div>
               <div class="swf-caption">Tap to Play</div>
             </div>
-            <div class="swf-slot" data-swf="images/work/ads/FITCH_Leveraged_Elevator_300x250v3.swf" data-w="300" data-h="250">
+            <div class="swf-slot swf-slot--light" data-swf="images/work/ads/FITCH_Leveraged_Elevator_300x250v3.swf" data-w="300" data-h="250">
               <div class="swf-poster" style="width: 300px; height: 250px;">
                 <div class="swf-poster__title">Fitch &mdash; Leveraged Elevator</div>
                 <div class="swf-poster__icon"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
@@ -1221,7 +1280,7 @@
             <p>Part of a campaign to position Intel as a leader in "Big Data".</p>
           </div>
           <div class="project__media">
-            <div class="swf-slot" data-swf="images/work/ads/intel_big_vision.mp4" data-w="300" data-h="600">
+            <div class="swf-slot swf-slot--light" data-swf="images/work/ads/intel_big_vision.mp4" data-w="300" data-h="600">
               <div class="swf-poster" style="width: 300px; height: 600px;">
                 <div class="swf-poster__title">Intel &mdash; Big Vision</div>
                 <div class="swf-poster__icon"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
@@ -1242,7 +1301,7 @@
             <p>In 2012, Microsoft drew a line in the sand by shipping Internet Explorer 10 with Do Not Track turned on out of the box &mdash; a position that put the browser ahead of any settled standard and squarely against the prevailing ad-industry winds. The work positioned IE as the browser that respected its users by default rather than asking them to opt in. The campaign extended into broadcast &mdash; see the <a href="broadcast.html#microsoft" class="inline-link"><strong>Browser Privacy TV spot &#8594;</strong></a>.</p>
           </div>
           <div class="project__media">
-            <div class="swf-slot" data-swf="images/work/ads/microsoft_privacy.mp4" data-w="300" data-h="600">
+            <div class="swf-slot swf-slot--light" data-swf="images/work/ads/microsoft_privacy.mp4" data-w="300" data-h="600">
               <div class="swf-poster" style="width: 300px; height: 600px;">
                 <div class="swf-poster__title">Microsoft &mdash; Privacy by Default</div>
                 <div class="swf-poster__icon"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
@@ -1283,7 +1342,7 @@
             <p>A series of rich media banner ads designed to compete with Google search results for staffing-related queries.</p>
           </div>
           <div class="project__media aerotek-grid">
-            <div class="swf-slot" data-swf="images/work/ads/10363_Aerotek_VsGoogle_300x250A.swf" data-w="300" data-h="250">
+            <div class="swf-slot swf-slot--light" data-swf="images/work/ads/10363_Aerotek_VsGoogle_300x250A.swf" data-w="300" data-h="250">
               <div class="swf-poster" style="width: 300px; height: 250px;">
                 <div class="swf-poster__title">Aerotek vs. Google &mdash; A</div>
                 <div class="swf-poster__icon"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
@@ -1291,7 +1350,7 @@
               </div>
               <div class="swf-caption">Tap to Play</div>
             </div>
-            <div class="swf-slot" data-swf="images/work/ads/10363_Aerotek_VsGoogle_300x250B.swf" data-w="300" data-h="250">
+            <div class="swf-slot swf-slot--light" data-swf="images/work/ads/10363_Aerotek_VsGoogle_300x250B.swf" data-w="300" data-h="250">
               <div class="swf-poster" style="width: 300px; height: 250px;">
                 <div class="swf-poster__title">Aerotek vs. Google &mdash; B</div>
                 <div class="swf-poster__icon"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
@@ -1299,7 +1358,7 @@
               </div>
               <div class="swf-caption">Tap to Play</div>
             </div>
-            <div class="swf-slot" data-swf="images/work/ads/aerotek_vs_google_c.mp4" data-w="300" data-h="250">
+            <div class="swf-slot swf-slot--light" data-swf="images/work/ads/aerotek_vs_google_c.mp4" data-w="300" data-h="250">
               <div class="swf-poster" style="width: 300px; height: 250px;">
                 <div class="swf-poster__title">Aerotek vs. Google &mdash; C</div>
                 <div class="swf-poster__icon"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
@@ -1307,7 +1366,7 @@
               </div>
               <div class="swf-caption">Tap to Play</div>
             </div>
-            <div class="swf-slot" data-swf="images/work/ads/aerotek_vs_google_d.mp4" data-w="300" data-h="250">
+            <div class="swf-slot swf-slot--light" data-swf="images/work/ads/aerotek_vs_google_d.mp4" data-w="300" data-h="250">
               <div class="swf-poster" style="width: 300px; height: 250px;">
                 <div class="swf-poster__title">Aerotek vs. Google &mdash; D</div>
                 <div class="swf-poster__icon"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
@@ -1477,8 +1536,20 @@
       media.style.borderRadius = '12px';
       media.style.display = 'block';
 
-      slot.innerHTML = '';
-      slot.appendChild(media);
+      // Replace JUST the poster with the media. Caption stays in the DOM
+      // but fades to opacity 0 so its row doesn't collapse. No layout shift.
+      var poster = slot.querySelector('.swf-poster');
+      if (poster) {
+        slot.replaceChild(media, poster);
+      } else {
+        slot.insertBefore(media, slot.firstChild);
+      }
+      var caption = slot.querySelector('.swf-caption');
+      if (caption) {
+        caption.style.transition = 'opacity 0.25s ease';
+        caption.style.opacity = '0';
+        caption.style.pointerEvents = 'none';
+      }
     });
   </script>
 

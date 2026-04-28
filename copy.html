@@ -135,6 +135,8 @@
       height: var(--nav-height);
       display: flex;
       align-items: center;
+      overflow: hidden;
+      box-shadow: 0 18px 22px -14px rgba(0,0,0,0.10);
     }
 
     .site-nav::after {
@@ -152,18 +154,9 @@
       opacity: 0;
     }
 
-    /* Gradient + shadow below nav */
-    .site-nav::before {
-      content: '';
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      height: 40px;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.04) 0%, transparent 100%);
-      pointer-events: none;
-      z-index: -1;
-    }
+    /* Below-nav gradient is now a box-shadow on .site-nav so it survives
+       overflow:hidden (which we use to clip the nav hover bars at the
+       nav's bottom edge). */
 
     .site-nav .container {
       display: flex;
@@ -278,16 +271,17 @@
       height: 22px;
       clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 100%, 15px 100%);
       /* unfold vertically AND slide horizontally during transition */
-      transform: scaleY(0) translateX(-22px);
-      transform-origin: top;
-      transition: transform 0.13s cubic-bezier(0.55, 0, 0.67, 0.3);
+      transform: translate(-22px, -22px);
+      transition: transform 0.13s cubic-bezier(0.55, 0, 0.67, 0.3), opacity 0.13s cubic-bezier(0.55, 0, 0.67, 0.3);
+      opacity: 0;
       pointer-events: none;
     }
     .site-nav__links a.nav-campaigns:hover::before,
     .site-nav__links a.nav-web:hover::before,
     .site-nav__links a.nav-copy:hover::before,
     .site-nav__links a.nav-broadcast:hover::before {
-      transform: scaleY(1) translateX(-12px);
+      transform: translate(-12px, 0);
+      opacity: 1;
     }
     .site-nav__links a.nav-campaigns::before { background: #e03a3e; }
     .site-nav__links a.nav-web::before { background: #009ddc; }
@@ -303,16 +297,17 @@
       height: 22px;
       clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 100%, 15px 100%);
       /* unfold vertically AND slide horizontally during transition */
-      transform: scaleY(0) translateX(22px);
-      transform-origin: bottom;
-      transition: transform 0.13s cubic-bezier(0.55, 0, 0.67, 0.3);
+      transform: translate(22px, 22px);
+      transition: transform 0.13s cubic-bezier(0.55, 0, 0.67, 0.3), opacity 0.13s cubic-bezier(0.55, 0, 0.67, 0.3);
+      opacity: 0;
       pointer-events: none;
     }
     .site-nav__links a.nav-campaigns:hover .bar-bottom,
     .site-nav__links a.nav-web:hover .bar-bottom,
     .site-nav__links a.nav-copy:hover .bar-bottom,
     .site-nav__links a.nav-broadcast:hover .bar-bottom {
-      transform: scaleY(1) translateX(12px);
+      transform: translate(12px, 0);
+      opacity: 1;
     }
     .site-nav__links a.nav-campaigns .bar-bottom { background: #e03a3e; }
     .site-nav__links a.nav-web .bar-bottom { background: #009ddc; }
@@ -952,6 +947,15 @@
       background: #fdb827;
       border-radius: 3px;
     }
+
+    /* Tiny down-right shadow in a dark yellow (derived from the
+       legal-pad bg) plus a slim, soft yellow glow.
+       Applied to image rows across the page. */
+    .copy-shadow-row img {
+      filter:
+        drop-shadow(1px 2px 2px rgba(80, 65, 20, 0.18))
+        drop-shadow(0 0 2px rgba(245, 215, 125, 0.30));
+    }
   </style>
   <!-- Default Statcounter code for DanArt https://danart.vercel.app/ -->
   <script type="text/javascript">
@@ -1024,10 +1028,10 @@
         <section class="project--three-up">
           <div class="project__copy">
             <h3>The Economist</h3>
-            <h2>For the Climbers</h2>
+            <h2>For the High Achievers</h2>
             <p>Headlines from The Economist's long-running red campaign &mdash; a wink to readers climbing the ladder fast.</p>
           </div>
-          <div class="project__gallery-row" style="align-items: start;">
+          <div class="project__gallery-row copy-shadow-row" style="align-items: start;">
             <img src="images/work/economist_1.png" alt="The Economist 1" style="width: 100%; border-radius: 12px;">
             <img src="images/work/economist_2.png" alt="The Economist 2" style="width: 100%; border-radius: 12px;">
             <img src="images/work/economist_3.png" alt="The Economist 3" style="width: 100%; border-radius: 12px;">
@@ -1063,11 +1067,11 @@
         <!-- Hargray -->
         <section class="project--full-width">
           <div class="project__copy">
-            <h3>Hargray</h3>
+            <h3>Hargray Wireless</h3>
             <h2>Bundle Savings</h2>
-            <p>Making the case to a Lowcountry retiree: bundle the home services and free up the budget for whatever upgrade comes next.</p>
+            <p style="max-width: 50%;">Making the case to a Lowcountry retiree: bundle the home services and free up the budget for whatever upgrade comes next.</p>
           </div>
-          <div class="project__media" style="display: flex; gap: var(--space-sm); flex-wrap: wrap;">
+          <div class="project__media copy-shadow-row" style="display: flex; gap: var(--space-sm); flex-wrap: wrap;">
             <div class="project__media--expandable" data-gallery="hargray" style="max-width: 48%;"><img src="images/work/hargray_bundle_1.png" alt="Hargray Bundle Savings 1" style="width: 100%; border-radius: 12px;"></div>
             <div class="project__media--expandable" data-gallery="hargray" style="max-width: 48%;"><img src="images/work/hargray_bundle_2.png" alt="Hargray Bundle Savings 2" style="width: 100%; border-radius: 12px;"></div>
           </div>
@@ -1078,11 +1082,11 @@
         <!-- DroneUp -->
         <section class="project--full-width">
           <div class="project__copy">
-            <h3>DroneUp</h3>
+            <h3>DroneUp Delivery</h3>
             <h2>Is it a bird? A plane? It's my latte.</h2>
-            <p>Onboarding screens for a drone-delivery app &mdash; your morning coffee, by airmail.</p>
+            <p>Onboarding screens for a drone-delivery app &mdash; your morning coffee, or prescription, or in some states, your Walmart order, by airmail.</p>
           </div>
-          <div class="project__media" style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; justify-content: center;">
+          <div class="project__media copy-shadow-row" style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; justify-content: center;">
             <img src="images/work/copy/droneup_phone.png" alt="DroneUp on iPhone" style="flex: 1 1 0; min-width: 120px; max-width: 20%; height: auto;">
             <img src="images/work/copy/droneup_onboarding_1.png" alt="DroneUp onboarding screen 1" style="flex: 1 1 0; min-width: 120px; max-width: 20%; height: auto;">
             <img src="images/work/copy/droneup_onboarding_2.png" alt="DroneUp onboarding screen 2" style="flex: 1 1 0; min-width: 120px; max-width: 20%; height: auto;">
@@ -1092,44 +1096,22 @@
         </section>
 
 
-        <!-- Sample 1 -->
+        <!-- Stealth AI Startup -->
         <section class="project--full-width">
           <div class="project__copy">
-            <h3>Coming Soon</h3>
-            <h2>Sample 1</h2>
-            <p style="color: #FF00FF">Copywriting sample title and description placeholder.</p>
+            <h3>Stealth AI Startup</h3>
+            <h2>Get Ready to Zen</h2>
+            <p>A wellness chatbot to help employees create self-awareness and lower their health insurance spend. Loading screens act as part explanation, part tone-setter, cheerleader and &ldquo;fortune cookie.&rdquo; As the user gains agency, language across the app shifts more to building and consistency, and into goal-setting and visionary thinking.</p>
+          </div>
+          <div class="project__media copy-shadow-row" style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; justify-content: center;">
+            <img src="images/work/copy/stealth_a.png" alt="Stealth AI loading screen A" style="flex: 1 1 0; min-width: 120px; max-width: 20%; height: auto;">
+            <img src="images/work/copy/stealth_b.png" alt="Stealth AI loading screen B" style="flex: 1 1 0; min-width: 120px; max-width: 20%; height: auto;">
+            <img src="images/work/copy/stealth_c.png" alt="Stealth AI loading screen C" style="flex: 1 1 0; min-width: 120px; max-width: 20%; height: auto;">
+            <img src="images/work/copy/stealth_d.png" alt="Stealth AI loading screen D" style="flex: 1 1 0; min-width: 120px; max-width: 20%; height: auto;">
+            <img src="images/work/copy/stealth_e.png" alt="Stealth AI loading screen E" style="flex: 1 1 0; min-width: 120px; max-width: 20%; height: auto;">
           </div>
         </section>
 
-
-        <!-- Loading Screens -->
-        <section class="project--full-width">
-          <div class="project__copy">
-            <h3>Placeholder</h3>
-            <h2>Loading Screens</h2>
-            <p>Placeholder &mdash; copy written for various loading states across Lore, DroneUp, and other apps. Samples coming soon.</p>
-          </div>
-        </section>
-
-
-        <!-- Sample 2 -->
-        <section class="project--full-width">
-          <div class="project__copy">
-            <h3>Coming Soon</h3>
-            <h2>Sample 2</h2>
-            <p style="color: #FF00FF">Copywriting sample title and description placeholder.</p>
-          </div>
-        </section>
-
-
-        <!-- Sample 3 -->
-        <section class="project--full-width">
-          <div class="project__copy">
-            <h3>Coming Soon</h3>
-            <h2>Sample 3</h2>
-            <p style="color: #FF00FF">Copywriting sample title and description placeholder.</p>
-          </div>
-        </section>
 
       </div>
       <!-- /project-sections -->
