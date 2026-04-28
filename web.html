@@ -975,6 +975,22 @@
       cursor: pointer;
     }
     .swf-caption:hover { color: #555; }
+
+    /* Aerotek banner row: explicit 2-up grid so it never lands at 3+1.
+       Drops to a single column on phones. (Adding a 4-up tier would
+       require letting the row break out of the 1100px container.) */
+    .aerotek-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 300px);
+      gap: var(--space-sm);
+      justify-content: start;
+    }
+    @media (max-width: 660px) {
+      .aerotek-grid {
+        grid-template-columns: 300px;
+        justify-content: center;
+      }
+    }
   </style>
   <!-- Default Statcounter code for DanArt https://danart.vercel.app/ -->
   <script type="text/javascript">
@@ -1266,7 +1282,7 @@
             <h2>Vs. Google Search Ads</h2>
             <p>A series of rich media banner ads designed to compete with Google search results for staffing-related queries.</p>
           </div>
-          <div class="project__media" style="display: flex; gap: 0.75rem; align-items: start; flex-wrap: wrap;">
+          <div class="project__media aerotek-grid">
             <div class="swf-slot" data-swf="images/work/ads/10363_Aerotek_VsGoogle_300x250A.swf" data-w="300" data-h="250">
               <div class="swf-poster" style="width: 300px; height: 250px;">
                 <div class="swf-poster__title">Aerotek vs. Google &mdash; A</div>
