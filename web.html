@@ -1010,6 +1010,38 @@
         drop-shadow(1px 2px 2px rgba(50, 45, 35, 0.18))
         drop-shadow(0 0 2px rgba(255, 250, 230, 0.28));
     }
+
+    /* Carousel (used by Marriott Facebook Covers) */
+    .carousel {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      aspect-ratio: 16/9;
+      background: #E6EBF1;
+    }
+    .carousel__track {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    .carousel__slide {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .carousel__slide.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .carousel__slide.exit-left {
+      opacity: 0;
+      transform: translateX(-40px);
+    }
   </style>
   <!-- Default Statcounter code for DanArt https://danart.vercel.app/ -->
   <script type="text/javascript">
@@ -1100,7 +1132,7 @@
       <ul class="site-nav__links">
         <li><a href="campaigns.html" class="nav-campaigns"><i class="bar-bottom"></i><span>Campaigns</span></a></li>
         <li><a href="web.html" class="nav-web active"><i class="bar-bottom"></i><span>Web</span></a></li>
-        <li><a href="copy.html" class="nav-copy"><i class="bar-bottom"></i><span>Copy</span></a></li>
+        <!-- <li><a href="copy.html" class="nav-copy"><i class="bar-bottom"></i><span>Copy</span></a></li> -->
         <li><a href="broadcast.html" class="nav-broadcast"><i class="bar-bottom"></i><span>Broadcast</span></a></li>
         <li><a href="index.html#contact"><span class="nav-resume-inner">Resume + Contact</span></a></li>
       </ul>
@@ -1377,6 +1409,70 @@
           </div>
         </section>
 
+
+
+
+        <!-- Marriott Facebook Covers -->
+        <section class="project--full-width">
+          <div class="project__copy">
+            <h3>Marriott Hotels</h3>
+            <h2>Facebook Covers</h2>
+            <p style="max-width: 440px;">Social rebrand aimed at the next generation of Marriott guests: ambitious, always on, and earning the downtime.</p>
+          </div>
+          <div class="project__media">
+            <div class="carousel" id="marriott-carousel" style="max-width: 80%;">
+              <div class="carousel__track">
+                <img src="images/work/marriott_fb_1.jpg" alt="Marriott Facebook Cover 1" class="carousel__slide active">
+                <img src="images/work/marriott_fb_2.jpg" alt="Marriott Facebook Cover 2" class="carousel__slide">
+                <img src="images/work/marriott_fb_3.jpg" alt="Marriott Facebook Cover 3" class="carousel__slide">
+                <img src="images/work/marriott_fb_4.jpg" alt="Marriott Facebook Cover 4" class="carousel__slide">
+                <img src="images/work/marriott_fb_5.jpg" alt="Marriott Facebook Cover 5" class="carousel__slide">
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- Conversation Design -->
+        <section class="project--full-width">
+          <div class="project__copy">
+            <h3>Best Buy &mdash; Services Digital Team</h3>
+            <h2>Conversation Design</h2>
+            <p>Two white papers written to help a team of technical writers think conversationally &mdash; aligning to brand voice, designing microinteractions, and understanding how small, delicate patterns shape the way a user moves through a triage flow. The first paper breaks down microinteractions as tiny conversations. The second distills learnings from IBM Watson's AI Masterclass on building a conversational system. Both fed directly into the <a href="https://www.bestbuy.com/services/triage/home" target="_blank" class="inline-link"><strong>Best Buy Services Triage</strong></a> experience.</p>
+          </div>
+          <div class="project__media" style="display: flex; flex-direction: column; gap: var(--space-md); align-items: start;">
+            <img src="images/work/bestbuy_ipad.png" alt="Best Buy Services Triage on iPad" style="max-width: 60%; border-radius: 12px;">
+            <div style="display: flex; gap: var(--space-sm); align-items: start; width: 100%;">
+              <a href="https://drive.google.com/file/d/1fo_D81eCBdz-ZJP1ywX0JYTFO1C_nDVu/view?usp=sharing" target="_blank" style="flex: 1; text-decoration: none;">
+                <img src="images/work/cover_microinteractions.png" alt="Making TECH more HUMAN - Microinteractions white paper" style="width: 100%; border-radius: 12px;">
+                <div style="text-align: center; font-family: var(--font-display); font-style: italic; font-size: 0.85rem; color: #2a2a2a; margin-top: 0.5rem;">Tap to read white paper</div>
+              </a>
+              <a href="https://drive.google.com/file/d/1cOcxjiVeGn1yx4052fQZ-Xoa4z6m5kp3/view?usp=sharing" target="_blank" style="flex: 1; text-decoration: none;">
+                <img src="images/work/cover_conversational.png" alt="Creating a Conversational System white paper" style="width: 100%; border-radius: 12px;">
+                <div style="text-align: center; font-family: var(--font-display); font-style: italic; font-size: 0.85rem; color: #2a2a2a; margin-top: 0.5rem;">Tap to read white paper</div>
+              </a>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- DroneUp -->
+        <section class="project--full-width">
+          <div class="project__copy">
+            <h3>DroneUp Delivery</h3>
+            <h2>Is it a bird? A plane? It's my latte.</h2>
+            <p>Onboarding screens for a drone-delivery app &mdash; your morning coffee, or prescription, or in some states, your Walmart order, by airmail.</p>
+          </div>
+          <div class="project__media web-shadow" style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; justify-content: center;">
+            <img src="images/work/copy/droneup_phone.png" alt="DroneUp on iPhone" style="flex: 1 1 0; min-width: 120px; max-width: 20%; height: auto;">
+            <img src="images/work/copy/droneup_onboarding_1.png" alt="DroneUp onboarding screen 1" style="flex: 1 1 0; min-width: 120px; max-width: 20%; height: auto;">
+            <img src="images/work/copy/droneup_onboarding_2.png" alt="DroneUp onboarding screen 2" style="flex: 1 1 0; min-width: 120px; max-width: 20%; height: auto;">
+            <img src="images/work/copy/droneup_onboarding_3.png" alt="DroneUp onboarding screen 3" style="flex: 1 1 0; min-width: 120px; max-width: 20%; height: auto;">
+            <img src="images/work/copy/droneup_release.png" alt="DroneUp release notes" style="flex: 1 1 0; min-width: 120px; max-width: 20%; height: auto;">
+          </div>
+        </section>
+
+
       </div>
       <!-- /project-sections -->
 
@@ -1551,6 +1647,22 @@
         caption.style.pointerEvents = 'none';
       }
     });
+  </script>
+
+  <script>
+    // Marriott carousel — auto-advance every 4 seconds
+    (function() {
+      const slides = document.querySelectorAll('#marriott-carousel .carousel__slide');
+      if (!slides.length) return;
+      let current = 0;
+      setInterval(() => {
+        slides[current].classList.remove('active');
+        slides[current].classList.add('exit-left');
+        setTimeout(() => slides[current === 0 ? slides.length - 1 : current - 1].classList.remove('exit-left'), 600);
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('active');
+      }, 4000);
+    })();
   </script>
 
 </body>

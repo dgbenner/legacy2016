@@ -663,9 +663,10 @@
        ======================================== */
     .category-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: var(--space-md);
       padding: var(--space-lg) 0;
+      justify-content: center;
     }
 
     @media (max-width: 900px) {
@@ -1112,7 +1113,7 @@
       <ul class="site-nav__links">
         <li><a href="campaigns.html" class="nav-campaigns"><i class="bar-bottom"></i><span>Campaigns</span></a></li>
         <li><a href="web.html" class="nav-web"><i class="bar-bottom"></i><span>Web</span></a></li>
-        <li><a href="copy.html" class="nav-copy"><i class="bar-bottom"></i><span>Copy</span></a></li>
+        <!-- <li><a href="copy.html" class="nav-copy"><i class="bar-bottom"></i><span>Copy</span></a></li> -->
         <li><a href="broadcast.html" class="nav-broadcast"><i class="bar-bottom"></i><span>Broadcast</span></a></li>
         <li><a href="index.html#contact"><span class="nav-resume-inner">Resume + Contact</span></a></li>
       </ul>
@@ -1207,6 +1208,7 @@
           </div>
           <span class="category-card__link">View web work</span>
         </a>
+        <!--
         <a href="copy.html" class="category-card category-card--copy">
           <div class="category-card__img-wrap">
             <img src="images/elements/card_copy.jpg" alt="Copy">
@@ -1218,6 +1220,7 @@
           </div>
           <span class="category-card__link">See writing samples</span>
         </a>
+        -->
         <a href="broadcast.html" class="category-card category-card--broadcast">
           <div class="category-card__img-wrap">
             <img src="images/elements/card_broadcast.jpg" alt="Broadcast">
