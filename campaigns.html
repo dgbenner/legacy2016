@@ -1040,10 +1040,52 @@
     .hover-zoom, .hover-zoom-40, .hover-zoom-60, .hover-zoom-80 {
       transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
-    .hover-zoom:hover    { transform: scale(1.24); z-index: 2; }
-    .hover-zoom-40:hover { transform: scale(1.32); z-index: 2; }
-    .hover-zoom-60:hover { transform: scale(1.48); z-index: 2; }
-    .hover-zoom-80:hover { transform: scale(1.64); z-index: 2; }
+    /* Hover applies scale + 3D tilt driven by JS-set CSS vars (--rx/--ry).
+       Box-shadow offset also follows the tilt for a Pandora-style lift.
+       --mx/--my drive a mouse-tracked radial highlight (the "shine"). */
+    .hover-zoom, .hover-zoom-40, .hover-zoom-60, .hover-zoom-80 {
+      --rx: 0deg;
+      --ry: 0deg;
+      --mx: 50%;
+      --my: 50%;
+      position: relative;
+    }
+    .hover-zoom::after, .hover-zoom-40::after,
+    .hover-zoom-60::after, .hover-zoom-80::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0;
+      background: radial-gradient(ellipse 65% 85% at var(--mx) var(--my), rgba(255,255,255,0.30) 0%, rgba(255,255,255,0.12) 45%, transparent 100%);
+      transition: opacity 0.35s;
+      z-index: 3;
+      border-radius: inherit;
+      mix-blend-mode: overlay;
+    }
+    .hover-zoom:hover::after, .hover-zoom-40:hover::after,
+    .hover-zoom-60:hover::after, .hover-zoom-80:hover::after {
+      opacity: 1;
+    }
+    /* Stacked box-shadows fake the edge/side of the card (cardstock
+       thickness) — several thin solid offsets read as a chunky "side"
+       face, capped by a soft drop shadow that grounds the card. */
+    .hover-zoom:hover {
+      transform: perspective(900px) scale(1.24) rotateX(var(--rx)) rotateY(var(--ry));
+      z-index: 2;
+    }
+    .hover-zoom-40:hover {
+      transform: perspective(900px) scale(1.32) rotateX(var(--rx)) rotateY(var(--ry));
+      z-index: 2;
+    }
+    .hover-zoom-60:hover {
+      transform: perspective(900px) scale(1.48) rotateX(var(--rx)) rotateY(var(--ry));
+      z-index: 2;
+    }
+    .hover-zoom-80:hover {
+      transform: perspective(900px) scale(1.64) rotateX(var(--rx)) rotateY(var(--ry));
+      z-index: 2;
+    }
     .project__gallery-row .hover-zoom:nth-child(1),
     .project__gallery-row .hover-zoom-40:nth-child(1),
     .project__gallery-row .hover-zoom-80:nth-child(1) { transform-origin: left center; }
@@ -1195,8 +1237,8 @@
             <h2>High-Risk, High-Reward</h2>
             <p>Type A investors take big chances, but also expect to win big. Fitch wanted to position itself as a leader in high-risk (or leveraged assets) investing and asset evaluation.</p>
           </div>
-          <div class="project__media hover-zoom" style="display: inline-block; transform-origin: right center;">
-            <img src="https://danart.vercel.app/images/work/fitch.jpg" alt="Fitch campaign" style="max-width: 80%;">
+          <div class="project__media hover-zoom" style="display: inline-block; max-width: 80%; transform-origin: right center;">
+            <img src="https://danart.vercel.app/images/work/fitch.jpg" alt="Fitch campaign" style="display: block; width: 100%;">
           </div>
         </section>
 
@@ -1486,6 +1528,35 @@
         caption.style.pointerEvents = 'none';
       }
     });
+  </script>
+
+  <script>
+    // Pandora-style 3D tilt on hover-zoom cards. Tracks mouse position
+    // within the card; sets --rx/--ry CSS vars consumed by the :hover
+    // transform. Tilts up to ~10deg, eases back when the mouse leaves.
+    (function () {
+      var sel = '.hover-zoom, .hover-zoom-40, .hover-zoom-60, .hover-zoom-80';
+      var cards = document.querySelectorAll(sel);
+      var MAX_TILT = 3.5; // degrees in each axis
+
+      cards.forEach(function (card) {
+        card.addEventListener('mousemove', function (e) {
+          var rect = card.getBoundingClientRect();
+          var px = (e.clientX - rect.left) / rect.width;   // 0..1
+          var py = (e.clientY - rect.top)  / rect.height;
+          var ry = (px - 0.5) * (MAX_TILT * 2);            // -MAX..MAX
+          var rx = (0.5 - py) * (MAX_TILT * 2);
+          card.style.setProperty('--rx', rx.toFixed(2) + 'deg');
+          card.style.setProperty('--ry', ry.toFixed(2) + 'deg');
+          card.style.setProperty('--mx', (px * 100).toFixed(1) + '%');
+          card.style.setProperty('--my', (py * 100).toFixed(1) + '%');
+        });
+        card.addEventListener('mouseleave', function () {
+          card.style.setProperty('--rx', '0deg');
+          card.style.setProperty('--ry', '0deg');
+        });
+      });
+    })();
   </script>
 
 </body>
