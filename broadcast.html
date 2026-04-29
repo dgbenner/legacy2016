@@ -977,8 +977,11 @@
       position: absolute;
       will-change: transform;
     }
-    /* Make sure all real content sits above the bar tiles */
-    .site-nav, main, .site-footer, .lightbox { position: relative; z-index: 1; }
+    /* Make sure all real content sits above the bar tiles. Note:
+       .site-nav is intentionally OMITTED — it already has z-index: 10000
+       (above the bars) and forcing position: relative would break its
+       position: sticky behavior. */
+    main, .site-footer, .lightbox { position: relative; z-index: 1; }
   </style>
   <!-- Default Statcounter code for DanArt https://danart.vercel.app/ -->
   <script type="text/javascript">
