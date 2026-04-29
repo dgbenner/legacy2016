@@ -70,10 +70,12 @@
     }
 
     /* Decorative geometric shapes scattered in background.
-       z-index: -1 so they sit behind ALL content (including
-       static-positioned imagery like the Zipit screenshot). */
+       position: fixed so their high top: values don't extend the
+       document scroll height past the footer. The scroll JS below
+       translates them by y * (vSpeed - 1) so they appear to scroll
+       with the page (with parallax differential). */
     .iso-box {
-      position: absolute;
+      position: fixed;
       pointer-events: none;
       z-index: -1;
     }
@@ -1701,7 +1703,9 @@
         var y = window.scrollY;
         for (var i = 0; i < data.length; i++) {
           var d = data[i];
-          var ty = y * d.vSpeed;
+          // Shapes are position:fixed; translate by y*(vSpeed-1) to make
+          // them appear to scroll with the page plus a parallax differential.
+          var ty = y * (d.vSpeed - 1);
           var tx = d.hAmp * Math.sin(y * d.hFreq + d.hPhase);
           d.el.style.transform = d.base + ' translate(' + tx.toFixed(1) + 'px,' + ty.toFixed(1) + 'px)';
         }
