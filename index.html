@@ -173,6 +173,12 @@
       border-radius: 6px;
       object-fit: contain;
       transform: rotate(-20deg);
+      transition: transform 0.55s cubic-bezier(0.34, 3.5, 0.64, 1);
+      transform-origin: center;
+    }
+    /* Hover: scale up with a small overshoot bounce; settles back on mouse out */
+    .site-nav__logo:hover .site-nav__logo-img {
+      transform: rotate(-20deg) scale(1.22);
     }
     .site-nav__logo-text {
       font-family: var(--font-display);
@@ -180,12 +186,29 @@
       color: #2a2a2a;
       letter-spacing: -0.01em;
       position: relative;
-      margin-left: -30px;        /* pull back to overlap right edge of portrait */
-      top: 10px;                 /* drop down */
+      margin-left: -24px;        /* pull back to overlap right edge of portrait */
+      top: 14px;                 /* drop down */
       transform: rotate(-7deg) translateZ(0);   /* force GPU compositing */
+      transform-origin: left center;            /* anchor for the wag */
       backface-visibility: hidden;
       text-rendering: geometricPrecision;
       -webkit-font-smoothing: antialiased;
+    }
+
+    /* Wag the IM Dan Benner like a dog's tail when the portrait is hovered.
+       Anchored on the LEFT edge; right side rocks up and down with a touch
+       of motion blur at the peaks; settles back to its resting -7deg tilt. */
+    @keyframes imWag {
+      0%   { transform: rotate(-7deg)  translateZ(0); filter: none; }
+      15%  { transform: rotate(-14deg) translateZ(0); filter: blur(0.4px); }
+      30%  { transform: rotate(0deg)   translateZ(0); filter: blur(0.4px); }
+      45%  { transform: rotate(-12deg) translateZ(0); filter: blur(0.3px); }
+      60%  { transform: rotate(-3deg)  translateZ(0); filter: blur(0.2px); }
+      75%  { transform: rotate(-9deg)  translateZ(0); filter: blur(0.1px); }
+      100% { transform: rotate(-7deg)  translateZ(0); filter: none; }
+    }
+    .site-nav__logo:hover .site-nav__logo-text {
+      animation: imWag 0.7s ease-out;
     }
 
     .site-nav__links {
@@ -1129,7 +1152,7 @@
         <img class="hero-img-right" src="images/elements/hero_header.png" alt="">
         <canvas class="hero-canvas-left" id="hero-canvas-left"></canvas>
         <canvas class="hero-canvas-right" id="hero-canvas-right"></canvas>
-        <h1 style="margin-left: -2px;">I art direct. I write.<br>I don't pick sides.<br>I <em>just do it</em>.</h1>
+        <h1 style="margin-left: -2px;">I art direct. I write.<br>Ideas come first.<br>I <em>just do it</em>.</h1>
         <p style="margin-left: calc(3.5rem - 9px); margin-top: calc(-0.5rem - 1px); font-family: var(--font-display); font-size: 0.75rem; font-style: italic; color: #2a2a2a; letter-spacing: -0.01em;">And I try not to steal famous tag lines.</p>
       </section>
 
