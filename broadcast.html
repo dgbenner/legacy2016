@@ -175,19 +175,40 @@
       border-radius: 6px;
       object-fit: contain;
       transform: rotate(-20deg);
+      transition: transform 0.55s cubic-bezier(0.34, 3.5, 0.64, 1);
+      transform-origin: center;
+    }
+    /* Hover: scale up with a small overshoot bounce; settles back on mouse out */
+    .site-nav__logo:hover .site-nav__logo-img {
+      transform: rotate(-20deg) scale(1.22);
     }
     .site-nav__logo-text {
       font-family: var(--font-display);
       font-size: 0.75rem;
-      color: rgba(232,229,222,0.95);   /* matches body text but a touch brighter for the thin caslon */
+      color: rgba(232,229,222,0.95);
       letter-spacing: -0.01em;
       position: relative;
-      margin-left: -30px;        /* pull back to overlap right edge of portrait */
-      top: 10px;                 /* drop down */
+      margin-left: -24px;        /* pull back to overlap right edge of portrait */
+      top: 14px;                 /* drop down */
       transform: rotate(-7deg) translateZ(0);   /* force GPU compositing */
+      transform-origin: left center;            /* anchor for the wag */
       backface-visibility: hidden;
       text-rendering: geometricPrecision;
       -webkit-font-smoothing: antialiased;
+    }
+
+    /* Wag the IM Dan Benner like a dog's tail when the portrait is hovered. */
+    @keyframes imWag {
+      0%   { transform: rotate(-7deg)  translateZ(0); filter: none; }
+      15%  { transform: rotate(-14deg) translateZ(0); filter: blur(0.4px); }
+      30%  { transform: rotate(0deg)   translateZ(0); filter: blur(0.4px); }
+      45%  { transform: rotate(-12deg) translateZ(0); filter: blur(0.3px); }
+      60%  { transform: rotate(-3deg)  translateZ(0); filter: blur(0.2px); }
+      75%  { transform: rotate(-9deg)  translateZ(0); filter: blur(0.1px); }
+      100% { transform: rotate(-7deg)  translateZ(0); filter: none; }
+    }
+    .site-nav__logo:hover .site-nav__logo-text {
+      animation: imWag 0.7s ease-out;
     }
 
     .site-nav__links {
@@ -919,6 +940,22 @@
       background: #61bb46;
       border-radius: 3px;
     }
+
+    /* SMPTE-fragment scatter — fixed background of small tiles that
+       parallax at varied speeds as you scroll. */
+    .broadcast-bars {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .broadcast-bars .tile {
+      position: absolute;
+      will-change: transform;
+    }
+    /* Make sure all real content sits above the bar tiles */
+    .site-nav, main, .site-footer, .lightbox { position: relative; z-index: 1; }
   </style>
   <!-- Default Statcounter code for DanArt https://danart.vercel.app/ -->
   <script type="text/javascript">
@@ -931,6 +968,9 @@
   <!-- End of Statcounter Code -->
 </head>
 <body>
+
+  <!-- SMPTE-fragment scatter background (tiles injected by JS) -->
+  <div class="broadcast-bars" aria-hidden="true"></div>
 
   <!-- ======== NAV ======== -->
   <nav class="site-nav">
@@ -968,7 +1008,6 @@
           <div class="project__copy">
             <h3>Crescent Bank</h3>
             <h2>&ldquo;Racket-Free&rdquo; Checking <span class="runtime">0:30</span></h2>
-            <p>Placeholder description.</p>
           </div>
           <div class="project__media">
             <video controls poster="images/work/crescent_poster.jpg" style="width: 60%; border-radius: 12px;">
@@ -983,7 +1022,6 @@
           <div class="project__copy">
             <h3>BellSouth</h3>
             <h2>The Magician <span class="runtime">0:30</span></h2>
-            <p>Placeholder description.</p>
           </div>
           <div class="project__media">
             <video controls poster="images/work/bellsouth_poster.jpg" style="width: 100%; border-radius: 12px;">
@@ -999,7 +1037,6 @@
           <div class="project__copy">
             <h3>Children's Hospital of The King's Daughters</h3>
             <h2>Success Story Promotion <span class="runtime">0:45</span></h2>
-            <p>Placeholder description.</p>
           </div>
           <div class="project__media">
             <video controls poster="images/work/chkd_poster.jpg" style="width: 100%; border-radius: 12px;">
@@ -1014,7 +1051,6 @@
           <div class="project__copy">
             <h3>Microsoft</h3>
             <h2>Browser Privacy <span class="runtime">0:30</span></h2>
-            <p>Placeholder description.</p>
           </div>
           <div class="project__media">
             <div class="video-embed">
@@ -1179,6 +1215,83 @@
       if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length; showLightboxImage(); }
       if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % galleryImages.length; showLightboxImage(); }
     });
+  </script>
+
+  <script>
+    // SMPTE-fragment scatter: ~35 small tiles (mini-stripe blocks,
+    // horizontal rectangles, squares) randomly placed across the viewport,
+    // each parallaxing upward at its own speed as you scroll.
+    (function () {
+      var container = document.querySelector('.broadcast-bars');
+      if (!container) return;
+
+      var COLORS = [
+        'rgba(191,191,191,0.02)',  // gray/white
+        'rgba(204,204,0,0.02)',    // yellow
+        'rgba(0,204,204,0.02)',    // cyan
+        'rgba(0,204,0,0.02)',      // green
+        'rgba(204,0,204,0.02)',    // magenta
+        'rgba(204,0,0,0.02)',      // red
+        'rgba(0,0,204,0.02)'       // blue
+      ];
+      function rand(a, b) { return a + Math.random() * (b - a); }
+      function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+      // Three single-color tile shapes — all sized 50% larger so they
+       // overlap more aggressively. Same SMPTE-like proportional ratios.
+      function makeVStripe() {
+        return '<div style="width:' + Math.round(rand(21, 48)) + 'px;height:' +
+               Math.round(rand(90, 195)) + 'px;background:' + pick(COLORS) + ';"></div>';
+      }
+      function makeHRect() {
+        return '<div style="width:' + Math.round(rand(42, 90)) + 'px;height:' +
+               Math.round(rand(7, 18)) + 'px;background:' + pick(COLORS) + ';"></div>';
+      }
+      function makeSquare() {
+        var s = Math.round(rand(39, 66));
+        return '<div style="width:' + s + 'px;height:' + s + 'px;background:' +
+               pick(COLORS) + ';"></div>';
+      }
+      // Weighted: vertical stripes are the dominant shape (3:1:1 ratio)
+      var TYPES = [makeVStripe, makeVStripe, makeVStripe, makeHRect, makeSquare];
+
+      var tiles = [];
+      var NUM = 310;
+      // Place tiles uniformly across one viewport (0–100vh). On scroll,
+      // each tile's translate wraps modulo viewportH so it cycles back
+      // when it scrolls off the top — guarantees consistent coverage at
+      // every scroll position even with extreme parallax speeds.
+      for (var n = 0; n < NUM; n++) {
+        var tile = document.createElement('div');
+        tile.className = 'tile';
+        var topVh = (n / NUM) * 100 + rand(-1, 1);   // evenly spread 0–100vh
+        tile.style.top  = topVh + 'vh';
+        tile.style.left = rand(-4, 96) + '%';
+        tile.innerHTML = pick(TYPES)();
+        container.appendChild(tile);
+        tiles.push({ el: tile, topVh: topVh, speed: rand(4, 150) });
+      }
+
+      var ticking = false;
+      function update() {
+        var y = window.scrollY;
+        var vh = window.innerHeight;
+        for (var i = 0; i < tiles.length; i++) {
+          var d = tiles[i];
+          var topPx = d.topVh * vh / 100;
+          var raw = topPx - y * d.speed;
+          // Wrap into [0, vh) so tile cycles when it leaves the viewport
+          var visiblePx = ((raw % vh) + vh) % vh;
+          var transform = visiblePx - topPx;
+          d.el.style.transform = 'translateY(' + transform.toFixed(1) + 'px)';
+        }
+        ticking = false;
+      }
+      window.addEventListener('scroll', function () {
+        if (!ticking) { window.requestAnimationFrame(update); ticking = true; }
+      }, { passive: true });
+      update();
+    })();
   </script>
 
 </body>

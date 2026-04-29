@@ -186,6 +186,12 @@
       border-radius: 6px;
       object-fit: contain;
       transform: rotate(-20deg);
+      transition: transform 0.55s cubic-bezier(0.34, 3.5, 0.64, 1);
+      transform-origin: center;
+    }
+    /* Hover: scale up with a small overshoot bounce; settles back on mouse out */
+    .site-nav__logo:hover .site-nav__logo-img {
+      transform: rotate(-20deg) scale(1.22);
     }
     .site-nav__logo-text {
       font-family: var(--font-display);
@@ -193,12 +199,29 @@
       color: #2a2a2a;
       letter-spacing: -0.01em;
       position: relative;
-      margin-left: -30px;        /* pull back to overlap right edge of portrait */
-      top: 10px;                 /* drop down */
+      margin-left: -24px;        /* pull back to overlap right edge of portrait */
+      top: 14px;                 /* drop down */
       transform: rotate(-7deg) translateZ(0);   /* force GPU compositing */
+      transform-origin: left center;            /* anchor for the wag */
       backface-visibility: hidden;
       text-rendering: geometricPrecision;
       -webkit-font-smoothing: antialiased;
+    }
+
+    /* Wag the IM Dan Benner like a dog's tail when the portrait is hovered.
+       Anchored on the LEFT edge; right side rocks up and down with a touch
+       of motion blur at the peaks; settles back to its resting -7deg tilt. */
+    @keyframes imWag {
+      0%   { transform: rotate(-7deg)  translateZ(0); filter: none; }
+      15%  { transform: rotate(-14deg) translateZ(0); filter: blur(0.4px); }
+      30%  { transform: rotate(0deg)   translateZ(0); filter: blur(0.4px); }
+      45%  { transform: rotate(-12deg) translateZ(0); filter: blur(0.3px); }
+      60%  { transform: rotate(-3deg)  translateZ(0); filter: blur(0.2px); }
+      75%  { transform: rotate(-9deg)  translateZ(0); filter: blur(0.1px); }
+      100% { transform: rotate(-7deg)  translateZ(0); filter: none; }
+    }
+    .site-nav__logo:hover .site-nav__logo-text {
+      animation: imWag 0.7s ease-out;
     }
 
     .site-nav__links {
@@ -1070,55 +1093,55 @@
 
 
   <!-- Decorative geometric shapes scattered in background -->
-  <svg class="iso-box" style="top: 5268px; left: 8%; width: 106px; height: 103px;" viewBox="0 0 70 70">
+  <svg class="iso-box" style="top: 5268px; left: 8%; width: 318px; height: 309px;" viewBox="0 0 70 70">
     <circle cx="35" cy="35" r="25" fill="rgba(195,215,195,0.22)" stroke="rgba(85,130,75,0.30)" stroke-width="0.7"/>
     <ellipse cx="35" cy="35" rx="25" ry="8" fill="none" stroke="rgba(85,130,75,0.30)" stroke-width="0.7"/>
     <ellipse cx="35" cy="35" rx="8" ry="25" fill="none" stroke="rgba(85,130,75,0.30)" stroke-width="0.7"/>
   </svg>
-  <svg class="iso-box" style="top: 3507px; left: 38%; width: 122px; height: 109px;" viewBox="0 0 80 70">
+  <svg class="iso-box" style="top: 3507px; left: 38%; width: 366px; height: 327px;" viewBox="0 0 80 70">
     <polygon points="10,30 50,30 50,60 10,60" fill="none" stroke="rgba(100,98,90,0.28)" stroke-width="0.7"/>
     <polygon points="10,30 30,15 70,15 50,30" fill="rgba(200,198,190,0.20)" stroke="rgba(100,98,90,0.28)" stroke-width="0.7"/>
     <polygon points="50,30 70,15 70,45 50,60" fill="rgba(170,168,160,0.18)" stroke="rgba(100,98,90,0.28)" stroke-width="0.7"/>
   </svg>
-  <svg class="iso-box" style="top: 1595px; right: 9%; width: 78px; height: 87px; transform: rotate(-10deg);" viewBox="0 0 60 90">
+  <svg class="iso-box" style="top: 1595px; right: 9%; width: 234px; height: 261px; transform: rotate(-10deg);" viewBox="0 0 60 90">
     <rect x="12" y="15" width="36" height="60" fill="rgba(220,213,178,0.22)" stroke="none"/>
     <ellipse cx="30" cy="15" rx="18" ry="6" fill="rgba(200,190,150,0.20)" stroke="rgba(150,130,65,0.30)" stroke-width="0.7"/>
     <ellipse cx="30" cy="75" rx="18" ry="6" fill="rgba(220,213,178,0.22)" stroke="rgba(150,130,65,0.30)" stroke-width="0.7"/>
     <line x1="12" y1="15" x2="12" y2="75" stroke="rgba(150,130,65,0.30)" stroke-width="0.7"/>
     <line x1="48" y1="15" x2="48" y2="75" stroke="rgba(150,130,65,0.30)" stroke-width="0.7"/>
   </svg>
-  <svg class="iso-box" style="top: 4991px; left: 37%; width: 73px; height: 76px; transform: rotate(15deg);" viewBox="0 0 60 90">
+  <svg class="iso-box" style="top: 4991px; left: 37%; width: 219px; height: 228px; transform: rotate(15deg);" viewBox="0 0 60 90">
     <rect x="12" y="15" width="36" height="60" fill="rgba(200,198,190,0.20)" stroke="none"/>
     <ellipse cx="30" cy="15" rx="18" ry="6" fill="rgba(170,168,160,0.18)" stroke="rgba(100,98,90,0.28)" stroke-width="0.7"/>
     <ellipse cx="30" cy="75" rx="18" ry="6" fill="rgba(200,198,190,0.20)" stroke="rgba(100,98,90,0.28)" stroke-width="0.7"/>
     <line x1="12" y1="15" x2="12" y2="75" stroke="rgba(100,98,90,0.28)" stroke-width="0.7"/>
     <line x1="48" y1="15" x2="48" y2="75" stroke="rgba(100,98,90,0.28)" stroke-width="0.7"/>
   </svg>
-  <svg class="iso-box" style="top: 783px; right: 6%; width: 87px; height: 101px;" viewBox="0 0 70 70">
+  <svg class="iso-box" style="top: 783px; right: 6%; width: 261px; height: 303px;" viewBox="0 0 70 70">
     <circle cx="35" cy="35" r="25" fill="rgba(220,195,193,0.22)" stroke="rgba(165,80,80,0.30)" stroke-width="0.7"/>
     <ellipse cx="35" cy="35" rx="25" ry="8" fill="none" stroke="rgba(165,80,80,0.30)" stroke-width="0.7"/>
     <ellipse cx="35" cy="35" rx="8" ry="25" fill="none" stroke="rgba(165,80,80,0.30)" stroke-width="0.7"/>
   </svg>
-  <svg class="iso-box" style="top: 7289px; right: 12%; width: 129px; height: 138px; transform: rotate(5deg);" viewBox="0 0 60 90">
+  <svg class="iso-box" style="top: 7289px; right: 12%; width: 387px; height: 414px; transform: rotate(5deg);" viewBox="0 0 60 90">
     <rect x="12" y="15" width="36" height="60" fill="rgba(200,198,190,0.20)" stroke="none"/>
     <ellipse cx="30" cy="15" rx="18" ry="6" fill="rgba(170,168,160,0.18)" stroke="rgba(100,98,90,0.28)" stroke-width="0.7"/>
     <ellipse cx="30" cy="75" rx="18" ry="6" fill="rgba(200,198,190,0.20)" stroke="rgba(100,98,90,0.28)" stroke-width="0.7"/>
     <line x1="12" y1="15" x2="12" y2="75" stroke="rgba(100,98,90,0.28)" stroke-width="0.7"/>
     <line x1="48" y1="15" x2="48" y2="75" stroke="rgba(100,98,90,0.28)" stroke-width="0.7"/>
   </svg>
-  <svg class="iso-box" style="top: 5720px; right: 4%; width: 100px; height: 114px; transform: rotate(20deg);" viewBox="0 0 80 90">
+  <svg class="iso-box" style="top: 5720px; right: 4%; width: 300px; height: 342px; transform: rotate(20deg);" viewBox="0 0 80 90">
     <polygon points="40,15 15,75 65,75" fill="rgba(220,195,193,0.22)" stroke="rgba(165,80,80,0.30)" stroke-width="0.7"/>
     <ellipse cx="40" cy="75" rx="25" ry="8" fill="rgba(200,170,170,0.20)" stroke="rgba(165,80,80,0.30)" stroke-width="0.7"/>
   </svg>
-  <svg class="iso-box" style="top: 6662px; right: 7%; width: 139px; height: 120px;" viewBox="0 0 80 90">
+  <svg class="iso-box" style="top: 6662px; right: 7%; width: 417px; height: 360px;" viewBox="0 0 80 90">
     <polygon points="40,15 15,75 65,75" fill="rgba(220,195,193,0.22)" stroke="rgba(165,80,80,0.30)" stroke-width="0.7"/>
     <ellipse cx="40" cy="75" rx="25" ry="8" fill="rgba(200,170,170,0.20)" stroke="rgba(165,80,80,0.30)" stroke-width="0.7"/>
   </svg>
-  <svg class="iso-box" style="top: 3213px; left: 3%; width: 103px; height: 108px; transform: rotate(10deg);" viewBox="0 0 80 90">
+  <svg class="iso-box" style="top: 3213px; left: 3%; width: 309px; height: 324px; transform: rotate(10deg);" viewBox="0 0 80 90">
     <polygon points="40,15 15,75 65,75" fill="rgba(200,198,190,0.20)" stroke="rgba(100,98,90,0.28)" stroke-width="0.7"/>
     <ellipse cx="40" cy="75" rx="25" ry="8" fill="rgba(170,168,160,0.18)" stroke="rgba(100,98,90,0.28)" stroke-width="0.7"/>
   </svg>
-  <svg class="iso-box" style="top: 300px; left: 3%; width: 78px; height: 86px;" viewBox="0 0 80 70">
+  <svg class="iso-box" style="top: 300px; left: 3%; width: 234px; height: 258px;" viewBox="0 0 80 70">
     <polygon points="10,30 50,30 50,60 10,60" fill="none" stroke="rgba(150,130,65,0.30)" stroke-width="0.7"/>
     <polygon points="10,30 30,15 70,15 50,30" fill="rgba(220,213,178,0.22)" stroke="rgba(150,130,65,0.30)" stroke-width="0.7"/>
     <polygon points="50,30 70,15 70,45 50,60" fill="rgba(200,190,150,0.20)" stroke="rgba(150,130,65,0.30)" stroke-width="0.7"/>
