@@ -1433,12 +1433,13 @@
         </section>
 
 
-        <!-- Conversation Design -->
+        <!-- Conversation Design (hidden) -->
+        <!--
         <section class="project--full-width">
           <div class="project__copy">
             <h3>Best Buy &mdash; Services Digital Team</h3>
             <h2>Conversation Design</h2>
-            <p>Two white papers written to help a team of technical writers think conversationally &mdash; aligning to brand voice, designing microinteractions, and understanding how small, delicate patterns shape the way a user moves through a triage flow. The first paper breaks down microinteractions as tiny conversations. The second distills learnings from IBM Watson's AI Masterclass on building a conversational system. Both fed directly into the <a href="https://www.bestbuy.com/services/triage/home" target="_blank" class="inline-link"><strong>Best Buy Services Triage</strong></a> experience.</p>
+            <p>Two white papers written to help a team of technical writers think conversationally — aligning to brand voice, designing microinteractions, and understanding how small, delicate patterns shape the way a user moves through a triage flow. The first paper breaks down microinteractions as tiny conversations. The second distills learnings from IBM Watson's AI Masterclass on building a conversational system. Both fed directly into the Best Buy Services Triage experience.</p>
           </div>
           <div class="project__media" style="display: flex; flex-direction: column; gap: var(--space-md); align-items: start;">
             <img src="images/work/bestbuy_ipad.png" alt="Best Buy Services Triage on iPad" style="max-width: 60%; border-radius: 12px;">
@@ -1454,9 +1455,11 @@
             </div>
           </div>
         </section>
+        -->
 
 
-        <!-- DroneUp -->
+        <!-- DroneUp (hidden) -->
+        <!--
         <section class="project--full-width">
           <div class="project__copy">
             <h3>DroneUp Delivery</h3>
@@ -1471,6 +1474,7 @@
             <img src="images/work/copy/droneup_release.png" alt="DroneUp release notes" style="flex: 1 1 0; min-width: 120px; max-width: 20%; height: auto;">
           </div>
         </section>
+        -->
 
 
       </div>
@@ -1662,6 +1666,44 @@
         current = (current + 1) % slides.length;
         slides[current].classList.add('active');
       }, 4000);
+    })();
+  </script>
+
+  <script>
+    /* Light scroll-driven drift on the decorative .iso-box shapes.
+       Each shape gets a small random parallax speed (some drift faster
+       than the page, some slower), so the field shifts gently as you
+       scroll. Existing transforms (cone tilts, cylinder rotation) are
+       preserved by appending the translateY rather than replacing. */
+    (function () {
+      var shapes = document.querySelectorAll('.iso-box');
+      if (!shapes.length) return;
+      var data = [];
+      shapes.forEach(function (el) {
+        // Capture whatever transform was set inline (rotations, etc.)
+        var base = el.style.transform || '';
+        // Speed range -0.18 to -0.04 OR 0.04 to 0.18 — modest, mixed direction
+        var sign = Math.random() < 0.5 ? -1 : 1;
+        var speed = sign * (0.04 + Math.random() * 0.14);
+        data.push({ el: el, base: base, speed: speed });
+      });
+
+      var ticking = false;
+      function update() {
+        var y = window.scrollY;
+        for (var i = 0; i < data.length; i++) {
+          var d = data[i];
+          d.el.style.transform = d.base + ' translateY(' + (y * d.speed).toFixed(1) + 'px)';
+        }
+        ticking = false;
+      }
+      window.addEventListener('scroll', function () {
+        if (!ticking) {
+          window.requestAnimationFrame(update);
+          ticking = true;
+        }
+      }, { passive: true });
+      update();
     })();
   </script>
 
