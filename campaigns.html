@@ -70,7 +70,8 @@
       font-family: var(--font-body);
       color: var(--color-text);
       background-color: var(--color-bg);
-      /* CSS grid fallback if the Three.js canvas fails to load */
+      /* Tight blue grid on a slight diagonal — a pasteup-board feel.
+         Two perpendicular line sets at -10° / 80°, lines every 5px. */
       background-image:
         repeating-linear-gradient(
           -10deg,
@@ -103,20 +104,6 @@
         linear-gradient(to left, rgba(0,0,0,0.06) 0%, transparent 12%);
     }
 
-    /* Three.js shader-based warped grid. Canvas covers the viewport
-       behind all content; main/footer get z-index 1 so they paint above. */
-    #gridCanvas {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-    }
-    main, .site-footer {
-      position: relative;
-      z-index: 1;
-    }
 
     /* Background grain texture */
     body::after {
@@ -228,7 +215,7 @@
       margin-left: -24px;        /* pull back to overlap right edge of portrait */
       top: 14px;                 /* drop down */
       transform: rotate(-7deg) translateZ(0);   /* force GPU compositing */
-      transform-origin: left center;            /* anchor for the wag */
+      transform-origin: center center;          /* anchor for the wag */
       backface-visibility: hidden;
       text-rendering: geometricPrecision;
       -webkit-font-smoothing: antialiased;
@@ -1086,10 +1073,6 @@
 </head>
 <body>
 
-  <!-- Three.js fragment-shader background: rotated blue grid warped by
-       10 drifting lenses (alternating bulge / pinch, radius 100→600 px). -->
-  <canvas id="gridCanvas"></canvas>
-  <script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
 
   <!-- ======== NAV ======== -->
   <nav class="site-nav">
@@ -1146,9 +1129,9 @@
             <p>Prior to construction, a waterside development in Cape Fear, North Carolina needed to paint a picture of what life would be like living on the Intracoastal Waterway.</p>
           </div>
           <div class="project__gallery-row" style="align-items: stretch; gap: 0.5rem;">
-            <div class="campaigns-shadow hover-zoom" style="aspect-ratio: 367 / 473; overflow: hidden; border-radius: 12px;"><img src="images/work/sgr_1.png" alt="St George's Reach 1" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
-            <div class="campaigns-shadow hover-zoom" style="aspect-ratio: 367 / 473; overflow: hidden; border-radius: 12px;"><img src="images/work/sgr_2.png" alt="St George's Reach 2" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
-            <div class="campaigns-shadow hover-zoom" style="aspect-ratio: 367 / 473; overflow: hidden; border-radius: 12px;"><img src="images/work/sgr_3.png" alt="St George's Reach 3" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
+            <div class="campaigns-shadow hover-zoom" style="aspect-ratio: 367 / 473; overflow: hidden; border-radius: 12px;"><img src="images/work/sgr_1.png" alt="St George's Reach 1" style="width: 100%; height: 100%; object-fit: cover; display: block; filter: contrast(1.15) saturate(1.08);"></div>
+            <div class="campaigns-shadow hover-zoom" style="aspect-ratio: 367 / 473; overflow: hidden; border-radius: 12px;"><img src="images/work/sgr_2.png" alt="St George's Reach 2" style="width: 100%; height: 100%; object-fit: cover; display: block; filter: contrast(1.15) saturate(1.08);"></div>
+            <div class="campaigns-shadow hover-zoom" style="aspect-ratio: 367 / 473; overflow: hidden; border-radius: 12px;"><img src="images/work/sgr_3.png" alt="St George's Reach 3" style="width: 100%; height: 100%; object-fit: cover; display: block; filter: contrast(1.15) saturate(1.08);"></div>
           </div>
         </section>
 
@@ -1163,7 +1146,7 @@
           <div class="project__media" style="display: flex; gap: var(--space-md); align-items: start;">
             <div style="flex: 0 0 36%; display: flex; flex-direction: column;">
               <div class="campaigns-shadow hover-zoom-mild" data-gallery="dominion" style="transform-origin: left center; cursor: pointer; border-radius: 12px;">
-                <img src="images/work/dominion_hires.jpg" alt="Dominion Energy Veteran Recruitment" style="width: 100%; border-radius: 12px; display: block;">
+                <img src="images/work/dominion_hires.jpg" alt="Dominion Energy Veteran Recruitment" style="width: 100%; border-radius: 12px; display: block; filter: contrast(1.15) saturate(1.08);">
               </div>
               <p data-gallery="dominion" style="text-align: center; margin-top: 0.5rem; font-size: 0.85rem; color: var(--color-text-secondary); font-style: italic; cursor: pointer;">Tap image for zoom</p>
             </div>
@@ -1235,7 +1218,7 @@
         <section class="project--text-left" id="fixthedebt" style="grid-template-columns: 1fr 1.5fr;">
           <div class="project__copy">
             <h3>Fix the Debt</h3>
-            <h2>Debt Interrupts Everything.</h2>
+            <h2>Debt Interrupts Everything</h2>
             <p><a href="https://fixthedebt.org/" target="_blank" class="inline-link"><strong>Fix the Debt</strong></a> needed to make an impact immediately after a presidential election. The message needed to be broad, yet simple. And it needed to stir the public to push their elected officials to act for a bi-partisan solution, to avert disaster. This was a national campaign, but seen here is a media installation that used every available space in the US Capitol Metro Station.</p>
             <p>See more about this campaign on: <a href="http://video.foxnews.com/v/1957154210001/simpson-bowles-getting-a-fresh-look" target="_blank">Fox News</a> and <a href="http://abcnews.go.com/blogs/politics/2012/11/group-aims-to-push-for-national-debt-solutions/" target="_blank">ABC</a>.</p>
           </div>
@@ -1344,7 +1327,7 @@
           <div class="project__copy">
             <h3>Hargray Wireless</h3>
             <h2>Bundle Savings</h2>
-            <p style="max-width: 50%;">Making the case to a Lowcountry retiree: bundle the home services and free up the budget for whatever upgrade comes next.</p>
+            <p style="max-width: 50%;">Making the case to a South Carolina retiree: bundle the home services and free up the budget for whatever upgrade comes next.</p>
           </div>
           <div class="project__media campaigns-shadow" style="display: flex; gap: var(--space-sm); flex-wrap: wrap;">
             <div data-gallery="hargray" style="max-width: 48%; cursor: pointer;"><img src="images/work/hargray_bundle_1.png" alt="Hargray Bundle Savings 1" style="width: 100%; border-radius: 12px;"></div>
@@ -1542,86 +1525,6 @@
         caption.style.pointerEvents = 'none';
       }
     });
-  </script>
-
-  <script>
-    // Warped-grid background via Three.js + custom fragment shader.
-    // 10 drifting lenses, each pulsing radius 100→600 px, alternating
-    // bulge (push-out) and pinch (pull-in) distortion. Grid rotated ~12°
-    // counterclockwise. All math runs per-pixel in WebGL.
-    (function () {
-      if (typeof THREE === 'undefined') return;
-      var canvas = document.getElementById('gridCanvas');
-      if (!canvas) return;
-
-      var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-      var scene = new THREE.Scene();
-      var camera = new THREE.Camera(); // identity — we draw a fullscreen quad
-
-      var material = new THREE.ShaderMaterial({
-        uniforms: {
-          uResolution: { value: new THREE.Vector2() },
-          uScroll:     { value: 0 }
-        },
-        vertexShader: 'void main(){ gl_Position = vec4(position, 1.0); }',
-        fragmentShader: [
-          'precision highp float;',
-          'uniform vec2 uResolution;',
-          'uniform float uScroll;',
-          'void main(){',
-          '  vec2 p = gl_FragCoord.xy;',
-          '  float a = 0.21;',
-          '  float c = cos(a); float s = sin(a);',
-          '  vec2 r2 = mat2(c, -s, s, c) * p;',
-          '  // Grid: 2x denser (5 device px) and tilted ~12deg CCW',
-          '  vec2 g = mod(r2, 5.0);',
-          '  float thickness = 1.0;',
-          '  float aa = 1.0;',
-          '  float lx = 1.0 - smoothstep(thickness, thickness + aa, g.x);',
-          '  float ly = 1.0 - smoothstep(thickness, thickness + aa, g.y);',
-          '  float line = max(lx, ly);',
-          '  // Color bands shift through blue → red → blue → yellow → blue',
-          '  // as user scrolls, oriented along the same tilt as the grid.',
-          '  float bandSize = 400.0;',
-          '  float bp = mod(r2.y - uScroll, bandSize * 4.0) / bandSize;',
-          '  vec3 cBlue = vec3(0.32, 0.63, 0.80);',
-          '  vec3 cRed  = vec3(0.85, 0.30, 0.30);',
-          '  vec3 cYel  = vec3(0.85, 0.70, 0.20);',
-          '  vec3 lcol;',
-          '  if (bp < 1.0)      lcol = mix(cBlue, cRed, bp);',
-          '  else if (bp < 2.0) lcol = mix(cRed, cBlue, bp - 1.0);',
-          '  else if (bp < 3.0) lcol = mix(cBlue, cYel, bp - 2.0);',
-          '  else               lcol = mix(cYel, cBlue, bp - 3.0);',
-          '  vec3 bg = vec3(0.927, 0.910, 0.878);',
-          '  vec3 col = mix(bg, lcol, line * 0.18);',
-          '  gl_FragColor = vec4(col, 1.0);',
-          '}'
-        ].join('\n')
-      });
-
-      var mesh = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material);
-      scene.add(mesh);
-
-      function resize() {
-        var w = window.innerWidth;
-        var h = window.innerHeight;
-        renderer.setSize(w, h, false);
-        var dpr = renderer.getPixelRatio();
-        material.uniforms.uResolution.value.set(w * dpr, h * dpr);
-      }
-      window.addEventListener('resize', resize);
-      resize();
-
-      function frame() {
-        var scrollY = window.scrollY || window.pageYOffset || 0;
-        var dpr = renderer.getPixelRatio();
-        material.uniforms.uScroll.value = scrollY * dpr;
-        renderer.render(scene, camera);
-        requestAnimationFrame(frame);
-      }
-      requestAnimationFrame(frame);
-    })();
   </script>
 
 </body>

@@ -212,7 +212,7 @@
       margin-left: -24px;        /* pull back to overlap right edge of portrait */
       top: 14px;                 /* drop down */
       transform: rotate(-7deg) translateZ(0);   /* force GPU compositing */
-      transform-origin: left center;            /* anchor for the wag */
+      transform-origin: center center;          /* anchor for the wag */
       backface-visibility: hidden;
       text-rendering: geometricPrecision;
       -webkit-font-smoothing: antialiased;
@@ -733,12 +733,14 @@
       background: var(--color-surface);
       border-radius: 12px;
       overflow: hidden;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
 
     .category-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      transform: scale(1.06);
+      z-index: 2;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.14);
     }
 
     .category-card--campaigns { --card-color: #e03a3e; }
@@ -752,10 +754,7 @@
       overflow: hidden;
     }
 
-    .category-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-    }
+    /* (duplicate hover rule — kept for shadow override) */
 
     .category-card__img-wrap {
       position: relative;
@@ -1187,7 +1186,7 @@
         <section class="project--text-left">
           <div class="project__copy">
             <h3>Fix The Debt</h3>
-            <h2 style="margin-left: -2px; letter-spacing: -0.02em;">Fiscal Cliff Campaign</h2>
+            <h2 style="margin-left: -2px; letter-spacing: -0.02em;">Off the Cliff</h2>
             <p><a href="https://fixthedebt.org/" target="_blank" class="inline-link"><strong>Fix the Debt</strong></a> needed to make an impact immediately after a presidential election. The Fiscal Cliff was looming and Congress needed to make a deal. How do you simply demonstrate the short and long-term effects of not solving the Debt Crisis?</p>
             <a href="campaigns.html#fixthedebt" class="project__cta">View the solution &#8594;</a>
           </div>
@@ -1219,9 +1218,9 @@
             <p style="max-width: 60%;">With attendance down, IMAX needed a high-impact message to remind everyone<br>a 55" TV in their living room is no substitute for an IMAX Experience.</p>
           </div>
           <div class="project__gallery-row" style="align-items: stretch; gap: 0.5rem;">
-            <div style="aspect-ratio: 354 / 458; overflow: hidden; border-radius: 12px;"><img src="images/work/imax_1.png" alt="IMAX 1" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
-            <div style="aspect-ratio: 354 / 458; overflow: hidden; border-radius: 12px;"><img src="images/work/imax_2.png" alt="IMAX 2" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
-            <div style="aspect-ratio: 354 / 458; overflow: hidden; border-radius: 12px;"><img src="images/work/imax_3.png" alt="IMAX 3" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
+            <div style="aspect-ratio: 1275 / 1650; overflow: hidden; border-radius: 12px;"><img src="images/work/imax_nascar.jpg" alt="IMAX — NASCAR" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
+            <div style="aspect-ratio: 1275 / 1650; overflow: hidden; border-radius: 12px;"><img src="images/work/imax_squid.jpg" alt="IMAX — Squid" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
+            <div style="aspect-ratio: 1275 / 1650; overflow: hidden; border-radius: 12px;"><img src="images/work/imax_dinosaur.jpg" alt="IMAX — Dinosaur" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
           </div>
         </section>
 
