@@ -882,7 +882,7 @@
       right: var(--space-md);
       width: 44px;
       height: 44px;
-      padding: 0;
+      padding: 0 0 6px 0;
       background: rgba(255,255,255,0.95);
       border: none;
       border-radius: 50%;
@@ -1037,61 +1037,9 @@
     /* Hover-zoom on campaign cards. Side cards in three-up rows anchor
        toward the middle so they don't grow off the edges of narrower
        viewports. Extra variants for sections that need a bigger pop. */
-    .hover-zoom, .hover-zoom-40, .hover-zoom-60, .hover-zoom-80 {
-      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    /* Hover applies scale + 3D tilt driven by JS-set CSS vars (--rx/--ry).
-       Box-shadow offset also follows the tilt for a Pandora-style lift.
-       --mx/--my drive a mouse-tracked radial highlight (the "shine"). */
-    .hover-zoom, .hover-zoom-40, .hover-zoom-60, .hover-zoom-80 {
-      --rx: 0deg;
-      --ry: 0deg;
-      --mx: 50%;
-      --my: 50%;
+    .hover-zoom, .hover-zoom-40, .hover-zoom-60, .hover-zoom-80, .hover-zoom-mild {
       position: relative;
     }
-    .hover-zoom::after, .hover-zoom-40::after,
-    .hover-zoom-60::after, .hover-zoom-80::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0;
-      background: radial-gradient(ellipse 65% 85% at var(--mx) var(--my), rgba(255,255,255,0.30) 0%, rgba(255,255,255,0.12) 45%, transparent 100%);
-      transition: opacity 0.35s;
-      z-index: 3;
-      border-radius: inherit;
-      mix-blend-mode: overlay;
-    }
-    .hover-zoom:hover::after, .hover-zoom-40:hover::after,
-    .hover-zoom-60:hover::after, .hover-zoom-80:hover::after {
-      opacity: 1;
-    }
-    /* Stacked box-shadows fake the edge/side of the card (cardstock
-       thickness) — several thin solid offsets read as a chunky "side"
-       face, capped by a soft drop shadow that grounds the card. */
-    .hover-zoom:hover {
-      transform: perspective(900px) scale(1.24) rotateX(var(--rx)) rotateY(var(--ry));
-      z-index: 2;
-    }
-    .hover-zoom-40:hover {
-      transform: perspective(900px) scale(1.32) rotateX(var(--rx)) rotateY(var(--ry));
-      z-index: 2;
-    }
-    .hover-zoom-60:hover {
-      transform: perspective(900px) scale(1.48) rotateX(var(--rx)) rotateY(var(--ry));
-      z-index: 2;
-    }
-    .hover-zoom-80:hover {
-      transform: perspective(900px) scale(1.64) rotateX(var(--rx)) rotateY(var(--ry));
-      z-index: 2;
-    }
-    .project__gallery-row .hover-zoom:nth-child(1),
-    .project__gallery-row .hover-zoom-40:nth-child(1),
-    .project__gallery-row .hover-zoom-80:nth-child(1) { transform-origin: left center; }
-    .project__gallery-row .hover-zoom:nth-child(3),
-    .project__gallery-row .hover-zoom-40:nth-child(3),
-    .project__gallery-row .hover-zoom-80:nth-child(3) { transform-origin: right center; }
 
     /* Same dual-shadow recipe used on copy.html and web.html, retuned for
        the campaigns page in a dark blue-gray (sampled off the page accent). */
@@ -1163,10 +1111,11 @@
             <p>Entergy's Long Island power plant license was up for renewal. To rally support for the renewal process, they needed to communicate the importance of the plant as well as Entergy's hand in powering all the things New Yorkers love, regardless of size.</p>
           </div>
           <div class="project__gallery-row" style="align-items: stretch; gap: 0.5rem;">
-            <div class="campaigns-shadow hover-zoom" style="aspect-ratio: 332 / 507; overflow: hidden; border-radius: 12px;"><img src="images/work/entergy_1.png" alt="Entergy - Big or Small 1" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
-            <div class="campaigns-shadow hover-zoom" style="aspect-ratio: 332 / 507; overflow: hidden; border-radius: 12px;"><img src="images/work/entergy_2.png" alt="Entergy - Big or Small 2" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
-            <div class="campaigns-shadow hover-zoom" style="aspect-ratio: 332 / 507; overflow: hidden; border-radius: 12px;"><img src="images/work/entergy_3.png" alt="Entergy - Big or Small 3" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
+            <div class="campaigns-shadow hover-zoom-mild" data-gallery="entergy" style="aspect-ratio: 332 / 507; overflow: hidden; border-radius: 12px; cursor: pointer;"><img src="images/work/entergy1_hires.jpg" alt="Entergy - Big or Small 1" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
+            <div class="campaigns-shadow hover-zoom-mild" data-gallery="entergy" style="aspect-ratio: 332 / 507; overflow: hidden; border-radius: 12px; cursor: pointer;"><img src="images/work/entergy2_hires.jpg" alt="Entergy - Big or Small 2" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
+            <div class="campaigns-shadow hover-zoom-mild" data-gallery="entergy" style="aspect-ratio: 332 / 507; overflow: hidden; border-radius: 12px; cursor: pointer;"><img src="images/work/entergy3_hires.jpg" alt="Entergy - Big or Small 3" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
           </div>
+          <p data-gallery="entergy" style="text-align: center; margin-top: 0.5rem; font-size: 0.85rem; color: var(--color-text-secondary); font-style: italic; cursor: pointer;">Tap any image for zoom</p>
         </section>
 
 
@@ -1193,8 +1142,11 @@
             <p>A Fortune 500 energy company needed a simple way to get job-seeking veterans' attention, as well as point out Dominion Energy makes the military to civilian transition an easy one.</p>
           </div>
           <div class="project__media" style="display: flex; gap: var(--space-md); align-items: start;">
-            <div class="campaigns-shadow hover-zoom" style="flex: 0 0 36%; transform-origin: left center;">
-              <img src="images/work/dominion_troopstoenergy.jpg" alt="Dominion Energy Veteran Recruitment" style="width: 100%; border-radius: 12px; display: block;">
+            <div style="flex: 0 0 36%; display: flex; flex-direction: column;">
+              <div class="campaigns-shadow hover-zoom-mild" data-gallery="dominion" style="transform-origin: left center; cursor: pointer; border-radius: 12px;">
+                <img src="images/work/dominion_hires.jpg" alt="Dominion Energy Veteran Recruitment" style="width: 100%; border-radius: 12px; display: block;">
+              </div>
+              <p data-gallery="dominion" style="text-align: center; margin-top: 0.5rem; font-size: 0.85rem; color: var(--color-text-secondary); font-style: italic; cursor: pointer;">Tap image for zoom</p>
             </div>
             <div style="flex: 1; display: flex; flex-direction: column; gap: var(--space-md); align-items: center;">
               <div class="video-embed" style="margin-top: 0; width: 100%;">
@@ -1223,10 +1175,11 @@
             <p style="max-width: 60%;">With attendance down, IMAX needed a high-impact message to remind everyone<br>a 55" TV in their living room is no substitute for an IMAX Experience.</p>
           </div>
           <div class="project__gallery-row" style="align-items: stretch; gap: 0.5rem;">
-            <div class="campaigns-shadow hover-zoom" style="aspect-ratio: 354 / 458; overflow: hidden; border-radius: 12px;"><img src="images/work/imax_1.png" alt="IMAX 1" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
-            <div class="campaigns-shadow hover-zoom" style="aspect-ratio: 354 / 458; overflow: hidden; border-radius: 12px;"><img src="images/work/imax_2.png" alt="IMAX 2" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
-            <div class="campaigns-shadow hover-zoom" style="aspect-ratio: 354 / 458; overflow: hidden; border-radius: 12px;"><img src="images/work/imax_3.png" alt="IMAX 3" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
+            <div class="campaigns-shadow" data-gallery="imax" style="aspect-ratio: 1275 / 1650; overflow: hidden; border-radius: 12px; cursor: pointer;"><img src="images/work/imax_nascar.jpg" alt="IMAX — NASCAR" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
+            <div class="campaigns-shadow" data-gallery="imax" style="aspect-ratio: 1275 / 1650; overflow: hidden; border-radius: 12px; cursor: pointer;"><img src="images/work/imax_squid.jpg" alt="IMAX — Squid" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
+            <div class="campaigns-shadow" data-gallery="imax" style="aspect-ratio: 1275 / 1650; overflow: hidden; border-radius: 12px; cursor: pointer;"><img src="images/work/imax_dinosaur.jpg" alt="IMAX — Dinosaur" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
           </div>
+          <p data-gallery="imax" style="text-align: center; margin-top: 0.5rem; font-size: 0.85rem; color: var(--color-text-secondary); font-style: italic; cursor: pointer;">Tap any image for zoom</p>
         </section>
 
 
@@ -1237,8 +1190,11 @@
             <h2>High-Risk, High-Reward</h2>
             <p>Type A investors take big chances, but also expect to win big. Fitch wanted to position itself as a leader in high-risk (or leveraged assets) investing and asset evaluation.</p>
           </div>
-          <div class="project__media hover-zoom" style="display: inline-block; max-width: 80%; transform-origin: right center;">
-            <img src="https://danart.vercel.app/images/work/fitch.jpg" alt="Fitch campaign" style="display: block; width: 100%;">
+          <div style="display: inline-block; max-width: 80%;">
+            <div class="project__media" data-gallery="fitch" style="cursor: pointer;">
+              <img src="images/work/fitch_hires.jpg" alt="Fitch campaign" style="display: block; width: 100%;">
+            </div>
+            <p data-gallery="fitch" style="text-align: center; margin-top: 0.5rem; font-size: 0.85rem; color: var(--color-text-secondary); font-style: italic; cursor: pointer;">Tap image for zoom</p>
           </div>
         </section>
 
@@ -1260,12 +1216,15 @@
         <section class="project--text-left" id="fixthedebt" style="grid-template-columns: 1fr 1.5fr;">
           <div class="project__copy">
             <h3>Fix the Debt</h3>
-            <h2>Fiscal Cliff Campaign</h2>
+            <h2>Debt Interrupts Everything.</h2>
             <p><a href="https://fixthedebt.org/" target="_blank" class="inline-link"><strong>Fix the Debt</strong></a> needed to make an impact immediately after a presidential election. The message needed to be broad, yet simple. And it needed to stir the public to push their elected officials to act for a bi-partisan solution, to avert disaster. This was a national campaign, but seen here is a media installation that used every available space in the US Capitol Metro Station.</p>
             <p>See more about this campaign on: <a href="http://video.foxnews.com/v/1957154210001/simpson-bowles-getting-a-fresh-look" target="_blank">Fox News</a> and <a href="http://abcnews.go.com/blogs/politics/2012/11/group-aims-to-push-for-national-debt-solutions/" target="_blank">ABC</a>.</p>
           </div>
-          <div class="project__media hover-zoom-60" style="transform-origin: right center;">
-            <img src="https://danart.vercel.app/images/work/ftd_metro.png" alt="Fix the Debt metro installation">
+          <div>
+            <div class="project__media" data-gallery="ftd_metro" style="cursor: pointer;">
+              <img src="https://danart.vercel.app/images/work/ftd_metro.png" alt="Fix the Debt metro installation" style="display: block; width: 100%;">
+            </div>
+            <p data-gallery="ftd_metro" style="text-align: center; margin-top: 0.5rem; font-size: 0.85rem; color: var(--color-text-secondary); font-style: italic; cursor: pointer;">Tap image for zoom</p>
           </div>
         </section>
 
@@ -1275,14 +1234,15 @@
           <div class="project__copy">
             <h3>Fix the Debt</h3>
             <h2>Doomsday</h2>
-            <p>During the final days of the year, <a href="https://fixthedebt.org/" target="_blank" class="inline-link"><strong>Fix the Debt</strong></a> needed to give one last push to get the bill across the finish line. Arresting Doomsday imagery was the appropriate attention-grabber for Congress and the President.</p>
-            <p>The campaign ran in Politico, The Hill, and Roll Call &mdash; the political publications inside the Beltway.</p>
+            <p style="max-width: 50%;">During the final days of the year, <a href="https://fixthedebt.org/" target="_blank" class="inline-link"><strong>Fix the Debt</strong></a> needed to give one last push to get the bill across the finish line. Arresting Doomsday imagery was the appropriate attention-grabber for Congress and the President.</p>
+            <p style="max-width: 50%;">The campaign ran in Politico, The Hill, and Roll Call &mdash; the political publications inside the Beltway.</p>
           </div>
           <div class="project__gallery-row" style="align-items: stretch; gap: 0.5rem;">
-            <div class="campaigns-shadow hover-zoom" style="aspect-ratio: 347 / 542; overflow: hidden; border-radius: 12px;"><img src="images/work/doomsday_1.png" alt="Doomsday 1" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
-            <div class="campaigns-shadow hover-zoom" style="aspect-ratio: 347 / 542; overflow: hidden; border-radius: 12px;"><img src="images/work/doomsday_2.png" alt="Doomsday 2" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
-            <div class="campaigns-shadow hover-zoom" style="aspect-ratio: 347 / 542; overflow: hidden; border-radius: 12px;"><img src="images/work/doomsday_3.png" alt="Doomsday 3" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
+            <div class="campaigns-shadow" data-gallery="doomsday" style="aspect-ratio: 2000 / 3142; overflow: hidden; border-radius: 12px; cursor: pointer;"><img src="images/work/capitol_hires.jpg" alt="Doomsday — Capitol" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
+            <div class="campaigns-shadow" data-gallery="doomsday" style="aspect-ratio: 2000 / 3140; overflow: hidden; border-radius: 12px; cursor: pointer;"><img src="images/work/washmonum_hires.jpg" alt="Doomsday — Washington Monument" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
+            <div class="campaigns-shadow" data-gallery="doomsday" style="aspect-ratio: 2000 / 3202; overflow: hidden; border-radius: 12px; cursor: pointer;"><img src="images/work/lincoln_hires.jpg" alt="Doomsday — Lincoln Memorial" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
           </div>
+          <p data-gallery="doomsday" style="text-align: center; margin-top: 0.5rem; font-size: 0.85rem; color: var(--color-text-secondary); font-style: italic; cursor: pointer;">Tap any image for zoom</p>
         </section>
 
         <!-- TNEM: The Northeast Maglev (hidden) -->
@@ -1309,6 +1269,38 @@
         </section>
         -->
 
+        <!-- Zipit -->
+        <section class="project--three-up">
+          <div class="project__copy">
+            <h3>Zipit</h3>
+            <h2>It's Where Your Friends Are</h2>
+            <p>Print campaign for the Z2, a pocket Wi-Fi messenger built for the generation not old enough for a mobile plan but unwilling to be out of the loop. See the <a href="broadcast.html#zipit" style="text-decoration: underline;">TV spot</a> and the <a href="web.html#zipit" style="text-decoration: underline;">microsite</a>.</p>
+          </div>
+          <div class="project__gallery-row" style="align-items: stretch; gap: 0.5rem;">
+            <div class="campaigns-shadow" data-gallery="zipit" style="aspect-ratio: 927 / 1200; overflow: hidden; border-radius: 12px; cursor: pointer;"><img src="images/work/zipit_blue.jpg" alt="Zipit — Blue" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
+            <div class="campaigns-shadow" data-gallery="zipit" style="aspect-ratio: 927 / 1200; overflow: hidden; border-radius: 12px; cursor: pointer;"><img src="images/work/zipit_green.jpg" alt="Zipit — Green" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
+            <div class="campaigns-shadow" data-gallery="zipit" style="aspect-ratio: 927 / 1200; overflow: hidden; border-radius: 12px; cursor: pointer;"><img src="images/work/zipit_pink.jpg" alt="Zipit — Pink" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
+          </div>
+          <p data-gallery="zipit" style="text-align: center; margin-top: 0.5rem; font-size: 0.85rem; color: var(--color-text-secondary); font-style: italic; cursor: pointer;">Tap any image for zoom</p>
+        </section>
+
+
+        <!-- Publix -->
+        <section class="project--full-width">
+          <div class="project__copy">
+            <h3>Publix</h3>
+            <h2>A Tasty Photo Shoot</h2>
+            <p>A custom ad for custom cake ordering.</p>
+          </div>
+          <div style="display: inline-block; max-width: 39%;">
+            <div class="campaigns-shadow" data-gallery="publix" style="cursor: pointer; border-radius: 12px;">
+              <img src="images/work/publix.jpg" alt="Publix — Tasty Photo Shoot" style="width: 100%; border-radius: 12px; display: block; clip-path: inset(2px);">
+            </div>
+            <p data-gallery="publix" style="text-align: center; margin-top: 0.5rem; font-size: 0.85rem; color: var(--color-text-secondary); font-style: italic; cursor: pointer;">Tap image for zoom</p>
+          </div>
+        </section>
+
+
         <!-- Anderson Brothers Bank -->
         <section class="project--full-width">
           <div class="project__copy">
@@ -1317,13 +1309,14 @@
             <p>Campaign positioning a local community bank as the smarter alternative to predatory lenders and high-interest credit cards.</p>
           </div>
           <div class="project__media" style="display: flex; gap: 0.5rem; align-items: start;">
-            <div class="campaigns-shadow hover-zoom-40" style="flex: 1; transform-origin: left center;">
+            <div class="campaigns-shadow" data-gallery="anderson" style="flex: 1; cursor: pointer;">
               <img src="images/work/abb_cashmax.png" alt="Anderson Brothers Bank - Cash Max" style="width: 100%; border-radius: 12px;">
             </div>
-            <div class="campaigns-shadow hover-zoom-40" style="flex: 1; transform-origin: right center;">
+            <div class="campaigns-shadow" data-gallery="anderson" style="flex: 1; cursor: pointer;">
               <img src="images/work/abb_creditcards.png" alt="Anderson Brothers Bank - Credit Cards" style="width: 100%; border-radius: 12px;">
             </div>
           </div>
+          <p data-gallery="anderson" style="text-align: center; margin-top: 0.5rem; font-size: 0.85rem; color: var(--color-text-secondary); font-style: italic; cursor: pointer;">Tap any image for zoom</p>
         </section>
 
 
@@ -1335,9 +1328,10 @@
             <p style="max-width: 50%;">Making the case to a Lowcountry retiree: bundle the home services and free up the budget for whatever upgrade comes next.</p>
           </div>
           <div class="project__media campaigns-shadow" style="display: flex; gap: var(--space-sm); flex-wrap: wrap;">
-            <div class="hover-zoom-40" style="max-width: 48%; transform-origin: left center;"><img src="images/work/hargray_bundle_1.png" alt="Hargray Bundle Savings 1" style="width: 100%; border-radius: 12px;"></div>
-            <div class="hover-zoom-40" style="max-width: 48%; transform-origin: right center;"><img src="images/work/hargray_bundle_2.png" alt="Hargray Bundle Savings 2" style="width: 100%; border-radius: 12px;"></div>
+            <div data-gallery="hargray" style="max-width: 48%; cursor: pointer;"><img src="images/work/hargray_bundle_1.png" alt="Hargray Bundle Savings 1" style="width: 100%; border-radius: 12px;"></div>
+            <div data-gallery="hargray" style="max-width: 48%; cursor: pointer;"><img src="images/work/hargray_bundle_2.png" alt="Hargray Bundle Savings 2" style="width: 100%; border-radius: 12px;"></div>
           </div>
+          <p data-gallery="hargray" style="text-align: center; margin-top: 0.5rem; font-size: 0.85rem; color: var(--color-text-secondary); font-style: italic; cursor: pointer;">Tap any image for zoom</p>
         </section>
 
 
@@ -1349,10 +1343,11 @@
             <p>Campaign for classic games. One button, one rule: &ldquo;walk right.&rdquo;</p>
           </div>
           <div class="project__gallery-row" style="align-items: start;">
-            <div class="hover-zoom-80"><img src="images/work/playstation_1.png" alt="PlayStation Classics 1" style="width: 100%; aspect-ratio: 1429/909; object-fit: cover; border-radius: 12px;"></div>
-            <div class="hover-zoom-80"><img src="images/work/playstation_2.png" alt="PlayStation Classics 2" style="width: 100%; aspect-ratio: 1429/909; object-fit: cover; border-radius: 12px;"></div>
-            <div class="hover-zoom-80"><img src="images/work/playstation_3.png" alt="PlayStation Classics 3" style="width: 100%; aspect-ratio: 1429/909; object-fit: cover; border-radius: 12px;"></div>
+            <div data-gallery="playstation" style="cursor: pointer;"><img src="images/work/playstation_1.png" alt="PlayStation Classics 1" style="width: 100%; aspect-ratio: 1429/909; object-fit: cover; border-radius: 12px;"></div>
+            <div data-gallery="playstation" style="cursor: pointer;"><img src="images/work/playstation_2.png" alt="PlayStation Classics 2" style="width: 100%; aspect-ratio: 1429/909; object-fit: cover; border-radius: 12px;"></div>
+            <div data-gallery="playstation" style="cursor: pointer;"><img src="images/work/playstation_3.png" alt="PlayStation Classics 3" style="width: 100%; aspect-ratio: 1429/909; object-fit: cover; border-radius: 12px;"></div>
           </div>
+          <p data-gallery="playstation" style="text-align: center; margin-top: 0.5rem; font-size: 0.85rem; color: var(--color-text-secondary); font-style: italic; cursor: pointer;">Tap any image for zoom</p>
         </section>
 
 
@@ -1407,7 +1402,7 @@
     // Collect gallery groups: each [data-gallery] can hold multiple images
     // For single-image expandables, clicking opens just that image
     // For multi-image galleries, group them by data-gallery value
-    document.querySelectorAll('.project__media--expandable').forEach(el => {
+    document.querySelectorAll('.project__media--expandable, [data-gallery]').forEach(el => {
       el.addEventListener('click', () => {
         const galleryId = el.dataset.gallery;
         if (galleryId) {
@@ -1528,35 +1523,6 @@
         caption.style.pointerEvents = 'none';
       }
     });
-  </script>
-
-  <script>
-    // Pandora-style 3D tilt on hover-zoom cards. Tracks mouse position
-    // within the card; sets --rx/--ry CSS vars consumed by the :hover
-    // transform. Tilts up to ~10deg, eases back when the mouse leaves.
-    (function () {
-      var sel = '.hover-zoom, .hover-zoom-40, .hover-zoom-60, .hover-zoom-80';
-      var cards = document.querySelectorAll(sel);
-      var MAX_TILT = 3.5; // degrees in each axis
-
-      cards.forEach(function (card) {
-        card.addEventListener('mousemove', function (e) {
-          var rect = card.getBoundingClientRect();
-          var px = (e.clientX - rect.left) / rect.width;   // 0..1
-          var py = (e.clientY - rect.top)  / rect.height;
-          var ry = (px - 0.5) * (MAX_TILT * 2);            // -MAX..MAX
-          var rx = (0.5 - py) * (MAX_TILT * 2);
-          card.style.setProperty('--rx', rx.toFixed(2) + 'deg');
-          card.style.setProperty('--ry', ry.toFixed(2) + 'deg');
-          card.style.setProperty('--mx', (px * 100).toFixed(1) + '%');
-          card.style.setProperty('--my', (py * 100).toFixed(1) + '%');
-        });
-        card.addEventListener('mouseleave', function () {
-          card.style.setProperty('--rx', '0deg');
-          card.style.setProperty('--ry', '0deg');
-        });
-      });
-    })();
   </script>
 
 </body>
