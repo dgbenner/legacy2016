@@ -871,7 +871,7 @@
       right: var(--space-md);
       width: 44px;
       height: 44px;
-      padding: 0;
+      padding: 0 0 6px 0;
       background: rgba(255,255,255,0.95);
       border: none;
       border-radius: 50%;
@@ -1212,8 +1212,11 @@
             &nbsp;
             <a href="https://web.archive.org/web/20140929021807/http://midatlantic.kaiserpermanente.org/" target="_blank" class="project__cta">Kaiser Permanente archived site &#8594;</a>
           </div>
-          <div class="project__media project__media--expandable" data-gallery="kaiser">
-            <img src="https://danart.vercel.app/images/work/kaiser_site.png" alt="Kaiser Permanente">
+          <div>
+            <div class="project__media project__media--expandable" data-gallery="kaiser" style="cursor: pointer;">
+              <img src="https://danart.vercel.app/images/work/kaiser_site.png" alt="Kaiser Permanente">
+            </div>
+            <p data-gallery="kaiser" style="text-align: center; margin-top: 0.5rem; font-size: 0.85rem; color: var(--color-text-secondary); font-style: italic; cursor: pointer;">Tap image for zoom</p>
           </div>
         </section>
 
@@ -1243,8 +1246,11 @@
             <p style="max-width: 50%;">Promotional page and matching TV spot for a Quest UK show featuring AC/DC's Brian Johnson and his impressive car collection.</p>
           </div>
           <div class="project__media" style="display: flex; gap: var(--space-sm); align-items: start;">
-            <div class="project__media--expandable" data-gallery="carsthatrock" style="flex: 1;">
-              <img class="web-shadow" src="https://danart.vercel.app/images/work/carsthatrock_web.png" alt="Cars That Rock" style="width: 100%; border-radius: 12px;">
+            <div style="flex: 1;">
+              <div class="project__media--expandable" data-gallery="carsthatrock" style="cursor: pointer;">
+                <img class="web-shadow" src="https://danart.vercel.app/images/work/carsthatrock_web.png" alt="Cars That Rock" style="width: 100%; border-radius: 12px;">
+              </div>
+              <p data-gallery="carsthatrock" style="text-align: center; margin-top: 0.5rem; font-size: 0.85rem; color: var(--color-text-secondary); font-style: italic; cursor: pointer;">Tap image for zoom</p>
             </div>
             <div class="video-embed" style="flex: 1; margin-top: 0;">
               <iframe src="//player.vimeo.com/video/118965031?title=0&byline=0&portrait=0" allowfullscreen></iframe>
@@ -1276,10 +1282,13 @@
             <p>A handful of off-the-grid neighbors riding out the seasons on a frozen Canadian lake.</p>
           </div>
           <div class="project__media" style="display: flex; gap: var(--space-sm); align-items: start;">
-            <div class="project__media--expandable" data-gallery="icelake-ekit" style="flex: 1.44;">
-              <img class="web-shadow" src="https://danart.vercel.app/images/work/icelake_ekit.png" alt="Ice Lake Rebels E-Press Kit" style="width: 100%; border-radius: 12px;">
+            <div style="flex: 1.44;">
+              <div class="project__media--expandable" data-gallery="icelake-ekit" style="cursor: pointer;">
+                <img class="web-shadow" src="https://danart.vercel.app/images/work/icelake_ekit.png" alt="Ice Lake Rebels E-Press Kit" style="width: 100%; border-radius: 12px;">
+              </div>
+              <p data-gallery="icelake-ekit" style="text-align: center; margin-top: 0.5rem; font-size: 0.85rem; color: var(--color-text-secondary); font-style: italic; cursor: pointer;">Tap image for zoom</p>
             </div>
-            <div class="project__media--expandable" data-gallery="icelake-storefront" style="flex: 1;">
+            <div class="project__media--expandable" data-gallery="icelake-storefront" style="flex: 1; cursor: pointer;">
               <img class="web-shadow" src="https://danart.vercel.app/images/work/icelake_storefront.png" alt="Ice Lake Rebels digital storefront" style="width: 100%; border-radius: 12px;">
             </div>
           </div>
@@ -1401,16 +1410,17 @@
             <h2>Thank A Vet</h2>
             <p>Online placements to raise awareness for a veterans' rights non-profit group.</p>
             <p>Conceived as a way to extend thank-yous to veterans beyond the typical "thank you for your service", the DAV Thank A Vet app guides users through a series of questions and uploading photos to thank a veteran in their life with a customized video. During a three week period around Veterans' Day, the app had over 2,000 videos created, which collectively had over 25,000 shares.</p>
-            <a href="http://www.davthankavet.org/" target="_blank" class="project__cta">Visit Thank A Vet &#8594;</a>
+            <a href="https://web.archive.org/web/20141107022500/https://www.davthankavet.org/" target="_blank" class="project__cta">Visit Thank A Vet archived site &#8594;</a>
           </div>
           <div class="project__media" style="display: flex; gap: var(--space-sm); align-items: start;">
-            <div class="project__media--expandable" data-gallery="dav" style="flex: 1;">
+            <div class="project__media--expandable" data-gallery="dav" style="flex: 1; cursor: pointer;">
               <img src="https://danart.vercel.app/images/work/dav_pandora.png" alt="Disabled American Veterans" style="width: 100%; border-radius: 12px;">
             </div>
-            <div class="project__media--expandable" data-gallery="dav" style="flex: 1;">
+            <div class="project__media--expandable" data-gallery="dav" style="flex: 1; cursor: pointer;">
               <img src="https://danart.vercel.app/images/work/dav_thankavet.png" alt="DAV Thank A Vet" style="width: 100%; border-radius: 12px;">
             </div>
           </div>
+          <p data-gallery="dav" style="text-align: center; margin-top: 0.5rem; font-size: 0.85rem; color: var(--color-text-secondary); font-style: italic; cursor: pointer;">Tap any image for zoom</p>
         </section>
 
 
@@ -1576,7 +1586,7 @@
     // Collect gallery groups: each [data-gallery] can hold multiple images
     // For single-image expandables, clicking opens just that image
     // For multi-image galleries, group them by data-gallery value
-    document.querySelectorAll('.project__media--expandable').forEach(el => {
+    document.querySelectorAll('.project__media--expandable, [data-gallery]').forEach(el => {
       el.addEventListener('click', () => {
         const galleryId = el.dataset.gallery;
         if (galleryId) {
