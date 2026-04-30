@@ -70,8 +70,7 @@
       font-family: var(--font-body);
       color: var(--color-text);
       background-color: var(--color-bg);
-      /* Blue derived from the site accent (#009ddc / nav web color),
-         desaturated and softened for a pasteup-board feel. */
+      /* CSS grid fallback if the Three.js canvas fails to load */
       background-image:
         repeating-linear-gradient(
           -10deg,
@@ -102,6 +101,21 @@
       background:
         linear-gradient(to right, rgba(0,0,0,0.06) 0%, transparent 12%),
         linear-gradient(to left, rgba(0,0,0,0.06) 0%, transparent 12%);
+    }
+
+    /* Three.js shader-based warped grid. Canvas covers the viewport
+       behind all content; main/footer get z-index 1 so they paint above. */
+    #gridCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    main, .site-footer {
+      position: relative;
+      z-index: 1;
     }
 
     /* Background grain texture */
@@ -1072,6 +1086,11 @@
 </head>
 <body>
 
+  <!-- Three.js fragment-shader background: rotated blue grid warped by
+       10 drifting lenses (alternating bulge / pinch, radius 100→600 px). -->
+  <canvas id="gridCanvas"></canvas>
+  <script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
+
   <!-- ======== NAV ======== -->
   <nav class="site-nav">
     <div class="container">
@@ -1523,6 +1542,86 @@
         caption.style.pointerEvents = 'none';
       }
     });
+  </script>
+
+  <script>
+    // Warped-grid background via Three.js + custom fragment shader.
+    // 10 drifting lenses, each pulsing radius 100→600 px, alternating
+    // bulge (push-out) and pinch (pull-in) distortion. Grid rotated ~12°
+    // counterclockwise. All math runs per-pixel in WebGL.
+    (function () {
+      if (typeof THREE === 'undefined') return;
+      var canvas = document.getElementById('gridCanvas');
+      if (!canvas) return;
+
+      var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      var scene = new THREE.Scene();
+      var camera = new THREE.Camera(); // identity — we draw a fullscreen quad
+
+      var material = new THREE.ShaderMaterial({
+        uniforms: {
+          uResolution: { value: new THREE.Vector2() },
+          uScroll:     { value: 0 }
+        },
+        vertexShader: 'void main(){ gl_Position = vec4(position, 1.0); }',
+        fragmentShader: [
+          'precision highp float;',
+          'uniform vec2 uResolution;',
+          'uniform float uScroll;',
+          'void main(){',
+          '  vec2 p = gl_FragCoord.xy;',
+          '  float a = 0.21;',
+          '  float c = cos(a); float s = sin(a);',
+          '  vec2 r2 = mat2(c, -s, s, c) * p;',
+          '  // Grid: 2x denser (5 device px) and tilted ~12deg CCW',
+          '  vec2 g = mod(r2, 5.0);',
+          '  float thickness = 1.0;',
+          '  float aa = 1.0;',
+          '  float lx = 1.0 - smoothstep(thickness, thickness + aa, g.x);',
+          '  float ly = 1.0 - smoothstep(thickness, thickness + aa, g.y);',
+          '  float line = max(lx, ly);',
+          '  // Color bands shift through blue → red → blue → yellow → blue',
+          '  // as user scrolls, oriented along the same tilt as the grid.',
+          '  float bandSize = 400.0;',
+          '  float bp = mod(r2.y - uScroll, bandSize * 4.0) / bandSize;',
+          '  vec3 cBlue = vec3(0.32, 0.63, 0.80);',
+          '  vec3 cRed  = vec3(0.85, 0.30, 0.30);',
+          '  vec3 cYel  = vec3(0.85, 0.70, 0.20);',
+          '  vec3 lcol;',
+          '  if (bp < 1.0)      lcol = mix(cBlue, cRed, bp);',
+          '  else if (bp < 2.0) lcol = mix(cRed, cBlue, bp - 1.0);',
+          '  else if (bp < 3.0) lcol = mix(cBlue, cYel, bp - 2.0);',
+          '  else               lcol = mix(cYel, cBlue, bp - 3.0);',
+          '  vec3 bg = vec3(0.927, 0.910, 0.878);',
+          '  vec3 col = mix(bg, lcol, line * 0.18);',
+          '  gl_FragColor = vec4(col, 1.0);',
+          '}'
+        ].join('\n')
+      });
+
+      var mesh = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material);
+      scene.add(mesh);
+
+      function resize() {
+        var w = window.innerWidth;
+        var h = window.innerHeight;
+        renderer.setSize(w, h, false);
+        var dpr = renderer.getPixelRatio();
+        material.uniforms.uResolution.value.set(w * dpr, h * dpr);
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      function frame() {
+        var scrollY = window.scrollY || window.pageYOffset || 0;
+        var dpr = renderer.getPixelRatio();
+        material.uniforms.uScroll.value = scrollY * dpr;
+        renderer.render(scene, camera);
+        requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    })();
   </script>
 
 </body>
